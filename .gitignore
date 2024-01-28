@@ -1,0 +1,13 @@
+/target/
+
+### Eclipse ###
+.classpath
+.factorypath
+.project
+.settings
+
+### VS Code ###
+.vscode/
+
+### Mac OS ###
+.DS_Store
