@@ -1,8 +1,8 @@
-package tests.selenium.demo;
+package ui.demo.selenium;
 
 import org.openqa.selenium.By;
 
-public class DemoUI {
+public class LocatorDemo {
 
 	public static void main(String[] args) {
 		By locator = null;

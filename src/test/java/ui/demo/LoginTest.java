@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
-import tests.pages.demo.LoginPage;
-import tests.steps.demo.LoginSteps;
+import pages.demo.LoginPage;
+import steps.demo.LoginSteps;
 import ui.base.web.WebBase;
 import utilities.ConfigReader;
 

@@ -4,7 +4,7 @@ import io.cucumber.java.BeforeAll;
 
 public class ChromeWebHook {
 
-	@BeforeAll(order = 0)
+	@BeforeAll(order = 2)
 	public static void beforeAllTestConfig() {
 		System.setProperty("browser", "chrome");
 	}

@@ -1,7 +1,7 @@
 package utilities;
 
-import tests.pages.demo.InventoryPage;
-import tests.pages.demo.LoginPage;
+import pages.demo.InventoryPage;
+import pages.demo.LoginPage;
 
 public class PageManager {
 
