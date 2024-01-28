@@ -1,4 +1,4 @@
-package tests.steps.demo;
+package steps.demo;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 

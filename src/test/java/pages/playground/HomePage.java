@@ -1,4 +1,4 @@
-package tests.pages.playground;
+package pages.playground;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;

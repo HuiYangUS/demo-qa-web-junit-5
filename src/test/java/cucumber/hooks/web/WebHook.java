@@ -9,7 +9,7 @@ import utilities.PageManager;
 
 public class WebHook {
 
-	@BeforeAll(order = 1)
+	@BeforeAll(order = 3)
 	public static void beforeAllTestConfig() {
 		String browserName = System.getProperty("browser");
 		if (browserName == null)
@@ -27,7 +27,6 @@ public class WebHook {
 		case "safari":
 			System.out.println("Safari in Test:");
 			break;
-
 		default:
 			System.out.println("Default browser in Test:");
 			break;

@@ -2,9 +2,9 @@ package cucumber.step_definitions.demo;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import org.openqa.selenium.WebDriver;
-
-import io.cucumber.java.en.*;
+import io.cucumber.java.en.Given;
+import io.cucumber.java.en.Then;
+import io.cucumber.java.en.When;
 import utilities.ConfigReader;
 import utilities.DataManager;
 import utilities.DriverFactory;
@@ -14,13 +14,12 @@ import utilities.PageManager;
 public class LoginSteps {
 
 	private static PageManager pages = PageManager.getInstance();
-	private static WebDriver driver = DriverFactory.getDriver();
 	private static DataManager testData = DataManager.getInstance();
 
 	@Given("user is on the login page")
 	public void user_is_on_the_login_page() {
 		pages.loginPage().loadPage();
-		assertTrue(driver.getCurrentUrl().contains("saucedemo"), "User is not on the login page.");
+		assertTrue(DriverFactory.getDriver().getCurrentUrl().contains("saucedemo"), "User is not on the login page.");
 	}
 
 	@When("user enters the username")
