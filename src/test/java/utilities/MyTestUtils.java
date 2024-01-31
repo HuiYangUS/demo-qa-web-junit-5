@@ -1,5 +1,8 @@
 package utilities;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
 public class MyTestUtils {
 
 	private static int demoWaitTime = 6;
@@ -16,6 +19,10 @@ public class MyTestUtils {
 		boolean isDemo = Boolean.parseBoolean(ConfigReader.getValue("config", "demo"));
 		if (isDemo)
 			pause(demoWaitTime);
+	}
+
+	public static long getTimestamp() {
+		return Timestamp.valueOf(LocalDateTime.now()).getTime();
 	}
 
 }
