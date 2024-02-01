@@ -1,4 +1,4 @@
-package unit.demo.check;
+package unit.check;
 
 import java.time.LocalDate;
 
