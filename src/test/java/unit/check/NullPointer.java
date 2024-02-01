@@ -1,10 +1,12 @@
-package unit.demo.check;
+package unit.check;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 
 import org.junit.jupiter.api.Test;
+
+import utilities.ConfigReader;
 
 public class NullPointer {
 
@@ -21,6 +23,11 @@ public class NullPointer {
 		System.out.println(new File(targetDirPath).exists());
 		if (!new File(targetDirPath).exists())
 			new File(targetDirPath).mkdir();
+	}
+
+	@Test
+	void configReaderTest() {
+		System.out.println(ConfigReader.getValue("config", "demo"));
 	}
 
 }
