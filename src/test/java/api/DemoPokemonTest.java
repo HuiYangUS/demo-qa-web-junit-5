@@ -30,8 +30,8 @@ public class DemoPokemonTest {
 		System.out.println("name: " + responseData.jsonPath().get("name"));
 	}
 
-	@Test
 	@Disabled
+	@Test
 	void getJsonTest() {
 		String endpoint = "3/";
 		Response responseData = RestAssured.get(endpoint);

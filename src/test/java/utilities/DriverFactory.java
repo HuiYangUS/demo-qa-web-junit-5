@@ -1,7 +1,6 @@
 package utilities;
 
 import java.io.File;
-import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverService;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
 /*
  * JUnit-5 "DriverFactory" class that uses Selenium-4
@@ -29,20 +27,14 @@ public class DriverFactory {
 
 	private static String browser = "default";
 	private static boolean headless = false;
-	private static boolean remote = false;
 	private static int waitTime = 5;
 
 	private DriverFactory() {
-		System.out.println("Nothing happened here.");
 	}
 
-	private static void configDriver() {
+	private static void setUpDriver() {
 		if (System.getProperty(BROWSER_KEY) != null)
 			browser = System.getProperty(BROWSER_KEY).strip().toLowerCase();
-
-		String remoteKey = "remote";
-		if (System.getProperty(remoteKey) != null)
-			remote = Boolean.valueOf(System.getProperty(remoteKey).strip().toLowerCase());
 
 		String headlessKey = "headless";
 		if (System.getProperty(headlessKey) != null)
@@ -50,11 +42,11 @@ public class DriverFactory {
 	}
 
 	public static synchronized WebDriver getDriver() {
-		configDriver();
+		setUpDriver();
 		if (localDriver == null)
 			localDriver = new ThreadLocal<WebDriver>();
 		if (localDriver.get() == null)
-			localDriver.set(getRealDriver());
+			localDriver.set(initLocalDriver());
 		return localDriver.get();
 	}
 
@@ -67,18 +59,7 @@ public class DriverFactory {
 			System.clearProperty(BROWSER_KEY);
 	}
 
-	private static WebDriver getRealDriver() {
-		WebDriver driver = null;
-		try {
-			driver = remote ? getRemoteDriver() : getLocalDriver();
-		} catch (Exception e) {
-			System.out.println("No remote driver is found.");
-			e.printStackTrace();
-		}
-		return driver;
-	}
-
-	private static WebDriver getLocalDriver() {
+	private static WebDriver initLocalDriver() {
 		WebDriver driver;
 		switch (browser) {
 		case "chrome":
@@ -117,46 +98,10 @@ public class DriverFactory {
 		return driver;
 	}
 
-	private static WebDriver getRemoteDriver() throws Exception {
-		System.out.println("Remote driver in use:");
-		String grid = null;
-		try {
-			grid = ConfigReader.getValue("config", "grid");
-		} catch (Exception e) {
-			throw new Exception("No Selenium Grid is discovered.");
-		}
-
-		URL gridURL = new URL(grid);
-
-		WebDriver driver = null;
-		switch (browser) {
-		case "chrome":
-			driver = getRemoteDefaultDriver(gridURL);
-			break;
-		case "edge":
-			driver = new RemoteWebDriver(gridURL, new EdgeOptions());
-			break;
-		case "firefox":
-			driver = new RemoteWebDriver(gridURL, new FirefoxOptions());
-			break;
-		default:
-			System.out.println("No browser is found. Default to chrome.");
-			driver = getRemoteDefaultDriver(gridURL);
-			break;
-		}
-
-		configDriver(driver);
-		return driver;
-	}
-
 	private static void configDriver(WebDriver driver) {
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
-	}
-
-	private static WebDriver getRemoteDefaultDriver(URL gridURL) {
-		return new RemoteWebDriver(gridURL, new ChromeOptions());
 	}
 
 	private static WebDriver getLocalDefaultDriver() {

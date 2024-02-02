@@ -4,10 +4,11 @@ import java.time.Duration;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utilities.DriverFactory;
+import utilities.DriverManager;
 import utilities.PageManager;
 
 public class WebBase {
@@ -19,7 +20,7 @@ public class WebBase {
 
 	@BeforeEach
 	protected void setUp() throws Exception {
-		driver = DriverFactory.getDriver();
+		driver = DriverManager.getDriver();
 		System.out.println(driver.toString().replaceAll("[(].*[)]", "").strip());
 		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 
@@ -28,7 +29,7 @@ public class WebBase {
 
 	@AfterEach
 	protected void tearDown() {
-		DriverFactory.reset();
+		DriverManager.reset();
 		PageManager.reset();
 	}
 

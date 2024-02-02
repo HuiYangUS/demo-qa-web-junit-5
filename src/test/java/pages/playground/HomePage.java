@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import utilities.ConfigReader;
-import utilities.DriverFactory;
+import utilities.DriverManager;
 
 public class HomePage {
 
@@ -18,7 +18,7 @@ public class HomePage {
 	private static WebElement formDemoText;
 
 	public HomePage() throws Exception {
-		driver = DriverFactory.getDriver();
+		driver = DriverManager.getDriver();
 		PageFactory.initElements(driver, this);
 	}
 
