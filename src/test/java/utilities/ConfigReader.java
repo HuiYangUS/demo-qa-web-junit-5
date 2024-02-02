@@ -15,7 +15,7 @@ public class ConfigReader {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return p.isEmpty() ? null : p.getProperty(key);
+		return p.containsKey(key) ? (p.getProperty(key).isBlank() ? null : p.getProperty(key)) : null;
 	}
 
 }

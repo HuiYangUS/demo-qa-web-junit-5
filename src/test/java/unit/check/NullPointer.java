@@ -27,7 +27,9 @@ public class NullPointer {
 
 	@Test
 	void configReaderTest() {
-		System.out.println(ConfigReader.getValue("config", "demo"));
+		System.out.println(ConfigReader.getValue("config", "grid"));
+		System.out.println(ConfigReader.getValue("config", "remote"));
+		System.out.println(ConfigReader.getValue("config", "age"));
 	}
 
 }

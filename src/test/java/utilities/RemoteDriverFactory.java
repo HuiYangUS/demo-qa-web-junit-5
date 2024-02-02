@@ -14,6 +14,7 @@ public class RemoteDriverFactory {
 
 	private static WebDriver driver;
 	private static int waitTime = 5;
+	private static final String DEFAULT_GRID_URL = "http://localhost:4444/";
 
 	private RemoteDriverFactory() {
 	}
@@ -29,7 +30,7 @@ public class RemoteDriverFactory {
 	}
 
 	private static WebDriver initRemoteDriver() throws Exception {
-		URL gridURL = new URL(ConfigReader.getValue("config", "grid"));
+		URL gridURL = new URL(getURL() == null ? DEFAULT_GRID_URL : getURL());
 
 		switch (ConfigReader.getValue("config", "browser")) {
 		case "chrome":
@@ -50,6 +51,10 @@ public class RemoteDriverFactory {
 
 		configDriver(driver);
 		return driver;
+	}
+
+	private static String getURL() {
+		return ConfigReader.getValue("config", "grid");
 	}
 
 	private static void configDriver(WebDriver driver) {
