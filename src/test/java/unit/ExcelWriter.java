@@ -34,7 +34,7 @@ public class ExcelWriter {
 	}
 
 	@Test
-	void runReadTest() {
+	void runWriteTest() {
 		// create a new directory if it does not exist
 		String targetDirPath = "target/demo";
 		if (!new File(targetDirPath).exists())
