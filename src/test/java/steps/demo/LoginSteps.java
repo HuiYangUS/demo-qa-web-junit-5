@@ -1,8 +1,8 @@
 package steps.demo;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
-import utilities.DriverFactory;
+import utilities.DriverManager;
 import utilities.PageManager;
 
 public class LoginSteps {
@@ -30,7 +30,7 @@ public class LoginSteps {
 	}
 
 	public static void loginCheck() {
-		assertTrue(DriverFactory.getDriver().getCurrentUrl().contains("inventory"),
+		assertTrue(DriverManager.getDriver().getCurrentUrl().contains("inventory"),
 				"User should be on the inventory page.");
 		System.out.println("User logins successfully.");
 	}

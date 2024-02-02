@@ -1,16 +1,22 @@
 package cucumber.hooks.web;
 
-import io.cucumber.java.After;
-import io.cucumber.java.Before;
-import io.cucumber.java.BeforeAll;
+import io.cucumber.java.*;
+import utilities.ConfigReader;
 import utilities.DataManager;
-import utilities.DriverFactory;
+import utilities.DriverManager;
 import utilities.PageManager;
 
 public class WebHook {
 
 	@BeforeAll(order = 3)
 	public static void beforeAllTestConfig() {
+		if (Boolean.valueOf(ConfigReader.getValue("config", "remote")))
+			System.out.println("Remote testing:");
+		else
+			printTestType();
+	}
+
+	private static void printTestType() {
 		String browserName = System.getProperty("browser");
 		if (browserName == null)
 			browserName = "default";
@@ -36,7 +42,7 @@ public class WebHook {
 	@Before("@ui or @web")
 	public void setUp() {
 		System.out.println("Test starts:");
-		DriverFactory.getDriver();
+		DriverManager.getDriver();
 		PageManager.getInstance();
 		DataManager.getInstance();
 	}
@@ -44,7 +50,7 @@ public class WebHook {
 	@After("@ui or @web")
 	public void tearDown() {
 		System.out.println("Test completed.");
-		DriverFactory.reset();
+		DriverManager.reset();
 		PageManager.reset();
 		DataManager.reset();
 	}

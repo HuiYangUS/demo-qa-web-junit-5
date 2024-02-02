@@ -5,9 +5,10 @@ import static org.junit.jupiter.api.Assertions.*;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+
 import utilities.ConfigReader;
 import utilities.DataManager;
-import utilities.DriverFactory;
+import utilities.DriverManager;
 import utilities.MyTestUtils;
 import utilities.PageManager;
 
@@ -19,7 +20,7 @@ public class LoginSteps {
 	@Given("user is on the login page")
 	public void user_is_on_the_login_page() {
 		pages.loginPage().loadPage();
-		assertTrue(DriverFactory.getDriver().getCurrentUrl().contains("saucedemo"), "User is not on the login page.");
+		assertTrue(DriverManager.getDriver().getCurrentUrl().contains("saucedemo"), "User is not on the login page.");
 	}
 
 	@When("user enters the username")

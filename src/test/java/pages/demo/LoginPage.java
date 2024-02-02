@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
 import utilities.ConfigReader;
-import utilities.DriverFactory;
+import utilities.DriverManager;
 
 public class LoginPage {
 
@@ -24,7 +24,7 @@ public class LoginPage {
 	private static WebElement loginButton;
 
 	public LoginPage() {
-		driver = DriverFactory.getDriver();
+		driver = DriverManager.getDriver();
 		PageFactory.initElements(driver, this);
 	}
 

@@ -13,7 +13,8 @@ public class ExcelReaderTest {
 	@ParameterizedTest
 	@MethodSource("dataProvider")
 	void runDemoTest(Map<?, ?> dataRow) {
-		System.out.println(String.format("Full name: %s %s.", dataRow.get("firstName"), dataRow.get("lastName")));
+		System.out.println(String.format("Employee: %s %s, %s, %s.", dataRow.get("firstName"), dataRow.get("lastName"),
+				dataRow.get("empID"), dataRow.get("department")));
 	}
 
 	static Stream<Object> dataProvider() {

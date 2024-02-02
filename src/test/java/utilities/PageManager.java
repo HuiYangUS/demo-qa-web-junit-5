@@ -11,7 +11,6 @@ public class PageManager {
 	private static InventoryPage inventoryPage;
 
 	private PageManager() {
-
 	}
 
 	public static synchronized PageManager getInstance() {

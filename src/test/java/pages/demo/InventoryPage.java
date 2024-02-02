@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utilities.DriverFactory;
+import utilities.DriverManager;
 
 public class InventoryPage {
 
@@ -16,7 +16,7 @@ public class InventoryPage {
 	private static WebDriverWait wait;
 
 	public InventoryPage() {
-		driver = DriverFactory.getDriver();
+		driver = DriverManager.getDriver();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 	}
 
