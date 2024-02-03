@@ -8,7 +8,7 @@ import org.junit.jupiter.api.TestMethodOrder;
 import utilities.MyPrinter;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class OrderTest extends Base {
+public class OrderTest extends BaseTest {
 
 	@Test
 	@Order(value = 3)

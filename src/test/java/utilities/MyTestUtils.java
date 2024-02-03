@@ -5,8 +5,6 @@ import java.time.LocalDateTime;
 
 public class MyTestUtils {
 
-	private static int demoWaitTime = 6;
-
 	public static void pause(long time) {
 		try {
 			Thread.sleep(time * 1000);
@@ -15,14 +13,32 @@ public class MyTestUtils {
 		}
 	}
 
-	public static void demoPause() {
-		boolean isDemo = Boolean.parseBoolean(ConfigReader.getValue("config", "demo"));
-		if (isDemo)
-			pause(demoWaitTime);
-	}
-
 	public static long getTimestamp() {
 		return Timestamp.valueOf(LocalDateTime.now()).getTime();
+	}
+
+	public static String getOS() {
+		return System.getProperty("os.name").toLowerCase();
+	}
+
+	public static boolean isWindows() {
+		return getOS().contains("windows");
+	}
+
+	public static boolean isMac() {
+		return getOS().contains("mac");
+	}
+
+	public static String getWindowsErrMsg() {
+		return String.format("Expected: <windows> but actual: <%s>.", getOS());
+	}
+
+	public static String getMacErrMsg() {
+		return String.format("Expected: <mac> but actual: <%s>.", getOS());
+	}
+
+	public static String getCurrentDir() {
+		return System.getProperty("user.dir").replace("\\", "/");
 	}
 
 }

@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 
 import utilities.MyPrinter;
 
-public class SequentialTest extends Base {
+public class SequentialTest extends BaseTest {
 
 	@Test
 	void runATest() {

@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-import unit.Base;
+import unit.BaseTest;
 import utilities.ConfigReader;
 
-public class DemoOpenWeather extends Base {
+public class DemoOpenWeather extends BaseTest {
 
 	static String cityName = "Woodbridge";
 	static String stateCode = "VA";

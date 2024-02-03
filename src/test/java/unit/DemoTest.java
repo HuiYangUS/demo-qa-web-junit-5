@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import utilities.MyPrinter;
 
-public class DemoTest extends Base {
+public class DemoTest extends BaseTest {
 
 	@Test
 	void runTest() {
