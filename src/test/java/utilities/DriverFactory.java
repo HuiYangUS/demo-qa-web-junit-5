@@ -1,5 +1,7 @@
 package utilities;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 import java.io.File;
 import java.time.Duration;
 import java.util.HashMap;
@@ -67,7 +69,7 @@ public class DriverFactory {
 			break;
 		case "edge":
 			EdgeDriverService edgeService = new EdgeDriverService.Builder()
-					.usingDriverExecutable(new File("src/test/resources/drivers/edgedriver/msedgedriver.exe")).build();
+					.usingDriverExecutable(new File(getDriverDir() + "/edgedriver/msedgedriver.exe")).build();
 			EdgeOptions edgeOptions = new EdgeOptions();
 
 			Map<String, Object> prefs = new HashMap<>();
@@ -79,7 +81,8 @@ public class DriverFactory {
 			break;
 		case "firefox":
 			FirefoxDriverService firefoxService = new GeckoDriverService.Builder()
-					.usingDriverExecutable(new File("src/test/resources/drivers/firefoxdriver/geckodriver.exe"))
+					.usingDriverExecutable(new File(
+							getDriverDir() + "/firefoxdriver/geckodriver" + (MyTestUtils.isWindows() ? ".exe" : "")))
 					.build();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 
@@ -106,7 +109,9 @@ public class DriverFactory {
 
 	private static WebDriver getLocalDefaultDriver() {
 		ChromeDriverService service = new ChromeDriverService.Builder()
-				.usingDriverExecutable(new File("src/test/resources/drivers/chromedriver/chromedriver.exe")).build();
+				.usingDriverExecutable(new File(
+						getDriverDir() + "/chromedriver/chromedriver" + (MyTestUtils.isWindows() ? ".exe" : "")))
+				.build();
 		ChromeOptions options = new ChromeOptions();
 		findChromeHeadless(options);
 		return new ChromeDriver(service, options);
@@ -125,6 +130,16 @@ public class DriverFactory {
 	private static void findFirefoxHeadless(FirefoxOptions options) {
 		if (headless)
 			options.addArguments("-headless");
+	}
+
+	private static String getDriverDir() {
+		String dirPathName = null;
+		if (System.getProperty("os.name").toLowerCase().contains("mac"))
+			dirPathName = "mac";
+		if (MyTestUtils.isWindows())
+			dirPathName = "windows";
+		assertNotNull(dirPathName, "Failed to locate a valid directory for the driver.");
+		return MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
 	}
 
 }

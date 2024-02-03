@@ -48,7 +48,7 @@ public class LoginSteps {
 
 	@Then("user is on the inventory page")
 	public void user_is_on_the_inventory_page() {
-		MyTestUtils.demoPause();
+		MyTestUtils.pause(1);
 		assertTrue(pages.inventoryPage().isLoaded(), "User is not on the inventory page.");
 	}
 

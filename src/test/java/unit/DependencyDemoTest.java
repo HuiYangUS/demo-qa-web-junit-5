@@ -12,7 +12,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import utilities.MyPrinter;
 
 @TestMethodOrder(OrderAnnotation.class)
-public class DependencyDemoTest extends Base {
+public class DependencyDemoTest extends BaseTest {
 
 	static boolean isATestPass = false;
 

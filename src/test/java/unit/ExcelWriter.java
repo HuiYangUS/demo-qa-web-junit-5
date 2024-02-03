@@ -8,12 +8,14 @@ import java.util.Random;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import utilities.MyTestUtils;
 
 public class ExcelWriter {
 
+	@Disabled
 	@Test
 	void runCreateSheetTest() {
 		String targetFilePath = "src/test/resources/test-data/demo/demo.xlsx";

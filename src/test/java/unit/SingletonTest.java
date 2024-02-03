@@ -7,7 +7,7 @@ import utilities.DataManager;
 import utilities.MyPrinter;
 
 @SuppressWarnings("unused")
-public class SingletonTest extends Base {
+public class SingletonTest extends BaseTest {
 
 	@Test
 	void runTest() {
