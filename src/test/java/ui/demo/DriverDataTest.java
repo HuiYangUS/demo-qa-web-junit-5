@@ -54,11 +54,11 @@ public class DriverDataTest {
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
 	void localFirefoxDriverDataTest() {
-		GeckoDriverInfo driverInfo = new GeckoDriverInfo();
-		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
 		FirefoxDriver driver = new FirefoxDriver(new GeckoDriverService.Builder().usingDriverExecutable(new File(
 				MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/windows/firefoxdriver/geckodriver.exe"))
 				.build());
+		GeckoDriverInfo driverInfo = new GeckoDriverInfo();
+		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
 		configDriver(driver);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		System.out.println(String.format("%s: %s", "browserName", driver.getCapabilities().getBrowserName()));
@@ -76,6 +76,7 @@ public class DriverDataTest {
 		EdgeDriverInfo driverInfo = new EdgeDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
 		configDriver(driver);
+		MyTestUtils.pause(1);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		printDriverData(data);
 		shutDown(driver);
@@ -84,12 +85,13 @@ public class DriverDataTest {
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
 	void localEdgeDriverDataTest() {
-		EdgeDriverInfo driverInfo = new EdgeDriverInfo();
-		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
 		EdgeDriver driver = new EdgeDriver(new EdgeDriverService.Builder().usingDriverExecutable(new File(
 				MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/windows/edgedriver/msedgedriver.exe"))
 				.build());
+		EdgeDriverInfo driverInfo = new EdgeDriverInfo();
+		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
 		configDriver(driver);
+		MyTestUtils.pause(1);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		System.out.println(String.format("%s: %s", "browserName", driver.getCapabilities().getBrowserName()));
 		System.out.println(String.format("%s: %s", "browserVersion", driver.getCapabilities().getBrowserVersion()));
@@ -107,6 +109,7 @@ public class DriverDataTest {
 		ChromeDriverInfo driverInfo = new ChromeDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
 		configDriver(driver);
+		MyTestUtils.pause(1);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		printDriverData(data);
 		shutDown(driver);
@@ -115,12 +118,13 @@ public class DriverDataTest {
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
 	void localChromeDriverDataTest() {
-		ChromeDriverInfo driverInfo = new ChromeDriverInfo();
-		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
 		ChromeDriver driver = new ChromeDriver(new ChromeDriverService.Builder().usingDriverExecutable(new File(
 				MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/windows/chromedriver/chromedriver.exe"))
 				.build());
+		ChromeDriverInfo driverInfo = new ChromeDriverInfo();
+		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
 		configDriver(driver);
+		MyTestUtils.pause(1);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		System.out.println(String.format("%s: %s", "browserName", driver.getCapabilities().getBrowserName()));
 		System.out.println(String.format("%s: %s", "browserVersion", driver.getCapabilities().getBrowserVersion()));
