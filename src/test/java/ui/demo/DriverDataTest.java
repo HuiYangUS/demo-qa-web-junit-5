@@ -69,7 +69,6 @@ public class DriverDataTest {
 	}
 
 	@Test
-	@EnabledOnOs(OS.WINDOWS)
 	void sysEdgeDriverDataTest() {
 		EdgeDriverInfo driverInfo = new EdgeDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");

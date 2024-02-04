@@ -103,6 +103,7 @@ public class DriverFactory {
 	}
 
 	private static WebDriver autoLocalDriver() {
+		System.out.println("Auto driver in use:");
 		WebDriver driver;
 		switch (browser) {
 		case "chrome":

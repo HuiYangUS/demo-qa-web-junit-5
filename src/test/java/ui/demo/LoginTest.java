@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.openqa.selenium.By;
 
 import pages.demo.LoginPage;
@@ -12,6 +13,7 @@ import steps.demo.LoginSteps;
 import ui.base.web.WebBase;
 import utilities.ConfigReader;
 
+@DisabledIfSystemProperty(named = "browser", matches = "safari", disabledReason = "DriverFacotry for SafariDriver needs to be fixed")
 public class LoginTest extends WebBase {
 
 	/*

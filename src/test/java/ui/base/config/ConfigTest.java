@@ -22,7 +22,6 @@ public class ConfigTest {
 
 	@Test
 	@Tag("edge")
-	@EnabledOnOs(OS.WINDOWS)
 	void runEdge() {
 		printThread();
 		System.setProperty("browser", "edge");
