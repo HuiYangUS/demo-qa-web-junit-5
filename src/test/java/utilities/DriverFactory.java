@@ -49,7 +49,7 @@ public class DriverFactory {
 		if (localDriver == null)
 			localDriver = new ThreadLocal<WebDriver>();
 		if (localDriver.get() == null)
-			localDriver.set(MyTestUtils.isWindows() ? initLocalDriver() : autoLocalDriver());
+			localDriver.set(initLocalDriver());
 		return localDriver.get();
 	}
 
@@ -69,10 +69,13 @@ public class DriverFactory {
 			driver = getDefaultLocalDriver();
 			break;
 		case "edge":
+			String edgeDriverFilePath = getDriverDir() + "/edgedriver/msedgedriver"
+					+ (MyTestUtils.isWindows() ? ".exe" : "");
 			EdgeDriverService edgeService = new EdgeDriverService.Builder()
-					.usingDriverExecutable(new File(getDriverDir() + "/edgedriver/msedgedriver.exe")).build();
+					.usingDriverExecutable(new File(edgeDriverFilePath)).build();
 			EdgeOptions edgeOptions = new EdgeOptions();
 
+			// turn off personal profile prompt
 			Map<String, Object> prefs = new HashMap<>();
 			prefs.put("user_experience_metrics.personalization_data_consent_enabled", true);
 			edgeOptions.setExperimentalOption("prefs", prefs);
@@ -81,12 +84,13 @@ public class DriverFactory {
 			driver = new EdgeDriver(edgeService, edgeOptions);
 			break;
 		case "firefox":
+			String firefoxDriverFilePath = getDriverDir() + "/firefoxdriver/geckodriver"
+					+ (MyTestUtils.isWindows() ? ".exe" : "");
 			FirefoxDriverService firefoxService = new GeckoDriverService.Builder()
-					.usingDriverExecutable(new File(
-							getDriverDir() + "/firefoxdriver/geckodriver" + (MyTestUtils.isWindows() ? ".exe" : "")))
-					.build();
+					.usingDriverExecutable(new File(firefoxDriverFilePath)).build();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 
+			// turn off geo locator
 			firefoxOptions.addPreference("geo.enabled", false);
 			findFirefoxHeadless(firefoxOptions);
 
@@ -102,7 +106,9 @@ public class DriverFactory {
 		return driver;
 	}
 
+	@SuppressWarnings("unused")
 	private static WebDriver autoLocalDriver() {
+		// when in use, selenium manager auto locate driver
 		System.out.println("Auto driver in use:");
 		WebDriver driver;
 		switch (browser) {
@@ -147,10 +153,10 @@ public class DriverFactory {
 	}
 
 	private static WebDriver getDefaultLocalDriver() {
+		String localDriverFilePath = getDriverDir() + "/chromedriver/chromedriver"
+				+ (MyTestUtils.isWindows() ? ".exe" : "");
 		ChromeDriverService service = new ChromeDriverService.Builder()
-				.usingDriverExecutable(new File(
-						getDriverDir() + "/chromedriver/chromedriver" + (MyTestUtils.isWindows() ? ".exe" : "")))
-				.build();
+				.usingDriverExecutable(new File(localDriverFilePath)).build();
 		ChromeOptions options = new ChromeOptions();
 		findChromeHeadless(options);
 		return new ChromeDriver(service, options);
