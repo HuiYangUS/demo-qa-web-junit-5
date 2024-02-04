@@ -3,6 +3,7 @@ package ui.demo;
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
@@ -24,10 +25,11 @@ public class AutoDriverTest {
 	String url = "https://junit.org/junit5/docs/current/user-guide/";
 
 	@Test
+	@Tag("sys")
 	void chromeTest() {
+		driver = new ChromeDriver();
 		ChromeDriverInfo driverInfo = new ChromeDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isPresent(), "No driver is found.");
-		driver = new ChromeDriver();
 		DriverDataTest.configDriver(driver);
 		driver.navigate().to(url);
 		MyTestUtils.pause(1);
@@ -36,9 +38,9 @@ public class AutoDriverTest {
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
 	void edgeTest() {
+		driver = new EdgeDriver();
 		EdgeDriverInfo driverInfo = new EdgeDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isPresent(), "No driver is found.");
-		driver = new EdgeDriver();
 		DriverDataTest.configDriver(driver);
 		driver.navigate().to(url);
 		MyTestUtils.pause(1);
@@ -46,9 +48,9 @@ public class AutoDriverTest {
 
 	@Test
 	void firefoxTest() {
+		driver = new FirefoxDriver();
 		GeckoDriverInfo driverInfo = new GeckoDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isPresent(), "No driver is found.");
-		driver = new FirefoxDriver();
 		DriverDataTest.configDriver(driver);
 		driver.navigate().to(url);
 		MyTestUtils.pause(1);
