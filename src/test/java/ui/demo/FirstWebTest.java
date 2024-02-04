@@ -7,10 +7,10 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
 import ui.base.config.ConfigTest;
-import ui.base.web.WebBase;
+import ui.base.web.DriverFactoryWebBase;
 import utilities.MyTestUtils;
 
-public class FirstWebTest extends WebBase {
+public class FirstWebTest extends DriverFactoryWebBase {
 
 	@Test
 	@Tag("web")

@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import utilities.DriverManager;
 import utilities.PageManager;
 
-public class WebBase {
+public class DriverFactoryWebBase {
 
 	protected static WebDriver driver;
 	protected static WebDriverWait wait;
