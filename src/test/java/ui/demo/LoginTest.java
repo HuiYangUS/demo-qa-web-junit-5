@@ -10,11 +10,11 @@ import org.openqa.selenium.By;
 
 import pages.demo.LoginPage;
 import steps.demo.LoginSteps;
-import ui.base.web.WebBase;
+import ui.base.web.DriverFactoryWebBase;
 import utilities.ConfigReader;
 
-@DisabledIfSystemProperty(named = "browser", matches = "safari", disabledReason = "DriverFacotry for SafariDriver needs to be fixed")
-public class LoginTest extends WebBase {
+@DisabledIfSystemProperty(named = "browser", matches = "safari", disabledReason = "LocalThreadDriver is incompatible with SafariDriver.")
+public class LoginTest extends DriverFactoryWebBase {
 
 	/*
 	 * Without using Page Object Model

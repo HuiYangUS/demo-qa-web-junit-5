@@ -9,6 +9,7 @@ import java.util.Map.Entry;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverInfo;
@@ -29,10 +30,11 @@ public class DriverDataTest {
 	@Test
 	@EnabledOnOs(OS.MAC)
 	void sysSafariDriverDataTest() {
+		SafariDriver driver = new SafariDriver();
 		SafariDriverInfo driverInfo = new SafariDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
-		SafariDriver driver = new SafariDriver();
 		configDriver(driver);
+		MyTestUtils.pause(1);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		printDriverData(data);
 		shutDown(driver);
@@ -40,9 +42,9 @@ public class DriverDataTest {
 
 	@Test
 	void sysFirefoxDriverDataTest() {
+		FirefoxDriver driver = new FirefoxDriver();
 		GeckoDriverInfo driverInfo = new GeckoDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
-		FirefoxDriver driver = new FirefoxDriver();
 		configDriver(driver);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		printDriverData(data);
@@ -70,9 +72,9 @@ public class DriverDataTest {
 
 	@Test
 	void sysEdgeDriverDataTest() {
+		EdgeDriver driver = new EdgeDriver();
 		EdgeDriverInfo driverInfo = new EdgeDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
-		EdgeDriver driver = new EdgeDriver();
 		configDriver(driver);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		printDriverData(data);
@@ -101,9 +103,9 @@ public class DriverDataTest {
 
 	@Test
 	void sysChromeDriverDataTest() {
+		ChromeDriver driver = new ChromeDriver();
 		ChromeDriverInfo driverInfo = new ChromeDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isAvailable(), "Driver is not present or available.");
-		ChromeDriver driver = new ChromeDriver();
 		configDriver(driver);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		printDriverData(data);

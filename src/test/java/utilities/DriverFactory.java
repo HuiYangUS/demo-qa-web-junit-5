@@ -18,10 +18,9 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverService;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
-import org.openqa.selenium.safari.SafariDriver;
 
 /*
- * JUnit-5 "DriverFactory" class that uses Selenium-4
+ * JUnit-5 <DriverFactory> class that uses Selenium-4
  */
 public class DriverFactory {
 
@@ -96,6 +95,7 @@ public class DriverFactory {
 
 			driver = new FirefoxDriver(firefoxService, firefoxOptions);
 			break;
+		case "safari":
 		default:
 			System.out.println("No browser is found. Default to chrome.");
 			driver = getDefaultLocalDriver();
@@ -134,8 +134,6 @@ public class DriverFactory {
 			driver = new FirefoxDriver(firefoxOptions);
 			break;
 		case "safari":
-			driver = new SafariDriver();
-			break;
 		default:
 			System.out.println("No browser is found. Default to chrome.");
 			driver = getAutoLocalDriver();

@@ -36,6 +36,8 @@ public class NullPointer {
 	@Test
 	void getDriverDirTest() {
 		System.out.println(DriverFactory.getDriverDir());
+		String safariDriverFilePath = "/usr/bin/safaridriver";
+		System.out.println(!new File(safariDriverFilePath).exists());
 	}
 
 }

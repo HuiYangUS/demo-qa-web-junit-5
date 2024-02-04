@@ -59,9 +59,9 @@ public class AutoDriverTest {
 	@Test
 	@EnabledOnOs(OS.MAC)
 	void safariTest() {
+		driver = new SafariDriver();
 		SafariDriverInfo driverInfo = new SafariDriverInfo();
 		assertTrue(driverInfo.isPresent() && driverInfo.isPresent(), "No driver is found.");
-		driver = new SafariDriver();
 		DriverDataTest.configDriver(driver);
 		driver.navigate().to(url);
 		MyTestUtils.pause(1);
