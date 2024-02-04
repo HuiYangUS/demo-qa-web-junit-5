@@ -48,7 +48,7 @@ public class DemoPokemonTest {
 
 	@Test
 	void getPokemonFrontImgTest() {
-		String endpoint = "6/";
+		String endpoint = "9/";
 		Response responseData = RestAssured.get(endpoint);
 		assertEquals(200, responseData.getStatusCode(),
 				String.format("Failed to get data, status code [%d].", responseData.getStatusCode()));
