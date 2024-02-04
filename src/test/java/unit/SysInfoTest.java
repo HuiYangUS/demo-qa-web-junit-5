@@ -3,6 +3,7 @@ package unit;
 import java.util.Map.Entry;
 import java.util.Properties;
 
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import utilities.MyTestUtils;
@@ -10,6 +11,7 @@ import utilities.MyTestUtils;
 public class SysInfoTest {
 
 	@Test
+	@Tag("sys")
 	void runTest() {
 		Properties p = System.getProperties();
 		for (Entry<Object, Object> element : p.entrySet()) {

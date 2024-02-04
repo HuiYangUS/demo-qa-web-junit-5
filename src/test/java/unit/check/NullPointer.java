@@ -7,7 +7,7 @@ import java.io.File;
 import org.junit.jupiter.api.Test;
 
 import utilities.ConfigReader;
-import utilities.MyTestUtils;
+import utilities.DriverFactory;
 
 public class NullPointer {
 
@@ -35,10 +35,7 @@ public class NullPointer {
 
 	@Test
 	void getDriverDirTest() {
-		String dirPathName = "windows";
-		if (System.getProperty("os.name").toLowerCase().contains("mac"))
-			dirPathName = "mac";
-		System.out.println(MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName);
+		System.out.println(DriverFactory.getDriverDir());
 	}
 
 }

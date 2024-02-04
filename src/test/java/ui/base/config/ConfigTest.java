@@ -2,6 +2,8 @@ package ui.base.config;
 
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 
 public class ConfigTest {
 
@@ -20,9 +22,18 @@ public class ConfigTest {
 
 	@Test
 	@Tag("edge")
+	@EnabledOnOs(OS.WINDOWS)
 	void runEdge() {
 		printThread();
 		System.setProperty("browser", "edge");
+	}
+
+	@Test
+	@Tag("safari")
+	@EnabledOnOs(OS.MAC)
+	void runSafari() {
+		printThread();
+		System.setProperty("browser", "safari");
 	}
 
 	@Test

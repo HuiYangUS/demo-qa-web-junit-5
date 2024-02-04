@@ -18,6 +18,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverService;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
+import org.openqa.selenium.safari.SafariDriver;
 
 /*
  * JUnit-5 "DriverFactory" class that uses Selenium-4
@@ -48,7 +49,7 @@ public class DriverFactory {
 		if (localDriver == null)
 			localDriver = new ThreadLocal<WebDriver>();
 		if (localDriver.get() == null)
-			localDriver.set(initLocalDriver());
+			localDriver.set(MyTestUtils.isWindows() ? initLocalDriver() : autoLocalDriver());
 		return localDriver.get();
 	}
 
@@ -65,7 +66,7 @@ public class DriverFactory {
 		WebDriver driver;
 		switch (browser) {
 		case "chrome":
-			driver = getLocalDefaultDriver();
+			driver = getDefaultLocalDriver();
 			break;
 		case "edge":
 			EdgeDriverService edgeService = new EdgeDriverService.Builder()
@@ -93,7 +94,44 @@ public class DriverFactory {
 			break;
 		default:
 			System.out.println("No browser is found. Default to chrome.");
-			driver = getLocalDefaultDriver();
+			driver = getDefaultLocalDriver();
+			break;
+		}
+
+		configDriver(driver);
+		return driver;
+	}
+
+	private static WebDriver autoLocalDriver() {
+		WebDriver driver;
+		switch (browser) {
+		case "chrome":
+			driver = getAutoLocalDriver();
+			break;
+		case "edge":
+			EdgeOptions edgeOptions = new EdgeOptions();
+
+			Map<String, Object> prefs = new HashMap<>();
+			prefs.put("user_experience_metrics.personalization_data_consent_enabled", true);
+			edgeOptions.setExperimentalOption("prefs", prefs);
+			findEdgeHeadless(edgeOptions);
+
+			driver = new EdgeDriver(edgeOptions);
+			break;
+		case "firefox":
+			FirefoxOptions firefoxOptions = new FirefoxOptions();
+
+			firefoxOptions.addPreference("geo.enabled", false);
+			findFirefoxHeadless(firefoxOptions);
+
+			driver = new FirefoxDriver(firefoxOptions);
+			break;
+		case "safari":
+			driver = new SafariDriver();
+			break;
+		default:
+			System.out.println("No browser is found. Default to chrome.");
+			driver = getAutoLocalDriver();
 			break;
 		}
 
@@ -107,7 +145,7 @@ public class DriverFactory {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
 	}
 
-	private static WebDriver getLocalDefaultDriver() {
+	private static WebDriver getDefaultLocalDriver() {
 		ChromeDriverService service = new ChromeDriverService.Builder()
 				.usingDriverExecutable(new File(
 						getDriverDir() + "/chromedriver/chromedriver" + (MyTestUtils.isWindows() ? ".exe" : "")))
@@ -115,6 +153,12 @@ public class DriverFactory {
 		ChromeOptions options = new ChromeOptions();
 		findChromeHeadless(options);
 		return new ChromeDriver(service, options);
+	}
+
+	private static WebDriver getAutoLocalDriver() {
+		ChromeOptions options = new ChromeOptions();
+		findChromeHeadless(options);
+		return new ChromeDriver(options);
 	}
 
 	private static void findChromeHeadless(ChromeOptions options) {
@@ -132,11 +176,13 @@ public class DriverFactory {
 			options.addArguments("-headless");
 	}
 
-	private static String getDriverDir() {
+	public static String getDriverDir() {
 		String dirPathName = null;
-		if (System.getProperty("os.name").toLowerCase().contains("mac"))
-			dirPathName = "mac";
-		if (MyTestUtils.isWindows())
+		if (MyTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("x86_64"))
+			dirPathName = "mac/intel";
+		else if (MyTestUtils.isMac())
+			dirPathName = "mac/m-chip";
+		else if (MyTestUtils.isWindows())
 			dirPathName = "windows";
 		assertNotNull(dirPathName, "Failed to locate a valid directory for the driver.");
 		return MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
