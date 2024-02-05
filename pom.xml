@@ -36,11 +36,18 @@
 			<version>2.22.1</version>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/com.aventstack/extentreports -->
+		<!-- original extent reports -->
 		<dependency>
 			<groupId>com.aventstack</groupId>
 			<artifactId>extentreports</artifactId>
 			<version>5.1.1</version>
+		</dependency>
+
+		<!-- extent reports for cucumber -->
+		<dependency>
+			<groupId>tech.grasshopper</groupId>
+			<artifactId>extentreports-cucumber7-adapter</artifactId>
+			<version>1.14.0</version>
 		</dependency>
 
 		<!-- ui-automation -->
