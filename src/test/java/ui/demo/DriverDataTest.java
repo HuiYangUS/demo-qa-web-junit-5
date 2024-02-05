@@ -6,7 +6,11 @@ import java.io.File;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 
@@ -25,10 +29,12 @@ import org.openqa.selenium.safari.SafariDriverInfo;
 
 import utilities.MyTestUtils;
 
+@TestMethodOrder(OrderAnnotation.class)
 public class DriverDataTest {
 
 	@Test
 	@EnabledOnOs(OS.MAC)
+	@Order(value = 4)
 	void sysSafariDriverDataTest() {
 		SafariDriver driver = new SafariDriver();
 		SafariDriverInfo driverInfo = new SafariDriverInfo();
@@ -41,6 +47,7 @@ public class DriverDataTest {
 	}
 
 	@Test
+	@Order(value = 3)
 	void sysFirefoxDriverDataTest() {
 		FirefoxDriver driver = new FirefoxDriver();
 		GeckoDriverInfo driverInfo = new GeckoDriverInfo();
@@ -53,6 +60,7 @@ public class DriverDataTest {
 
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
+	@Order(value = 7)
 	void localFirefoxDriverDataTest() {
 		FirefoxDriver driver = new FirefoxDriver(new GeckoDriverService.Builder().usingDriverExecutable(new File(
 				MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/windows/firefoxdriver/geckodriver.exe"))
@@ -71,6 +79,7 @@ public class DriverDataTest {
 	}
 
 	@Test
+	@Order(value = 2)
 	void sysEdgeDriverDataTest() {
 		EdgeDriver driver = new EdgeDriver();
 		EdgeDriverInfo driverInfo = new EdgeDriverInfo();
@@ -84,6 +93,7 @@ public class DriverDataTest {
 
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
+	@Order(value = 6)
 	void localEdgeDriverDataTest() {
 		EdgeDriver driver = new EdgeDriver(new EdgeDriverService.Builder().usingDriverExecutable(new File(
 				MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/windows/edgedriver/msedgedriver.exe"))
@@ -104,6 +114,7 @@ public class DriverDataTest {
 	}
 
 	@Test
+	@Order(value = 1)
 	void sysChromeDriverDataTest() {
 		ChromeDriver driver = new ChromeDriver();
 		ChromeDriverInfo driverInfo = new ChromeDriverInfo();
@@ -117,6 +128,7 @@ public class DriverDataTest {
 
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
+	@Order(value = 5)
 	void localChromeDriverDataTest() {
 		ChromeDriver driver = new ChromeDriver(new ChromeDriverService.Builder().usingDriverExecutable(new File(
 				MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/windows/chromedriver/chromedriver.exe"))
@@ -142,6 +154,7 @@ public class DriverDataTest {
 
 	public static void shutDown(WebDriver driver) {
 		try {
+
 		} finally {
 			driver.quit();
 		}
@@ -153,6 +166,11 @@ public class DriverDataTest {
 			String value = entry.getValue().toString();
 			System.out.println(String.format("%s --> %s", key, value));
 		}
+	}
+
+	@AfterEach
+	void afterTest() {
+		System.out.println();
 	}
 
 }

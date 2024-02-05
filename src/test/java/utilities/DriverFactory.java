@@ -25,26 +25,29 @@ import org.openqa.selenium.firefox.GeckoDriverService;
 public class DriverFactory {
 
 	private static ThreadLocal<WebDriver> localDriver;
-	private static final String BROWSER_KEY = "browser";
 
 	private static String browser = "default";
 	private static boolean headless = false;
+	private static boolean isSet = false;
 	private static int waitTime = 5;
 
 	private DriverFactory() {
 	}
 
 	private static void setUpDriver() {
-		if (System.getProperty(BROWSER_KEY) != null)
-			browser = System.getProperty(BROWSER_KEY).strip().toLowerCase();
+		String browserKey = "browser";
+		if (System.getProperty(browserKey) != null)
+			browser = System.getProperty(browserKey).strip().toLowerCase();
 
 		String headlessKey = "headless";
 		if (System.getProperty(headlessKey) != null)
 			headless = Boolean.valueOf(System.getProperty(headlessKey).strip().toLowerCase());
+		isSet = true;
 	}
 
 	public static synchronized WebDriver getDriver() {
-		setUpDriver();
+		if (!isSet)
+			setUpDriver();
 		if (localDriver == null)
 			localDriver = new ThreadLocal<WebDriver>();
 		if (localDriver.get() == null)
@@ -57,8 +60,7 @@ public class DriverFactory {
 			localDriver.get().quit();
 			localDriver.remove();
 		}
-		if (System.getProperties().containsKey(BROWSER_KEY))
-			System.clearProperty(BROWSER_KEY);
+		isSet = false;
 	}
 
 	private static WebDriver initLocalDriver() {
@@ -106,6 +108,22 @@ public class DriverFactory {
 		return driver;
 	}
 
+	private static WebDriver getDefaultLocalDriver() {
+		String localDriverFilePath = getDriverDir() + "/chromedriver/chromedriver"
+				+ (MyTestUtils.isWindows() ? ".exe" : "");
+		ChromeDriverService service = new ChromeDriverService.Builder()
+				.usingDriverExecutable(new File(localDriverFilePath)).build();
+		ChromeOptions options = new ChromeOptions();
+		findChromeHeadless(options);
+		return new ChromeDriver(service, options);
+	}
+
+	private static void configDriver(WebDriver driver) {
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
+	}
+
 	@SuppressWarnings("unused")
 	private static WebDriver autoLocalDriver() {
 		// when in use, selenium manager auto locate driver
@@ -142,22 +160,6 @@ public class DriverFactory {
 
 		configDriver(driver);
 		return driver;
-	}
-
-	private static void configDriver(WebDriver driver) {
-		driver.manage().deleteAllCookies();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
-	}
-
-	private static WebDriver getDefaultLocalDriver() {
-		String localDriverFilePath = getDriverDir() + "/chromedriver/chromedriver"
-				+ (MyTestUtils.isWindows() ? ".exe" : "");
-		ChromeDriverService service = new ChromeDriverService.Builder()
-				.usingDriverExecutable(new File(localDriverFilePath)).build();
-		ChromeOptions options = new ChromeOptions();
-		findChromeHeadless(options);
-		return new ChromeDriver(service, options);
 	}
 
 	private static WebDriver getAutoLocalDriver() {
