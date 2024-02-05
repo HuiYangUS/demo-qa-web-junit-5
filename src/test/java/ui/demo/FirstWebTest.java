@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-import ui.base.config.ConfigTest;
 import ui.base.web.DriverFactoryWebBase;
 import utilities.MyTestUtils;
 
@@ -15,7 +14,6 @@ public class FirstWebTest extends DriverFactoryWebBase {
 	@Test
 	@Tag("web")
 	void demoTest() {
-		ConfigTest.printThread();
 		System.out.println("ChromeDriver: " + (driver instanceof ChromeDriver));
 		if (driver instanceof ChromeDriver) {
 			ChromeDriver chromeDriver = (ChromeDriver) driver;
