@@ -10,7 +10,7 @@ import org.junit.platform.suite.api.Suite;
 @Suite
 @IncludeEngines("cucumber")
 @SelectClasspathResource("features/demo")
-@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "cucumber.hooks.browsers.safari, cucumber.hooks.test, cucumber.hooks.config, cucumber.step_definitions.demo")
+@ConfigurationParameter(key = GLUE_PROPERTY_NAME, value = "cucumber.hooks.browsers.safari, cucumber.hooks.config, cucumber.step_definitions.demo")
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty")
 @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@defective")
 public class RunDemoSafariTestSuite {

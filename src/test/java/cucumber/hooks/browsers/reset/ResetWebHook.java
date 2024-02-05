@@ -5,8 +5,8 @@ import io.cucumber.java.BeforeAll;
 public class ResetWebHook {
 
 	@BeforeAll(order = 2)
-	public static void beforeAllTestConfig() {
-		System.setProperty("browser", "default");
+	public static void reset() {
+		System.clearProperty("browser");
 	}
 
 }

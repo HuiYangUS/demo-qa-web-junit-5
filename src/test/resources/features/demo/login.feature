@@ -1,4 +1,4 @@
-@login
+@login @device_chrome @author_hui
 Feature: Login
 
   @ui
