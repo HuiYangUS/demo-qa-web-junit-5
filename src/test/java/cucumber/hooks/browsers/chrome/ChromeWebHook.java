@@ -1,4 +1,4 @@
-package cucumber.hooks.chrome;
+package cucumber.hooks.browsers.chrome;
 
 import io.cucumber.java.BeforeAll;
 

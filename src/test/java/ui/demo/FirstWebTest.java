@@ -14,7 +14,6 @@ public class FirstWebTest extends DriverFactoryWebBase {
 	@Test
 	@Tag("web")
 	void demoTest() {
-		System.out.println("ChromeDriver: " + (driver instanceof ChromeDriver));
 		if (driver instanceof ChromeDriver) {
 			ChromeDriver chromeDriver = (ChromeDriver) driver;
 			Map<?, ?> data = chromeDriver.getCapabilities().asMap();

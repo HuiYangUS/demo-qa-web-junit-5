@@ -27,7 +27,7 @@ public class LoginTest extends DriverFactoryWebBase {
 	@Test
 	@Order(1)
 	@Tags({ @Tag("ui"), @Tag("web") })
-	public void run1stLoginTest() {
+	public void the1stLoginTest() {
 		driver.navigate().to(ConfigReader.getValue("config", "url"));
 		driver.findElement(By.id("user-name")).sendKeys(ConfigReader.getValue("config", "username"));
 		driver.findElement(By.id("password")).sendKeys(ConfigReader.getValue("config", "password"));
@@ -41,7 +41,7 @@ public class LoginTest extends DriverFactoryWebBase {
 	@Test
 	@Order(2)
 	@Tags({ @Tag("ui"), @Tag("web") })
-	public void run2ndLoginTest() {
+	public void the2ndLoginTest() {
 		LoginPage loginPage = new LoginPage();
 		loginPage.loadPage();
 		loginPage.enterUsername("username");
@@ -56,7 +56,7 @@ public class LoginTest extends DriverFactoryWebBase {
 	@Test
 	@Order(3)
 	@Tags({ @Tag("ui"), @Tag("web") })
-	public void run3rdLoginTest() {
+	public void the3rdLoginTest() {
 		pages.loginPage().loadPage();
 		pages.loginPage().enterUsername("username");
 		pages.loginPage().enterPassword("password");
@@ -70,7 +70,7 @@ public class LoginTest extends DriverFactoryWebBase {
 	@Test
 	@Order(4)
 	@Tags({ @Tag("ui"), @Tag("web") })
-	public void run4thLoginTest() {
+	public void the4thLoginTest() {
 		LoginSteps.navigateToLoginPage();
 		LoginSteps.enterUsername();
 		LoginSteps.enterPassword();

@@ -43,7 +43,7 @@ public class ExcelWriter {
 			new File(targetDirPath).mkdir();
 
 		// create a new excel file from scratch
-		String targetFilePath = String.format("target/demo/demo-%d.xlsx", MyTestUtils.getTimestamp());
+		String targetFilePath = String.format("target/demo/demo-%d.xlsx", MyTestUtils.getTimeStamp());
 		try {
 			XSSFWorkbook demoWorkbook = new XSSFWorkbook();
 			XSSFSheet schoolSheet = demoWorkbook.createSheet("school");

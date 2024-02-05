@@ -1,4 +1,4 @@
-package cucumber.hooks.firefox;
+package cucumber.hooks.browsers.firefox;
 
 import io.cucumber.java.BeforeAll;
 

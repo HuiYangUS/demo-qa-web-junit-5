@@ -1,4 +1,4 @@
-package cucumber.hooks.edge;
+package cucumber.hooks.browsers.edge;
 
 import io.cucumber.java.BeforeAll;
 
