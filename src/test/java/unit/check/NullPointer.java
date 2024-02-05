@@ -7,7 +7,7 @@ import java.io.File;
 import org.junit.jupiter.api.Test;
 
 import utilities.ConfigReader;
-import utilities.DriverFactory;
+import utilities.MyTestUtils;
 
 public class NullPointer {
 
@@ -35,7 +35,7 @@ public class NullPointer {
 
 	@Test
 	void getDriverDirTest() {
-		System.out.println(DriverFactory.getDriverDir());
+		System.out.println(MyTestUtils.getCurrentDir());
 		String safariDriverFilePath = "/usr/bin/safaridriver";
 		System.out.println(!new File(safariDriverFilePath).exists());
 	}

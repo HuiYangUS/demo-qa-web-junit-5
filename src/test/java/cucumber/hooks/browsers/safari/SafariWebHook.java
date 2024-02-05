@@ -1,4 +1,4 @@
-package cucumber.hooks.safari;
+package cucumber.hooks.browsers.safari;
 
 import io.cucumber.java.BeforeAll;
 

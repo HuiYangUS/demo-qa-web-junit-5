@@ -26,7 +26,7 @@ public class DriverFactory {
 
 	private static ThreadLocal<WebDriver> localDriver;
 
-	private static String browser = "default";
+	private static String browser = "chrome";
 	private static boolean headless = false;
 	private static boolean isSet = false;
 	private static int waitTime = 5;
@@ -38,6 +38,8 @@ public class DriverFactory {
 		String browserKey = "browser";
 		if (System.getProperty(browserKey) != null)
 			browser = System.getProperty(browserKey).strip().toLowerCase();
+		else
+			System.out.println("Default browser is used: " + browser);
 
 		String headlessKey = "headless";
 		if (System.getProperty(headlessKey) != null)
@@ -99,11 +101,10 @@ public class DriverFactory {
 			break;
 		case "safari":
 		default:
-			System.out.println("No browser is found. Default to chrome.");
 			driver = getDefaultLocalDriver();
 			break;
 		}
-
+		System.out.println(driver.toString().replaceAll("[(].*[)]", ""));
 		configDriver(driver);
 		return driver;
 	}

@@ -1,4 +1,4 @@
-package cucumber.hooks.reset;
+package cucumber.hooks.browsers.reset;
 
 import io.cucumber.java.BeforeAll;
 
