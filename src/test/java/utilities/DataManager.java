@@ -8,6 +8,7 @@ public class DataManager {
 	private static ThreadLocal<DataManager> localDataManager;
 	private static String dayOfWeek;
 	private static String password;
+	private static WebUtils webUtils;
 
 	private DataManager() {
 		count++;
@@ -46,6 +47,12 @@ public class DataManager {
 
 	public void setPasswordValue(String password) {
 		DataManager.password = password;
+	}
+
+	public static WebUtils getWebUtils() {
+		if (webUtils == null)
+			webUtils = new WebUtils(DriverManager.getDriver());
+		return webUtils;
 	}
 
 }
