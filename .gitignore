@@ -1,6 +1,10 @@
 /target/
 configs/
 
+### Extent Reports ###
+extent.properties
+pdf-config.yaml
+
 ### Eclipse ###
 .classpath
 .factorypath
