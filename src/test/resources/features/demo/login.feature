@@ -1,7 +1,7 @@
 @login @device_chrome @author_hui
 Feature: Login
 
-  @ui
+  @ui @img
   Scenario: Entered password is not visible
     Given user is on the login page
     When user enters the password

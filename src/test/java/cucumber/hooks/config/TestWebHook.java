@@ -2,6 +2,7 @@ package cucumber.hooks.config;
 
 import io.cucumber.java.*;
 
+import utilities.ConfigReader;
 import utilities.DataManager;
 import utilities.DriverManager;
 import utilities.PageManager;
@@ -43,7 +44,9 @@ public class TestWebHook {
 	}
 
 	@After(order = 1, value = "@ui or @web")
-	public void tearDown() {
+	public void tearDown(Scenario scenario) {
+		if (Boolean.valueOf(ConfigReader.getValue("config", "screenshot")) && scenario.isFailed())
+			DataManager.getWebUtils().saveScreenshot();
 		DriverManager.reset();
 		PageManager.reset();
 		DataManager.reset();

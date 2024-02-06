@@ -14,6 +14,8 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
+import utilities.ConfigReader;
+import utilities.DataManager;
 import utilities.MyTestUtils;
 
 public class SimpleReportExtension
@@ -71,6 +73,8 @@ public class SimpleReportExtension
 		else {
 			test.fail(data.get());
 			test.log(Status.FAIL, "Test Failed");
+			if (Boolean.valueOf(ConfigReader.getValue("config", "screenshot")))
+				DataManager.getWebUtils().saveScreenshot();
 		}
 	}
 

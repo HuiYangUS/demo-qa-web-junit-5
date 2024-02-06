@@ -47,6 +47,7 @@ public class LoginSteps {
 	public void user_does_not_see_visible_password() {
 		assertEquals(pages.loginPage().getPasswordValue(), ConfigReader.getValue("config", "password"),
 				"Password is wrong.");
+		DataManager.getWebUtils().saveScreenshot();
 	}
 
 	@Then("user is on the inventory page")
