@@ -13,13 +13,13 @@ import org.junit.jupiter.api.Test;
 
 import pojos.database.tables.Employee;
 
-public class DemoTest {
+public class DemoReadTableTest {
 
 	SessionFactory sessionFactory;
 	StandardServiceRegistry registry;
 
 	@Test
-	void runBasicTest() {
+	void runTest() {
 		Session session = sessionFactory.openSession();
 		session.beginTransaction();
 
