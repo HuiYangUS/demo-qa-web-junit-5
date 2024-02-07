@@ -11,6 +11,13 @@ public class TestWebHook {
 
 	@BeforeAll(order = 3)
 	public static void printTestInfo() {
+		if (Boolean.valueOf(ConfigReader.getValue("config", "demo")))
+			System.out.println("Demo");
+		else
+			print();
+	}
+
+	private static void print() {
 		String browserName = "Chrome";
 		String data = System.getProperty("browser");
 		if (data != null) {
