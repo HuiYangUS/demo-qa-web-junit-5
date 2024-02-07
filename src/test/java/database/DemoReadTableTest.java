@@ -8,10 +8,12 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import pojos.database.tables.Employee;
+import pojos.database.tables.Employees;
 
 public class DemoReadTableTest {
 
@@ -24,11 +26,11 @@ public class DemoReadTableTest {
 		session.beginTransaction();
 
 		// table name is the pojo name, not the one from the database
-		List<Employee> result = session.createQuery("FROM Employee", Employee.class).list();
+		List<Employees> result = session.createQuery("FROM Employees", Employees.class).list();
 
-		for (Employee employee : result) {
-			System.out.println(String.format("%d: %s %s, %s", employee.getEmployeeNumber(), employee.getFirstName(),
-					employee.getLastName(), employee.getJobTitle()));
+		for (Employees employees : result) {
+			System.out.println(String.format("%d: %s %s, %s", employees.getEmployeeNumber(), employees.getFirstName(),
+					employees.getLastName(), employees.getJobTitle()));
 		}
 
 		session.getTransaction().commit();
@@ -51,7 +53,7 @@ public class DemoReadTableTest {
 		}
 	}
 
-	@BeforeEach
+	@AfterEach
 	void tearDown() {
 		if (registry != null) {
 			StandardServiceRegistryBuilder.destroy(registry);
