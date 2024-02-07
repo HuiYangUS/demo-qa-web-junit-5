@@ -3,6 +3,10 @@ package utilities;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
+
+import io.cucumber.datatable.DataTable;
 
 public class MyTestUtils {
 
@@ -44,6 +48,12 @@ public class MyTestUtils {
 
 	public static String getCurrentDir() {
 		return System.getProperty("user.dir").replace("\\", "/");
+	}
+
+	public static Map<String, String> getDataRow(DataTable dataTable) {
+		if (dataTable.asMaps().size() >= 1)
+			return dataTable.asMaps().get(0);
+		return new HashMap<String, String>();
 	}
 
 }
