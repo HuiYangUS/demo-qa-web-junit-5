@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "employees")
-public class Employee {
+public class Employees {
 
 	// must at least one "@Id"
 	@Id
@@ -34,11 +34,11 @@ public class Employee {
 	@Column(name = "jobTitle")
 	private String jobTitle;
 
-	public Employee() {
+	public Employees() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Employee(int employeeNumber, String lastName, String firstName, String extension, String email,
+	public Employees(int employeeNumber, String lastName, String firstName, String extension, String email,
 			String officeCode, Integer reportsTo, String jobTitle) {
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
