@@ -5,9 +5,6 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "employees")
 public class Employee {
-	/*
-	 * reportsTo has null value and must learn to fix it
-	 */
 
 	// must at least one "@Id"
 	@Id
@@ -30,6 +27,10 @@ public class Employee {
 	@Column(name = "officeCode")
 	private String officeCode;
 
+	// "reportsTo" can have null values and use Wrapper class
+	@Column(name = "reportsTo")
+	private Integer reportsTo;
+
 	@Column(name = "jobTitle")
 	private String jobTitle;
 
@@ -38,13 +39,14 @@ public class Employee {
 	}
 
 	public Employee(int employeeNumber, String lastName, String firstName, String extension, String email,
-			String officeCode, String jobTitle) {
+			String officeCode, Integer reportsTo, String jobTitle) {
 		this.employeeNumber = employeeNumber;
 		this.lastName = lastName;
 		this.firstName = firstName;
 		this.extension = extension;
 		this.email = email;
 		this.officeCode = officeCode;
+		this.reportsTo = reportsTo;
 		this.jobTitle = jobTitle;
 	}
 
