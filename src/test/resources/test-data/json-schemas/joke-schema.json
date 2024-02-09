@@ -1,0 +1,30 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "title": "Random Joke",
+    "description": "A joke",
+    "type": "object",
+    "properties": {
+        "type": {
+            "description": "a type of joke",
+            "type": "string"
+        },
+        "setup": {
+            "description": "the actual joke",
+            "type": "string"
+        },
+        "punchline": {
+            "description": "the punchline for the joke",
+            "type": "string"
+        },
+        "id": {
+            "description": "a unique identifier for this joke",
+            "type": "integer"
+        }
+    },
+    "required": [
+        "type",
+        "setup",
+        "punchline",
+        "id"
+    ]
+}
