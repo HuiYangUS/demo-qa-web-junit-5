@@ -25,14 +25,16 @@ public class BoraTechDemoTest {
 	void loginTokenTest() {
 		String authEndpoint = "api/auth";
 		RestAssured.baseURI = boratechURL;
+		// create a pojo
 		BoraTechLogin login = new BoraTechLogin();
 		login.email = email;
 		login.password = password;
 		long startTime = Timestamp.valueOf(LocalDateTime.now()).getTime();
-		;
+		// pass the payload
 		Response responseData = RestAssured.given().contentType(ContentType.JSON).body(login).post(authEndpoint);
 		assertEquals(200, responseData.getStatusCode(), "Failed to login to BoraTech.");
 		String token = responseData.jsonPath().getString("token");
+		// generate the second API call
 		Response responseDataProfile = RestAssured.given().header(new Header("X-Auth-Token", token)).get(authEndpoint);
 		assertEquals(200, responseData.getStatusCode(), "Failed to get the account profile.");
 		String name = responseDataProfile.jsonPath().getString("name");
