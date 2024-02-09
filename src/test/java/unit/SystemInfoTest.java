@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import utilities.MyTestUtils;
 
-public class SysInfoTest {
+public class SystemInfoTest {
 
 	@Test
 	@Tag("sys")
@@ -20,7 +20,7 @@ public class SysInfoTest {
 	}
 
 	@Test
-	void importantSysDataTest() {
+	void inFocusSysDataTest() {
 		Properties p = System.getProperties();
 		System.out.println(String.format("%s : %s", "OS name", p.get("os.name")));
 		System.out.println(String.format("%s : %s", "Chip name", p.get("os.arch")));
