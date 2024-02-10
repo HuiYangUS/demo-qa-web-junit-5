@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.File;
 
 import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
-import io.restassured.module.jsv.JsonSchemaValidator;
 import io.restassured.response.Response;
+import io.restassured.module.jsv.JsonSchemaValidator;
 
 import pojos.api.Joke;
 
@@ -53,6 +54,11 @@ public class DemoJokeTest {
 				.matchesJsonSchema(new File("src/test/resources/test-data/json-schemas/joke-schema.json"));
 		responseData.then().assertThat().body(jsonSchema);
 		System.out.println("Matched joke schema.");
+	}
+
+	@BeforeEach
+	void beforeTest() {
+
 	}
 
 	@AfterEach
