@@ -9,6 +9,8 @@ import java.util.Map.Entry;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.condition.EnabledOnOs;
@@ -94,6 +96,7 @@ public class DriverDataTest {
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
 	@Order(value = 6)
+	@Tags(value = { @Tag("local"), @Tag("edge") })
 	void localEdgeDriverDataTest() {
 		EdgeDriver driver = new EdgeDriver(new EdgeDriverService.Builder().usingDriverExecutable(new File(
 				MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/windows/edgedriver/msedgedriver.exe"))
@@ -129,6 +132,7 @@ public class DriverDataTest {
 	@Test
 	@EnabledOnOs(OS.WINDOWS)
 	@Order(value = 5)
+	@Tags(value = { @Tag("local"), @Tag("chrome") })
 	void localChromeDriverDataTest() {
 		ChromeDriver driver = new ChromeDriver(new ChromeDriverService.Builder().usingDriverExecutable(new File(
 				MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/windows/chromedriver/chromedriver.exe"))
