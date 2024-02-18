@@ -6,7 +6,7 @@ import org.junit.jupiter.api.extension.AfterEachCallback;
 import org.junit.jupiter.api.extension.BeforeEachCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-public class BrowserTestConfig implements BeforeEachCallback, AfterEachCallback {
+public class WebTestConfig implements BeforeEachCallback, AfterEachCallback {
 
 	@Override
 	public void beforeEach(ExtensionContext context) throws Exception {
