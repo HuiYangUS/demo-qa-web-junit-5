@@ -8,12 +8,12 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import ui.base.config.BrowserTestConfig;
+import ui.base.config.WebTestConfig;
 import ui.base.config.SimpleReportExtension;
 import utilities.DriverManager;
 import utilities.PageManager;
 
-@ExtendWith({ BrowserTestConfig.class, SimpleReportExtension.class })
+@ExtendWith({ WebTestConfig.class, SimpleReportExtension.class })
 public class DriverFactoryWebBase {
 
 	protected static WebDriver driver;
