@@ -8,6 +8,8 @@ import java.util.List;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.junit.jupiter.api.Tag;
+import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 import org.openqa.selenium.By;
@@ -25,6 +27,7 @@ public class AddTest extends DriverFactoryWebBase {
 	private static String password = ConfigReader.getValue("boratech", "password");
 
 	@Test
+	@Tags(value = { @Tag("exp"), @Tag("neg") })
 	void addExperience1stNegativeTest() {
 		driver.navigate().to(boratechURL);
 		driver.findElement(By.xpath("//div[@class='buttons']/a[@href='/login']")).click();
@@ -45,6 +48,7 @@ public class AddTest extends DriverFactoryWebBase {
 	}
 
 	@Test
+	@Tags(value = { @Tag("edu"), @Tag("neg") })
 	void addEducation1stNegativeTest() {
 		driver.navigate().to(boratechURL);
 		driver.findElement(By.xpath("//div[@class='buttons']/a[@href='/login']")).click();
@@ -65,6 +69,7 @@ public class AddTest extends DriverFactoryWebBase {
 	}
 
 	@Test
+	@Tags(value = { @Tag("exp"), @Tag("pos") })
 	@DisabledIfSystemProperty(named = "browser", matches = "firefox", disabledReason = "Date input field needs to be fixed in Firefox.")
 	void addExperience1stPositiveTest() {
 		driver.navigate().to(boratechURL);
@@ -114,6 +119,7 @@ public class AddTest extends DriverFactoryWebBase {
 	}
 
 	@Test
+	@Tags(value = { @Tag("exp"), @Tag("pos") })
 	@DisabledIfSystemProperty(named = "browser", matches = "firefox", disabledReason = "Date input field needs to be fixed in Firefox.")
 	void addExperience2ndPositiveTest() {
 		driver.navigate().to(boratechURL);
