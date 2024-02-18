@@ -10,9 +10,12 @@ public class BrowserTestConfig implements BeforeEachCallback, AfterEachCallback 
 
 	@Override
 	public void beforeEach(ExtensionContext context) throws Exception {
-		Optional<String> data = context.getConfigurationParameter("browser");
-		if (data.isPresent())
-			System.setProperty("browser", data.get());
+		Optional<String> browserData = context.getConfigurationParameter("browser");
+		if (browserData.isPresent())
+			System.setProperty("browser", browserData.get());
+		Optional<String> headlessData = context.getConfigurationParameter("headless");
+		if (headlessData.isPresent())
+			System.setProperty("headless", headlessData.get());
 	}
 
 	@Override
