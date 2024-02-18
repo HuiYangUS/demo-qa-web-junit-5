@@ -1,17 +1,15 @@
 package unit.check;
 
+import java.time.LocalDate;
+
 public class Temp {
 
 	public static void main(String[] args) {
-		String userDir = System.getProperty("user.dir");
-		String tempStr = userDir.substring(9);
-		int index = -1;
-		if (tempStr.contains("\\"))
-			index = tempStr.indexOf("\\");
-		else
-			index = tempStr.indexOf("/");
-		String resultStr = tempStr.substring(0, index);
-		System.out.println(resultStr);
+		String[] dateData = LocalDate.now().toString().split("-");
+		System.out.println(dateData.length);
+		System.out.println(dateData[0]);
+		System.out.println(dateData[1]);
+		System.out.println(dateData[2]);
 	}
 
 }
