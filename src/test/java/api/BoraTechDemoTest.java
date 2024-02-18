@@ -17,9 +17,9 @@ import utilities.ConfigReader;
 
 public class BoraTechDemoTest {
 
-	String boratechURL = ConfigReader.getValue("boratech", "url");
-	String email = ConfigReader.getValue("boratech", "email");
-	String password = ConfigReader.getValue("boratech", "password");
+	private static String boratechURL = ConfigReader.getValue("boratech", "url");
+	private static String email = ConfigReader.getValue("boratech", "email");
+	private static String password = ConfigReader.getValue("boratech", "password");
 
 	@Test
 	void loginTokenTest() {

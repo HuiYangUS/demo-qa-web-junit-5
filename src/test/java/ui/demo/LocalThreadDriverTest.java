@@ -14,7 +14,7 @@ public class LocalThreadDriverTest {
 	void runTest(String browser) {
 		System.setProperty("browser", browser);
 		WebDriver driver = DriverFactory.getDriver();
-		System.out.println(driver.toString());
+		System.out.println(driver.getWindowHandle() + "\n");
 		MyTestUtils.pause(1);
 		DriverFactory.reset();
 	}
