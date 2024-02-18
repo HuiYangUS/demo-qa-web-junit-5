@@ -32,20 +32,27 @@ public class DeleteTest extends DriverFactoryWebBase {
 		driver.findElement(By.name("password")).sendKeys(password);
 		driver.findElement(By.xpath("//input[@type='submit']")).submit();
 		wait.until(ExpectedConditions.urlContains("/dashboard"));
+		// collect all table rows
 		By dataRowByLocator = By.xpath("//table/thead/tr/th[text()='Title']/ancestor::table/tbody/tr");
 		List<WebElement> dataTableRows = driver.findElements(dataRowByLocator);
 		int count = dataTableRows.size();
+		// make sure it is not empty
 		assertTrue(count >= 1, "Nothing to be deleted.");
 		System.out.println("Count before deletion: " + count);
+		// randomly delete one row
 		Random roll = new Random();
 		int targetRowIndex = roll.nextInt(count);
+		// cell column index
 		int titleIndex = 1;
 		int deleteButtonIndex = 3;
+		// unique data value
 		String targetTitle = dataTableRows.get(targetRowIndex).findElements(By.tagName("td")).get(titleIndex).getText();
+		// delete
 		dataTableRows.get(targetRowIndex).findElements(By.tagName("td")).get(deleteButtonIndex).click();
 		By successAlertByLocater = By.xpath("//div[@class='alert alert-success']");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(successAlertByLocater));
 		System.out.println(driver.findElement(successAlertByLocater).getText());
+		// make sure deleted row is gone from the existing table
 		dataTableRows = driver.findElements(dataRowByLocator);
 		boolean targetFound = false;
 		for (WebElement webElement : dataTableRows) {
