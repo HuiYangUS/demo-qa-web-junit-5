@@ -34,6 +34,7 @@ public class ApplyTest extends DriverFactoryWebBase {
 		String firstName = "Bruce";
 		String lastName = "Wayne";
 		String[] dateData = LocalDate.now().toString().split("-");
+		// month, day, year
 		String today = dateData[1] + dateData[2] + dateData[0];
 		int gender = 2;
 		String email = "myemail@email.com";
@@ -46,16 +47,19 @@ public class ApplyTest extends DriverFactoryWebBase {
 		genderElements.get(gender).click();
 		driver.findElement(By.name("email")).sendKeys(email);
 		driver.findElement(By.name("phonenumber")).sendKeys(phoneNumber);
+		// Select class
 		Select courseSelectElement = new Select(driver.findElement(By.name("course")));
 		courseSelectElement.selectByValue("sdet");
 		Select sourceSelectElement = new Select(driver.findElement(By.name("source")));
 		sourceSelectElement.selectByValue("website");
+		// check for elements' status
 		By robotByLocator = By.name("notarobot");
 		assertFalse(driver.findElement(robotByLocator).isSelected(), "Robot select should be off.");
 		By submitByLocator = By.xpath("//input[@type='submit']");
 		assertFalse(driver.findElement(submitByLocator).isEnabled(), "Submit button should be disabled");
 		driver.findElement(robotByLocator).click();
 		wait.until(ExpectedConditions.elementToBeClickable(submitByLocator));
+		// submit
 		driver.findElement(submitByLocator).click();
 		By successAlertByLocater = By.xpath("//div[@class='alert alert-success']");
 		wait.until(ExpectedConditions.visibilityOfElementLocated(successAlertByLocater));
