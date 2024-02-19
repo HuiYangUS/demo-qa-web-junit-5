@@ -7,6 +7,7 @@ public class ResetWebHook {
 	@BeforeAll(order = 2)
 	public static void reset() {
 		System.clearProperty("browser");
+		System.clearProperty("headless");
 	}
 
 }
