@@ -33,6 +33,7 @@ public class ApplyTest extends DriverFactoryWebBase {
 		// data
 		String firstName = "Bruce";
 		String lastName = "Wayne";
+		// local date >> year-month-day
 		String[] dateData = LocalDate.now().toString().split("-");
 		// month, day, year
 		String today = dateData[1] + dateData[2] + dateData[0];
@@ -59,6 +60,8 @@ public class ApplyTest extends DriverFactoryWebBase {
 		assertFalse(driver.findElement(submitByLocator).isEnabled(), "Submit button should be disabled");
 		driver.findElement(robotByLocator).click();
 		wait.until(ExpectedConditions.elementToBeClickable(submitByLocator));
+		// display entered values
+		System.out.println(driver.findElement(By.name("dob")).getAttribute("value"));
 		// submit
 		driver.findElement(submitByLocator).click();
 		By successAlertByLocater = By.xpath("//div[@class='alert alert-success']");

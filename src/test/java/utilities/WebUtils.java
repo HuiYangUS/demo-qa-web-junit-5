@@ -9,13 +9,24 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.interactions.Actions;
 
 public class WebUtils {
 
 	private WebDriver driver;
+	private Actions actions;
 
 	public WebUtils(WebDriver driver) {
 		this.driver = driver;
+		actions = new Actions(driver);
+	}
+
+	public Actions mouse() {
+		return actions;
+	}
+
+	public Actions keyboard() {
+		return actions;
 	}
 
 	public void savesScreenshot() {
