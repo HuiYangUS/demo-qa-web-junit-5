@@ -74,7 +74,7 @@ public class SimpleReportExtension
 			test.fail(data.get());
 			test.log(Status.FAIL, "Test Failed");
 			if (Boolean.valueOf(ConfigReader.getValue("config", "screenshot")))
-				DataManager.getWebUtils().saveScreenshot();
+				DataManager.getWebUtils().savesScreenshot();
 		}
 	}
 
