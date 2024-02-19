@@ -18,11 +18,20 @@ public class WebUtils {
 		this.driver = driver;
 	}
 
-	public void saveScreenshot() {
+	public void savesScreenshot() {
+		savesScreenshot(null, false);
+	}
+
+	public void savesScreenshot(String postfix, boolean useTimeStamp) {
+		String tail = "-" + postfix;
+		if (postfix == null)
+			tail = "";
+		if (useTimeStamp)
+			tail += "-" + MyTestUtils.getDateString() + "-" + MyTestUtils.getTimeStamp();
 		TakesScreenshot cam = (TakesScreenshot) driver;
 		File imgData = cam.getScreenshotAs(OutputType.FILE);
 		try {
-			FileUtils.copyFile(imgData, new File("target/webpage-screenshots/screenshot.png"));
+			FileUtils.copyFile(imgData, new File(String.format("target/webpage-screenshots/screenshot%s.png", tail)));
 		} catch (IOException e) {
 			assertTrue(false, "Failed to capture the screenshot.");
 		}

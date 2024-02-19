@@ -53,7 +53,7 @@ public class TestWebHook {
 	@After(order = 1, value = "@ui or @web")
 	public void tearDown(Scenario scenario) {
 		if (Boolean.valueOf(ConfigReader.getValue("config", "screenshot")) && scenario.isFailed())
-			DataManager.getWebUtils().saveScreenshot();
+			DataManager.getWebUtils().savesScreenshot();
 		DriverManager.reset();
 		PageManager.reset();
 		DataManager.reset();

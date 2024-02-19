@@ -1,4 +1,4 @@
-package cucumber.suites;
+package cucumber.suites.demo;
 
 import org.junit.platform.suite.api.ConfigurationParameter;
 import org.junit.platform.suite.api.SelectClasspathResource;
