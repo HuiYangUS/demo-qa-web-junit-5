@@ -1,6 +1,7 @@
 package utilities;
 
 import java.sql.Timestamp;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -15,6 +16,26 @@ public class MyTestUtils {
 			Thread.sleep(time * 1000);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
+		}
+	}
+
+	public static boolean isInt(String text) {
+		try {
+			Integer.parseInt(text);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
+	public static boolean isValidDate(String year, String month, String dayOfMonth) {
+		if (!isInt(year) || !isInt(month) || !isInt(dayOfMonth))
+			return false;
+		try {
+			LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(dayOfMonth));
+			return true;
+		} catch (DateTimeException e) {
+			return false;
 		}
 	}
 
