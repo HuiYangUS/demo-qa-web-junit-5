@@ -63,31 +63,41 @@ public class ApplyPage {
 
 	public void enterFirstName(String firstName) {
 		firstNameInput.sendKeys(firstName);
+		wait.until(ExpectedConditions.attributeToBe(firstNameInput, "value", firstName));
 	}
 
 	public void enterLastName(String lastName) {
 		lastNameInput.sendKeys(lastName);
+		wait.until(ExpectedConditions.attributeToBe(lastNameInput, "value", lastName));
 	}
 
+	/*
+	 * date of birth is entered as month-day-year
+	 */
 	public void enterDateOfBirth(String dateOfBirth) {
-		// month, day, year
 		String[] date = dateOfBirth.split("-");
 		assertEquals(3, date.length, "Incorrect date format.");
 		String year = date[2];
 		String month = date[0];
 		String dayOfMonth = date[1];
 		assertTrue(MyTestUtils.isValidDate(year, month, dayOfMonth), "Invalid date.");
+		if (Integer.parseInt(month) < 10)
+			month = "0" + Integer.parseInt(month);
 		if (Integer.parseInt(dayOfMonth) < 10)
 			dayOfMonth = "0" + Integer.parseInt(dayOfMonth);
+		String expectedDateOfBirth = String.format("%s-%s-%s", year, month, dayOfMonth);
 		dateOfBirthInput.sendKeys(month + dayOfMonth + year);
+		wait.until(ExpectedConditions.attributeToBe(dateOfBirthInput, "value", expectedDateOfBirth));
 	}
 
 	public void enterEmail(String email) {
 		emailInput.sendKeys(email);
+		wait.until(ExpectedConditions.attributeToBe(emailInput, "value", email));
 	}
 
 	public void enterPhoneNumber(String phoneNumber) {
 		phoneNumberInput.sendKeys(phoneNumber);
+		wait.until(ExpectedConditions.attributeToBe(phoneNumberInput, "value", phoneNumber));
 	}
 
 	public void selectGender(int genderOption) {

@@ -12,6 +12,7 @@ import ui.base.config.WebTestConfig;
 import ui.base.config.SimpleReportExtension;
 import utilities.DriverManager;
 import utilities.PageManager;
+import utilities.WebUtils;
 
 @ExtendWith({ WebTestConfig.class, SimpleReportExtension.class })
 public class DriverFactoryWebBase {
@@ -19,12 +20,14 @@ public class DriverFactoryWebBase {
 	protected static WebDriver driver;
 	protected static WebDriverWait wait;
 	protected static PageManager pages;
+	protected static WebUtils webUtils;
 
 	@BeforeEach
 	protected void setUp() {
 		driver = DriverManager.getDriver();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
 		pages = PageManager.getInstance();
+		webUtils = new WebUtils(driver);
 	}
 
 	@AfterEach
