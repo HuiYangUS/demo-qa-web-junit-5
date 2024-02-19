@@ -1,4 +1,4 @@
-package demo;
+package myapp;
 
 public class DoString {
 
