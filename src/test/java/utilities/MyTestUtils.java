@@ -1,5 +1,8 @@
 package utilities;
 
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.io.File;
 import java.sql.Timestamp;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -59,22 +62,29 @@ public class MyTestUtils {
 		return getOS().contains("mac");
 	}
 
-	public static String getWindowsErrMsg() {
-		return String.format("Expected: <windows> but actual: <%s>.", getOS());
-	}
-
-	public static String getMacErrMsg() {
-		return String.format("Expected: <mac> but actual: <%s>.", getOS());
-	}
-
 	public static String getCurrentDir() {
 		return System.getProperty("user.dir").replace("\\", "/");
 	}
 
+	/*
+	 * return first row of cucumber data table as map
+	 */
 	public static Map<String, String> getDataRow(DataTable dataTable) {
 		if (dataTable.asMaps().size() >= 1)
 			return dataTable.asMaps().get(0);
 		return new HashMap<String, String>();
+	}
+
+	public static String getAutoChromeOnWindowsPath() {
+		assertTrue(isWindows(), "It must be on a windows machine.");
+		int lastIndex = getCurrentDir().lastIndexOf("/");
+		String projectContainerDirPath = getCurrentDir().substring(0, lastIndex);
+		String autoChromePath = projectContainerDirPath + "/automation/chrome/chrome.exe";
+		return autoChromePath;
+	}
+
+	public static boolean isAutoChromeOnWindowsAvailable() {
+		return (new File(getAutoChromeOnWindowsPath()).exists());
 	}
 
 }
