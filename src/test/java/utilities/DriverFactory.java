@@ -21,12 +21,14 @@ import org.openqa.selenium.firefox.GeckoDriverService;
 
 /*
  * JUnit-5 <DriverFactory> class that uses Selenium-4
+ * Currently, Safari Driver is disabled.
  */
 public class DriverFactory {
 
 	private static ThreadLocal<WebDriver> localDriver;
 
 	private static String browser = "chrome";
+	private static boolean auto = false;
 	private static boolean headless = false;
 	private static boolean isSet = false;
 	private static int waitTime = 5;
@@ -41,6 +43,10 @@ public class DriverFactory {
 		else
 			System.out.println("Default browser is used: " + browser);
 
+		String autoKey = "auto";
+		if (System.getProperty(autoKey) != null)
+			auto = Boolean.valueOf(System.getProperty(autoKey).strip().toLowerCase());
+
 		String headlessKey = "headless";
 		if (System.getProperty(headlessKey) != null)
 			headless = Boolean.valueOf(System.getProperty(headlessKey).strip().toLowerCase());
@@ -53,7 +59,7 @@ public class DriverFactory {
 		if (localDriver == null)
 			localDriver = new ThreadLocal<WebDriver>();
 		if (localDriver.get() == null)
-			localDriver.set(initLocalDriver());
+			localDriver.set(getRealDriver());
 		return localDriver.get();
 	}
 
@@ -63,6 +69,17 @@ public class DriverFactory {
 			localDriver.remove();
 		}
 		isSet = false;
+	}
+
+	private static void configDriver(WebDriver driver) {
+		driver.manage().deleteAllCookies();
+		driver.manage().window().maximize();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
+	}
+
+	// use auto driver or local driver
+	private static WebDriver getRealDriver() {
+		return auto ? autoLocalDriver() : initLocalDriver();
 	}
 
 	private static WebDriver initLocalDriver() {
@@ -119,20 +136,13 @@ public class DriverFactory {
 		return new ChromeDriver(service, options);
 	}
 
-	private static void configDriver(WebDriver driver) {
-		driver.manage().deleteAllCookies();
-		driver.manage().window().maximize();
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
-	}
-
-	@SuppressWarnings("unused")
 	private static WebDriver autoLocalDriver() {
-		// when in use, selenium manager auto locate driver
-		System.out.println("Auto driver in use:");
+		// when in use, Selenium Manager automatically downloads drivers
+		System.err.println("Danger!!! Auto driver is used. Warning: Illegal downloaded driver could harm your system.");
 		WebDriver driver;
 		switch (browser) {
 		case "chrome":
-			driver = getAutoLocalDriver();
+			driver = defaultAutoDriver();
 			break;
 		case "edge":
 			EdgeOptions edgeOptions = new EdgeOptions();
@@ -154,8 +164,7 @@ public class DriverFactory {
 			break;
 		case "safari":
 		default:
-			System.out.println("No browser is found. Default to chrome.");
-			driver = getAutoLocalDriver();
+			driver = defaultAutoDriver();
 			break;
 		}
 
@@ -163,7 +172,7 @@ public class DriverFactory {
 		return driver;
 	}
 
-	private static WebDriver getAutoLocalDriver() {
+	private static WebDriver defaultAutoDriver() {
 		ChromeOptions options = new ChromeOptions();
 		findChromeHeadless(options);
 		return new ChromeDriver(options);

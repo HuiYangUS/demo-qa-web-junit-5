@@ -13,6 +13,9 @@ public class WebTestConfig implements BeforeEachCallback, AfterEachCallback {
 		Optional<String> browserData = context.getConfigurationParameter("browser");
 		if (browserData.isPresent())
 			System.setProperty("browser", browserData.get());
+		Optional<String> autoData = context.getConfigurationParameter("auto");
+		if (autoData.isPresent())
+			System.setProperty("auto", autoData.get());
 		Optional<String> headlessData = context.getConfigurationParameter("headless");
 		if (headlessData.isPresent())
 			System.setProperty("headless", headlessData.get());
