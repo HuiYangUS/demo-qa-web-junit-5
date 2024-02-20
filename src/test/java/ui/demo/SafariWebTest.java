@@ -5,6 +5,7 @@ import java.io.File;
 import org.apache.commons.io.FileUtils;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.EnabledIfSystemProperty;
 import org.junit.jupiter.api.condition.EnabledOnOs;
 import org.junit.jupiter.api.condition.OS;
 import org.openqa.selenium.WebDriver;
@@ -68,6 +69,7 @@ public class SafariWebTest {
 
 	@Test
 	@EnabledOnOs(OS.MAC)
+	@EnabledIfSystemProperty(named = "os.arch", matches = "x86_64")
 	void localCopyDriverTest() {
 		String driverFilePath = "/usr/bin/safaridriver";
 		String targetFilePath = "src/test/resources/drivers/mac/intel/safaridriver/safaridriver";
