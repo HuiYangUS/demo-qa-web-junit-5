@@ -11,8 +11,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 
-import utilities.DriverFactory;
-
 public class ChromeOnMacTest {
 
 	@Test
@@ -30,10 +28,15 @@ public class ChromeOnMacTest {
 
 	@Test
 	@EnabledOnOs(OS.MAC)
-	void localDriverTest() {
-		WebDriver driver = DriverFactory.getDriver();
+	@EnabledIfSystemProperty(named = "os.arch", matches = "aarch64")
+	void mchipMacChromeDriverTest() {
+		File driverPath = new File("src/test/resources/drivers/mac/m-chip/chromedriver/chromedriver");
+		System.out.println(driverPath.getAbsolutePath());
+		ChromeDriverService service = new ChromeDriverService.Builder().usingDriverExecutable(driverPath).build();
+		WebDriver driver = new ChromeDriver(service);
+		driver.manage().window().maximize();
 		System.out.println(driver.toString());
-		DriverFactory.reset();
+		driver.quit();
 	}
 
 }
