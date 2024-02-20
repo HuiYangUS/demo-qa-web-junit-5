@@ -188,7 +188,7 @@ public class DriverFactory {
 		String dirPathName = null;
 		if (MyTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("x86_64"))
 			dirPathName = "mac/intel";
-		else if (MyTestUtils.isMac())
+		else if (MyTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("aarch64"))
 			dirPathName = "mac/m-chip";
 		else if (MyTestUtils.isWindows())
 			dirPathName = "windows";
