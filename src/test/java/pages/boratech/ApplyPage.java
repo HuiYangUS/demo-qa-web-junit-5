@@ -15,11 +15,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utilities.DriverManager;
 import utilities.MyTestUtils;
+import utilities.WebUtils;
 
 public class ApplyPage {
 
 	private static WebDriver driver;
 	private static WebDriverWait wait;
+	private static WebUtils utils;
 
 	@FindBy(name = "firstname")
 	private static WebElement firstNameInput;
@@ -58,6 +60,7 @@ public class ApplyPage {
 	public ApplyPage() {
 		driver = DriverManager.getDriver();
 		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		utils = new WebUtils(driver);
 		PageFactory.initElements(driver, this);
 	}
 
@@ -86,7 +89,9 @@ public class ApplyPage {
 		if (Integer.parseInt(dayOfMonth) < 10)
 			dayOfMonth = "0" + Integer.parseInt(dayOfMonth);
 		String expectedDateOfBirth = String.format("%s-%s-%s", year, month, dayOfMonth);
-		dateOfBirthInput.sendKeys(month + dayOfMonth + year);
+		dateOfBirthInput.click();
+		utils.keyboard().sendKeys(month + dayOfMonth + year).perform();
+		;
 		wait.until(ExpectedConditions.attributeToBe(dateOfBirthInput, "value", expectedDateOfBirth));
 	}
 

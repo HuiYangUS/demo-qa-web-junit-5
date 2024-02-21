@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import ui.base.web.DriverFactoryWebBase;
@@ -24,7 +23,8 @@ public class FirefoxApplyDateTest extends DriverFactoryWebBase {
 		driver.navigate().to(boratechURL);
 		driver.findElement(By.xpath("//a[@href='/apply']")).click();
 		wait.until(ExpectedConditions.urlContains("/apply"));
-		driver.findElement(By.name("dob")).sendKeys("11" + Keys.TAB);
+		driver.findElement(By.name("dob")).click();
+		webUtils.keyboard().sendKeys("12252005").perform();
 		wait.until(ExpectedConditions.attributeToBeNotEmpty(driver.findElement(By.name("dob")), "value"));
 		System.out.println(driver.findElement(By.name("dob")).getAttribute("value"));
 	}

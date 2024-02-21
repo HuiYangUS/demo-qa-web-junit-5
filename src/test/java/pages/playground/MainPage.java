@@ -8,7 +8,7 @@ import org.openqa.selenium.support.PageFactory;
 import utilities.ConfigReader;
 import utilities.DriverManager;
 
-public class HomePage {
+public class MainPage {
 
 	private static String fileName = "playground";
 
@@ -17,7 +17,7 @@ public class HomePage {
 	@FindBy(linkText = "Simple Form Demo")
 	private static WebElement formDemoText;
 
-	public HomePage() throws Exception {
+	public MainPage() {
 		driver = DriverManager.getDriver();
 		PageFactory.initElements(driver, this);
 	}

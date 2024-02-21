@@ -10,7 +10,6 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
@@ -25,7 +24,6 @@ public class ApplyTest extends DriverFactoryWebBase {
 	private static String boratechURL = ConfigReader.getValue("boratech", "url");
 
 	@Test
-	@DisabledIfSystemProperty(named = "browser", matches = "firefox", disabledReason = "Date input field needs to be fixed in Firefox.")
 	void applyPositiveTest() {
 		driver.navigate().to(boratechURL);
 		driver.findElement(By.xpath("//a[@href='/apply']")).click();
@@ -43,7 +41,8 @@ public class ApplyTest extends DriverFactoryWebBase {
 		// data entries
 		driver.findElement(By.name("firstname")).sendKeys(firstName);
 		driver.findElement(By.name("lastname")).sendKeys(lastName);
-		driver.findElement(By.name("dob")).sendKeys(today);
+		driver.findElement(By.name("dob")).click();
+		webUtils.keyboard().sendKeys(today).perform();
 		List<WebElement> genderElements = driver.findElements(By.name("gender"));
 		genderElements.get(gender).click();
 		driver.findElement(By.name("email")).sendKeys(email);
