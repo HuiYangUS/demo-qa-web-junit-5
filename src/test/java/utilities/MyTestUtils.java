@@ -9,6 +9,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 import io.cucumber.datatable.DataTable;
 
@@ -20,6 +21,17 @@ public class MyTestUtils {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static Map<String, String> stringToMap(String text) {
+		String[] textPairs = text.substring(1, text.length() - 1).split(", ");
+		Map<String, String> data = new TreeMap<>();
+		for (String textPair : textPairs) {
+			String[] dataPair = textPair.split("=");
+			data.put(dataPair[0], dataPair[1]);
+		}
+		assertTrue(data.toString().equals(text), "Invalid string format for conversion.");
+		return data;
 	}
 
 	public static boolean isInt(String text) {
@@ -75,6 +87,9 @@ public class MyTestUtils {
 		return new HashMap<String, String>();
 	}
 
+	/*
+	 * locates the directory of the auto chrome browser
+	 */
 	public static String getAutoChromeOnWindowsPath() {
 		assertTrue(isWindows(), "It must be on a windows machine.");
 		int lastIndex = getCurrentDir().lastIndexOf("/");
