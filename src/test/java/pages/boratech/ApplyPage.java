@@ -65,11 +65,13 @@ public class ApplyPage {
 	}
 
 	public void enterFirstName(String firstName) {
+		firstNameInput.clear();
 		firstNameInput.sendKeys(firstName);
 		wait.until(ExpectedConditions.attributeToBe(firstNameInput, "value", firstName));
 	}
 
 	public void enterLastName(String lastName) {
+		lastNameInput.clear();
 		lastNameInput.sendKeys(lastName);
 		wait.until(ExpectedConditions.attributeToBe(lastNameInput, "value", lastName));
 	}
@@ -89,18 +91,19 @@ public class ApplyPage {
 		if (Integer.parseInt(dayOfMonth) < 10)
 			dayOfMonth = "0" + Integer.parseInt(dayOfMonth);
 		String expectedDateOfBirth = String.format("%s-%s-%s", year, month, dayOfMonth);
-		dateOfBirthInput.click();
-		utils.keyboard().sendKeys(month + dayOfMonth + year).perform();
-		;
+		dateOfBirthInput.clear();
+		utils.keyboard().sendKeys(dateOfBirthInput, month + dayOfMonth + year).perform();
 		wait.until(ExpectedConditions.attributeToBe(dateOfBirthInput, "value", expectedDateOfBirth));
 	}
 
 	public void enterEmail(String email) {
+		emailInput.clear();
 		emailInput.sendKeys(email);
 		wait.until(ExpectedConditions.attributeToBe(emailInput, "value", email));
 	}
 
 	public void enterPhoneNumber(String phoneNumber) {
+		phoneNumberInput.clear();
 		phoneNumberInput.sendKeys(phoneNumber);
 		wait.until(ExpectedConditions.attributeToBe(phoneNumberInput, "value", phoneNumber));
 	}
