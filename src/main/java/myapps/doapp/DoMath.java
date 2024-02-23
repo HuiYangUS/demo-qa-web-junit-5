@@ -1,4 +1,4 @@
-package myapp;
+package myapps.doapp;
 
 public class DoMath {
 
