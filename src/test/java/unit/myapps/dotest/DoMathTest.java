@@ -1,10 +1,10 @@
-package unit.myapp;
+package unit.myapps.dotest;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import myapp.DoMath;
+import myapps.doapp.DoMath;
 
 public class DoMathTest {
 
