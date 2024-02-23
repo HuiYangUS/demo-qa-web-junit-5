@@ -9,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import ui.base.web.DriverFactoryWebBase;
 import utilities.MyTestUtils;
 
+/*
+ * tests for automatically downloaded drivers
+ */
 public class AutoDriverFactoryTest extends DriverFactoryWebBase {
 
 	@BeforeAll

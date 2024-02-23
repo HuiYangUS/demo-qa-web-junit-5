@@ -94,13 +94,10 @@ public class DriverFactory {
 			EdgeDriverService edgeService = new EdgeDriverService.Builder()
 					.usingDriverExecutable(new File(edgeDriverFilePath)).build();
 			EdgeOptions edgeOptions = new EdgeOptions();
-
-			// turn off personal profile prompt
 			Map<String, Object> prefs = new HashMap<>();
 			prefs.put("user_experience_metrics.personalization_data_consent_enabled", true);
 			edgeOptions.setExperimentalOption("prefs", prefs);
 			findEdgeHeadless(edgeOptions);
-
 			driver = new EdgeDriver(edgeService, edgeOptions);
 			break;
 		case "firefox":
@@ -109,12 +106,20 @@ public class DriverFactory {
 			FirefoxDriverService firefoxService = new GeckoDriverService.Builder()
 					.usingDriverExecutable(new File(firefoxDriverFilePath)).build();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
-
-			// turn off geo locator
 			firefoxOptions.addPreference("geo.enabled", false);
 			findFirefoxHeadless(firefoxOptions);
-
 			driver = new FirefoxDriver(firefoxService, firefoxOptions);
+			break;
+		case "opera":
+			assertTrue(MyTestUtils.isOperaOnWindowsAvailable(), "Opera browser is not available.");
+			ChromeDriverService operaService = new ChromeDriverService.Builder()
+					.usingDriverExecutable(new File("src/test/resources/drivers/win/operadriver/operadriver.exe"))
+					.build();
+			ChromeOptions operaOptions = new ChromeOptions();
+			operaOptions.setExperimentalOption("w3c", true);
+			operaOptions.setBinary(MyTestUtils.getOperaOnWindowsPath());
+			findChromeHeadless(operaOptions);
+			driver = new ChromeDriver(operaService, operaOptions);
 			break;
 		case "safari":
 		default:
@@ -146,20 +151,17 @@ public class DriverFactory {
 			break;
 		case "edge":
 			EdgeOptions edgeOptions = new EdgeOptions();
-
 			Map<String, Object> prefs = new HashMap<>();
+			// turn off personal prompt
 			prefs.put("user_experience_metrics.personalization_data_consent_enabled", true);
 			edgeOptions.setExperimentalOption("prefs", prefs);
 			findEdgeHeadless(edgeOptions);
-
 			driver = new EdgeDriver(edgeOptions);
 			break;
 		case "firefox":
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
-
 			firefoxOptions.addPreference("geo.enabled", false);
 			findFirefoxHeadless(firefoxOptions);
-
 			driver = new FirefoxDriver(firefoxOptions);
 			break;
 		case "safari":
@@ -200,7 +202,7 @@ public class DriverFactory {
 		else if (MyTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("aarch64"))
 			dirPathName = "mac/m-chip";
 		else if (MyTestUtils.isWindows())
-			dirPathName = "windows";
+			dirPathName = "win";
 		assertNotNull(dirPathName, "Failed to locate a valid directory for the driver.");
 		return MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
 	}
