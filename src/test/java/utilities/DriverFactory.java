@@ -203,6 +203,8 @@ public class DriverFactory {
 			dirPathName = "mac/m-chip";
 		else if (MyTestUtils.isWindows())
 			dirPathName = "win";
+		else if (MyTestUtils.isLinux())
+			dirPathName = "linux";
 		assertNotNull(dirPathName, "Failed to locate a valid directory for the driver.");
 		return MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
 	}
