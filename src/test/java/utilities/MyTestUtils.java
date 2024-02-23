@@ -74,6 +74,10 @@ public class MyTestUtils {
 		return getOS().contains("mac");
 	}
 
+	public static boolean isLinux() {
+		return getOS().contains("linux");
+	}
+
 	public static String getCurrentDir() {
 		return System.getProperty("user.dir").replace("\\", "/");
 	}
@@ -100,6 +104,21 @@ public class MyTestUtils {
 
 	public static boolean isAutoChromeOnWindowsAvailable() {
 		return (new File(getAutoChromeOnWindowsPath()).exists());
+	}
+
+	/*
+	 * locates the directory of the opera browser
+	 */
+	public static String getOperaOnWindowsPath() {
+		assertTrue(isWindows(), "It must be on a windows machine.");
+		int lastIndex = getCurrentDir().lastIndexOf("/");
+		String projectContainerDirPath = getCurrentDir().substring(0, lastIndex);
+		String autoChromePath = projectContainerDirPath + "/automation/opera/opera.exe";
+		return autoChromePath;
+	}
+
+	public static boolean isOperaOnWindowsAvailable() {
+		return (new File(getOperaOnWindowsPath()).exists());
 	}
 
 }

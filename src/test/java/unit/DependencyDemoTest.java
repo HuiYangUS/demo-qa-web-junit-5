@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.junit.jupiter.api.condition.EnabledIf;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
 import utilities.MyPrinter;
@@ -14,25 +12,24 @@ import utilities.MyPrinter;
 @TestMethodOrder(OrderAnnotation.class)
 public class DependencyDemoTest extends BaseTest {
 
-	static boolean isATestPass = false;
+	static boolean isAlphaPassed = false;
 
 	@Test
 	@Order(value = 1)
-	void runATest() {
-		MyPrinter.printLine("This the 1st demo test.");
-		fail();
-		isATestPass = true;
+	void runAlphaTest() {
+		MyPrinter.printLine("This is alpha demo test.");
+		isAlphaPassed = true;
 	}
 
-	boolean getATestResult() {
-		return isATestPass;
+	boolean getAlphaResult() {
+		return isAlphaPassed;
 	}
 
 	@Test
 	@Order(value = 2)
-	@EnabledIf(value = "getATestResult")
-	void runBTest() {
-		MyPrinter.printLine("This the 2nd demo test.");
+	@EnabledIf(value = "getAlphaResult")
+	void runOmegaTest() {
+		MyPrinter.printLine("This is omega demo test.");
 	}
 
 }
