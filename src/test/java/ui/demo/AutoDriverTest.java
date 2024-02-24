@@ -17,7 +17,7 @@ import org.openqa.selenium.firefox.GeckoDriverInfo;
 import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariDriverInfo;
 
-import ui.demo.metadata.DriverDataTest;
+import ui.metadata.DriverDataTest;
 import utilities.MyTestUtils;
 
 public class AutoDriverTest {
