@@ -4,11 +4,11 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.sql.Timestamp;
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
+import java.time.DateTimeException;
 import java.util.Map;
+import java.util.HashMap;
 import java.util.TreeMap;
 
 import io.cucumber.datatable.DataTable;
@@ -96,9 +96,7 @@ public class MyTestUtils {
 	 */
 	public static String getAutoChromeOnWindowsPath() {
 		assertTrue(isWindows(), "It must be on a windows machine.");
-		int lastIndex = getCurrentDir().lastIndexOf("/");
-		String projectContainerDirPath = getCurrentDir().substring(0, lastIndex);
-		String autoChromePath = projectContainerDirPath + "/automation/chrome/chrome.exe";
+		String autoChromePath = "C:/Programs+/Chrome/chrome.exe";
 		return autoChromePath;
 	}
 
@@ -111,10 +109,8 @@ public class MyTestUtils {
 	 */
 	public static String getOperaOnWindowsPath() {
 		assertTrue(isWindows(), "It must be on a windows machine.");
-		int lastIndex = getCurrentDir().lastIndexOf("/");
-		String projectContainerDirPath = getCurrentDir().substring(0, lastIndex);
-		String autoChromePath = projectContainerDirPath + "/automation/opera/opera.exe";
-		return autoChromePath;
+		String operaPath = "C:/Programs+/Opera/opera.exe";
+		return operaPath;
 	}
 
 	public static boolean isOperaOnWindowsAvailable() {
