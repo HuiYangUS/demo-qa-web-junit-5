@@ -74,8 +74,8 @@ public class DriverDataTest {
 		configDriver(driver);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		System.out.println(String.format("%s: %s", "browserName", driver.getCapabilities().getBrowserName()));
-		System.out.println(String.format("%s: %s", "browserVersion", driver.getCapabilities().getBrowserVersion()));
 		System.out.println(String.format("%s: %s", "geckodriverVersion", data.get("moz:geckodriverVersion")));
+		System.out.println(String.format("%s: %s", "browserVersion", driver.getCapabilities().getBrowserVersion()));
 		System.out.println(String.format("%s: %s", "cdpVersion", data.get("se:cdpVersion")));
 		System.out.println(
 				String.format("%s: %s", "implicitTimeout", ((Map<?, ?>) data.get("timeouts")).get("implicit")));
@@ -110,9 +110,9 @@ public class DriverDataTest {
 		MyTestUtils.pause(1);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		System.out.println(String.format("%s: %s", "browserName", driver.getCapabilities().getBrowserName()));
-		System.out.println(String.format("%s: %s", "browserVersion", driver.getCapabilities().getBrowserVersion()));
 		System.out.println(String.format("%s: %s", "msedgedriverVersion", ((Map<?, ?>) data.get("msedge"))
 				.get("msedgedriverVersion").toString().replaceAll("[(].*[)]", "").strip()));
+		System.out.println(String.format("%s: %s", "browserVersion", driver.getCapabilities().getBrowserVersion()));
 		System.out.println(String.format("%s: %s", "cdpVersion", data.get("se:cdpVersion")));
 		System.out.println(
 				String.format("%s: %s", "implicitTimeout", ((Map<?, ?>) data.get("timeouts")).get("implicit")));
@@ -147,9 +147,9 @@ public class DriverDataTest {
 		MyTestUtils.pause(1);
 		Map<?, ?> data = driver.getCapabilities().asMap();
 		System.out.println(String.format("%s: %s", "browserName", driver.getCapabilities().getBrowserName()));
-		System.out.println(String.format("%s: %s", "browserVersion", driver.getCapabilities().getBrowserVersion()));
 		System.out.println(String.format("%s: %s", "chromedriverVersion", ((Map<?, ?>) data.get("chrome"))
 				.get("chromedriverVersion").toString().replaceAll("[(].*[)]", "").strip()));
+		System.out.println(String.format("%s: %s", "browserVersion", driver.getCapabilities().getBrowserVersion()));
 		System.out.println(String.format("%s: %s", "cdpVersion", data.get("se:cdpVersion")));
 		System.out.println(
 				String.format("%s: %s", "implicitTimeout", ((Map<?, ?>) data.get("timeouts")).get("implicit")));
