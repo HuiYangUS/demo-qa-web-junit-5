@@ -18,7 +18,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import ui.base.web.DriverFactoryWebBase;
 import utilities.ConfigReader;
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 
 public class AddTest extends DriverFactoryWebBase {
 
@@ -85,7 +85,7 @@ public class AddTest extends DriverFactoryWebBase {
 		driver.findElement(By.xpath("//a[@href='/add-experience']")).click();
 		wait.until(ExpectedConditions.urlContains("/add-experience"));
 		By successAlertByLocater = By.xpath("//div[@class='alert alert-success']");
-		String jobTitle = "Cashier - " + MyTestUtils.getTimeStamp();
+		String jobTitle = "Cashier - " + AppTestUtils.getTimeStamp();
 		String company = "Walmart";
 		String[] dateData = LocalDate.now().toString().split("-");
 		String today = dateData[1] + dateData[2] + dateData[0];
@@ -135,7 +135,7 @@ public class AddTest extends DriverFactoryWebBase {
 		driver.findElement(By.xpath("//a[@href='/add-experience']")).click();
 		wait.until(ExpectedConditions.urlContains("/add-experience"));
 		By successAlertByLocater = By.xpath("//div[@class='alert alert-success']");
-		String jobTitle = "Cashier - " + MyTestUtils.getTimeStamp();
+		String jobTitle = "Cashier - " + AppTestUtils.getTimeStamp();
 		String company = "Walmart";
 		String[] dateData = LocalDate.now().toString().split("-");
 		String today = dateData[1] + dateData[2] + dateData[0];

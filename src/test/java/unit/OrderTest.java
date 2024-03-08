@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
-import utilities.MyPrinter;
+import utilities.SimplePrinter;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class OrderTest extends BaseTest {
@@ -13,19 +13,19 @@ public class OrderTest extends BaseTest {
 	@Test
 	@Order(value = 3)
 	void runATest() {
-		MyPrinter.printLine("This the 1st demo test.");
+		SimplePrinter.printLine("This the 1st demo test.");
 	}
 
 	@Test
 	@Order(value = 1)
 	void runBTest() {
-		MyPrinter.printLine("This the 2nd demo test.");
+		SimplePrinter.printLine("This the 2nd demo test.");
 	}
 
 	@Test
 	@Order(value = 2)
 	void runCTest() {
-		MyPrinter.printLine("This the 3rd demo test.");
+		SimplePrinter.printLine("This the 3rd demo test.");
 	}
 
 }

@@ -16,7 +16,7 @@ import org.openqa.selenium.safari.SafariDriverService;
 import org.openqa.selenium.safari.SafariOptions;
 
 import utilities.DriverFactory;
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 
 public class SafariWebTest {
 
@@ -27,7 +27,7 @@ public class SafariWebTest {
 		driver.manage().window().maximize();
 		System.out.println(driver.toString());
 		driver.navigate().to("https://www.apple.com");
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 		driver.quit();
 	}
 
@@ -50,7 +50,7 @@ public class SafariWebTest {
 		SafariDriver driver = new SafariDriver(service);
 		driver.manage().window().maximize();
 		System.out.println(driver.toString());
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 		driver.quit();
 	}
 
@@ -63,7 +63,7 @@ public class SafariWebTest {
 		SafariDriver driver = new SafariDriver(service);
 		driver.manage().window().maximize();
 		System.out.println(driver.toString());
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 		driver.quit();
 	}
 
@@ -84,7 +84,7 @@ public class SafariWebTest {
 		SafariDriver driver = new SafariDriver(service);
 		driver.manage().window().maximize();
 		System.out.println(driver.toString());
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 		driver.quit();
 	}
 
@@ -94,7 +94,7 @@ public class SafariWebTest {
 		System.setProperty("browser", "safari");
 		WebDriver driver = DriverFactory.getDriver();
 		System.out.println(driver.toString());
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 		DriverFactory.reset();
 	}
 

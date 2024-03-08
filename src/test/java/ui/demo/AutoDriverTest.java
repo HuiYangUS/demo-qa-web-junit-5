@@ -18,7 +18,7 @@ import org.openqa.selenium.safari.SafariDriver;
 import org.openqa.selenium.safari.SafariDriverInfo;
 
 import ui.metadata.DriverDataTest;
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 
 public class AutoDriverTest {
 
@@ -33,7 +33,7 @@ public class AutoDriverTest {
 		assertTrue(driverInfo.isPresent() && driverInfo.isPresent(), "No driver is found.");
 		DriverDataTest.configDriver(driver);
 		driver.navigate().to(url);
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class AutoDriverTest {
 		assertTrue(driverInfo.isPresent() && driverInfo.isPresent(), "No driver is found.");
 		DriverDataTest.configDriver(driver);
 		driver.navigate().to(url);
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 	}
 
 	@Test
@@ -54,7 +54,7 @@ public class AutoDriverTest {
 		assertTrue(driverInfo.isPresent() && driverInfo.isPresent(), "No driver is found.");
 		DriverDataTest.configDriver(driver);
 		driver.navigate().to(url);
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 	}
 
 	@Test
@@ -65,7 +65,7 @@ public class AutoDriverTest {
 		assertTrue(driverInfo.isPresent() && driverInfo.isPresent(), "No driver is found.");
 		DriverDataTest.configDriver(driver);
 		driver.navigate().to(url);
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 	}
 
 	@AfterEach

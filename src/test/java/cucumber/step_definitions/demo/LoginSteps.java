@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 import utilities.ConfigReader;
 import utilities.DataManager;
 import utilities.DriverManager;
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 import utilities.PageManager;
 
 public class LoginSteps {
@@ -52,7 +52,7 @@ public class LoginSteps {
 
 	@Then("user is on the inventory page")
 	public void user_is_on_the_inventory_page() {
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 		assertTrue(pages.inventoryPage().isLoaded(), "User is not on the inventory page.");
 	}
 

@@ -5,7 +5,7 @@ import org.junit.jupiter.params.provider.ValueSource;
 import org.openqa.selenium.WebDriver;
 
 import utilities.DriverFactory;
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 
 public class LocalThreadDriverTest {
 
@@ -15,7 +15,7 @@ public class LocalThreadDriverTest {
 		System.setProperty("browser", browser);
 		WebDriver driver = DriverFactory.getDriver();
 		System.out.println(driver.getWindowHandle() + "\n");
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 		DriverFactory.reset();
 	}
 

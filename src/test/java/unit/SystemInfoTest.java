@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.condition.EnabledIf;
 
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 
 public class SystemInfoTest {
 
@@ -32,7 +32,7 @@ public class SystemInfoTest {
 		System.out.println(String.format("%s: %s", "OS name", p.get("os.name")));
 		System.out.println(String.format("%s: %s", "Chip type", p.get("os.arch")));
 		System.out.println(String.format("%s: %s", "Java version", p.get("java.version")));
-		System.out.println(String.format("%s: %s", "Project directory", MyTestUtils.getCurrentDir()));
+		System.out.println(String.format("%s: %s", "Project directory", AppTestUtils.getCurrentDir()));
 	}
 
 }
