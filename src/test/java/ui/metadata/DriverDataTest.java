@@ -10,6 +10,7 @@ import java.util.Map.Entry;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
@@ -62,7 +63,7 @@ public class DriverDataTest {
 		shutDown(driver);
 	}
 
-	@Test
+	@RepeatedTest(2)
 	@EnabledOnOs(OS.WINDOWS)
 	@Order(value = 7)
 	@Tags(value = { @Tag("local"), @Tag("firefox") })
@@ -97,7 +98,7 @@ public class DriverDataTest {
 		shutDown(driver);
 	}
 
-	@Test
+	@RepeatedTest(2)
 	@EnabledOnOs(OS.WINDOWS)
 	@Order(value = 6)
 	@Tags(value = { @Tag("local"), @Tag("edge") })
@@ -138,7 +139,7 @@ public class DriverDataTest {
 		shutDown(driver);
 	}
 
-	@Test
+	@RepeatedTest(2)
 	@EnabledOnOs(OS.WINDOWS)
 	@Order(value = 5)
 	@Tags(value = { @Tag("local"), @Tag("chrome") })
