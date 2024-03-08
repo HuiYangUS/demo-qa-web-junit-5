@@ -14,7 +14,7 @@ import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
 
 import utilities.ConfigReader;
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 
 public class AutoChromeTest {
 
@@ -22,16 +22,16 @@ public class AutoChromeTest {
 	@DisplayName("Auto Chrome Test")
 	@EnabledOnOs(OS.WINDOWS)
 	void runTest() {
-		assertTrue(MyTestUtils.isAutoChromeOnWindowsAvailable(), "No auto chrome browser is available in the system.");
+		assertTrue(AppTestUtils.isAutoChromeOnWindowsAvailable(), "No auto chrome browser is available in the system.");
 		ChromeDriverService service = new ChromeDriverService.Builder()
 				.usingDriverExecutable(new File("src/test/resources/drivers/win/chromedriver/chromedriver.exe"))
 				.build();
 		ChromeOptions options = new ChromeOptions();
-		options.setBinary(MyTestUtils.getAutoChromeOnWindowsPath());
+		options.setBinary(AppTestUtils.getAutoChromeOnWindowsPath());
 		WebDriver driver = new ChromeDriver(service, options);
 		driver.manage().window().maximize();
 		driver.navigate().to(ConfigReader.getValue("playground", "url"));
-		MyTestUtils.pause(3);
+		AppTestUtils.pause(3);
 		driver.quit();
 	}
 

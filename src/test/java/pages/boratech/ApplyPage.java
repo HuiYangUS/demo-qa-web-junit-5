@@ -14,7 +14,7 @@ import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utilities.DriverManager;
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 import utilities.WebUtils;
 
 public class ApplyPage {
@@ -85,7 +85,7 @@ public class ApplyPage {
 		String year = date[2];
 		String month = date[0];
 		String dayOfMonth = date[1];
-		assertTrue(MyTestUtils.isValidDate(year, month, dayOfMonth), "Invalid date.");
+		assertTrue(AppTestUtils.isValidDate(year, month, dayOfMonth), "Invalid date.");
 		if (Integer.parseInt(month) < 10)
 			month = "0" + Integer.parseInt(month);
 		if (Integer.parseInt(dayOfMonth) < 10)

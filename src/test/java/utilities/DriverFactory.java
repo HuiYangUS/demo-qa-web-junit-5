@@ -90,7 +90,7 @@ public class DriverFactory {
 			break;
 		case "edge":
 			String edgeDriverFilePath = getDriverDir() + "/edgedriver/msedgedriver"
-					+ (MyTestUtils.isWindows() ? ".exe" : "");
+					+ (AppTestUtils.isWindows() ? ".exe" : "");
 			EdgeDriverService edgeService = new EdgeDriverService.Builder()
 					.usingDriverExecutable(new File(edgeDriverFilePath)).build();
 			EdgeOptions edgeOptions = new EdgeOptions();
@@ -102,7 +102,7 @@ public class DriverFactory {
 			break;
 		case "firefox":
 			String firefoxDriverFilePath = getDriverDir() + "/firefoxdriver/geckodriver"
-					+ (MyTestUtils.isWindows() ? ".exe" : "");
+					+ (AppTestUtils.isWindows() ? ".exe" : "");
 			FirefoxDriverService firefoxService = new GeckoDriverService.Builder()
 					.usingDriverExecutable(new File(firefoxDriverFilePath)).build();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -111,13 +111,13 @@ public class DriverFactory {
 			driver = new FirefoxDriver(firefoxService, firefoxOptions);
 			break;
 		case "opera":
-			assertTrue(MyTestUtils.isOperaOnWindowsAvailable(), "Opera browser is not available.");
+			assertTrue(AppTestUtils.isOperaOnWindowsAvailable(), "Opera browser is not available.");
 			ChromeDriverService operaService = new ChromeDriverService.Builder()
 					.usingDriverExecutable(new File("src/test/resources/drivers/win/operadriver/operadriver.exe"))
 					.build();
 			ChromeOptions operaOptions = new ChromeOptions();
 			operaOptions.setExperimentalOption("w3c", true);
-			operaOptions.setBinary(MyTestUtils.getOperaOnWindowsPath());
+			operaOptions.setBinary(AppTestUtils.getOperaOnWindowsPath());
 			findChromeHeadless(operaOptions);
 			driver = new ChromeDriver(operaService, operaOptions);
 			break;
@@ -133,7 +133,7 @@ public class DriverFactory {
 
 	private static WebDriver getDefaultLocalDriver() {
 		String localDriverFilePath = getDriverDir() + "/chromedriver/chromedriver"
-				+ (MyTestUtils.isWindows() ? ".exe" : "");
+				+ (AppTestUtils.isWindows() ? ".exe" : "");
 		ChromeDriverService service = new ChromeDriverService.Builder()
 				.usingDriverExecutable(new File(localDriverFilePath)).build();
 		ChromeOptions options = new ChromeOptions();
@@ -197,16 +197,16 @@ public class DriverFactory {
 
 	public static String getDriverDir() {
 		String dirPathName = null;
-		if (MyTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("x86_64"))
+		if (AppTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("x86_64"))
 			dirPathName = "mac/intel";
-		else if (MyTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("aarch64"))
+		else if (AppTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("aarch64"))
 			dirPathName = "mac/m-chip";
-		else if (MyTestUtils.isWindows())
+		else if (AppTestUtils.isWindows())
 			dirPathName = "win";
-		else if (MyTestUtils.isLinux())
+		else if (AppTestUtils.isLinux())
 			dirPathName = "linux";
 		assertNotNull(dirPathName, "Failed to locate a valid directory for the driver.");
-		return MyTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
+		return AppTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
 	}
 
 }

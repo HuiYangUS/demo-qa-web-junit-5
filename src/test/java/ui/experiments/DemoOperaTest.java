@@ -20,7 +20,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 import utilities.WebUtils;
 
 @EnabledOnOs(OS.WINDOWS)
@@ -32,12 +32,12 @@ public class DemoOperaTest {
 	@DisplayName("Demo Opera Test")
 	@Tags({ @Tag("opera") })
 	void runTest() {
-		assertTrue(MyTestUtils.isOperaOnWindowsAvailable(), "Opera browser is not available.");
+		assertTrue(AppTestUtils.isOperaOnWindowsAvailable(), "Opera browser is not available.");
 		ChromeDriverService operaService = new ChromeDriverService.Builder()
 				.usingDriverExecutable(new File("src/test/resources/drivers/win/operadriver/operadriver.exe")).build();
 		ChromeOptions operaOptions = new ChromeOptions();
 		operaOptions.setExperimentalOption("w3c", true);
-		operaOptions.setBinary(MyTestUtils.getOperaOnWindowsPath());
+		operaOptions.setBinary(AppTestUtils.getOperaOnWindowsPath());
 		WebDriver driver = new ChromeDriver(operaService, operaOptions);
 		driver.manage().deleteAllCookies();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(3));

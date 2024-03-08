@@ -7,7 +7,7 @@ import org.junit.jupiter.api.condition.EnabledIf;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 
-import utilities.MyPrinter;
+import utilities.SimplePrinter;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class DependencyDemoTest extends BaseTest {
@@ -17,7 +17,7 @@ public class DependencyDemoTest extends BaseTest {
 	@Test
 	@Order(value = 1)
 	void runAlphaTest() {
-		MyPrinter.printLine("This is alpha demo test.");
+		SimplePrinter.printLine("This is alpha demo test.");
 		isAlphaPassed = true;
 	}
 
@@ -29,7 +29,7 @@ public class DependencyDemoTest extends BaseTest {
 	@Order(value = 2)
 	@EnabledIf(value = "getAlphaResult")
 	void runOmegaTest() {
-		MyPrinter.printLine("This is omega demo test.");
+		SimplePrinter.printLine("This is omega demo test.");
 	}
 
 }

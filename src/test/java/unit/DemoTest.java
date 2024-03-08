@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
-import utilities.MyPrinter;
+import utilities.SimplePrinter;
 
 public class DemoTest extends BaseTest {
 
@@ -16,14 +16,14 @@ public class DemoTest extends BaseTest {
 	@Test
 	@Tag("cat")
 	void catTest() {
-		MyPrinter.printLine("This is a cat.");
+		SimplePrinter.printLine("This is a cat.");
 	}
 
 	@Test
 	@Tags({ @Tag("dog"), @Tag("pet") })
 	void dogTest() {
-		MyPrinter.printLine("This is a dog.");
-		MyPrinter.printLine("I want a dog as my pet.");
+		SimplePrinter.printLine("This is a dog.");
+		SimplePrinter.printLine("I want a dog as my pet.");
 	}
 
 }

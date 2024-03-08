@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
 
 import ui.base.web.DriverFactoryWebBase;
-import utilities.MyTestUtils;
+import utilities.AppTestUtils;
 
 /*
  * tests for automatically downloaded drivers
@@ -27,7 +27,7 @@ public class AutoDriverFactoryTest extends DriverFactoryWebBase {
 	void runTest() {
 		System.out.println(driver.toString().replaceAll("[(].*[)]", ""));
 		driver.navigate().to(url);
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 	}
 
 	@Test
@@ -36,7 +36,7 @@ public class AutoDriverFactoryTest extends DriverFactoryWebBase {
 	void demoTest() {
 		System.out.println(driver.toString().replaceAll("[(].*[)]", ""));
 		driver.navigate().to(url);
-		MyTestUtils.pause(1);
+		AppTestUtils.pause(1);
 	}
 
 }
