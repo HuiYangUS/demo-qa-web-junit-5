@@ -19,9 +19,9 @@ import org.openqa.selenium.firefox.FirefoxDriverService;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
 
-/*
- * JUnit-5 <DriverFactory> class that uses Selenium-4
- * Currently, Safari Driver is disabled.
+/**
+ * This JUnit-5 <DriverFactory> class uses Selenium-4 Currently, Safari Driver
+ * is disabled.
  */
 public class DriverFactory {
 
@@ -46,10 +46,14 @@ public class DriverFactory {
 		String autoKey = "auto";
 		if (System.getProperty(autoKey) != null)
 			auto = Boolean.valueOf(System.getProperty(autoKey).strip().toLowerCase());
+		else
+			auto = Boolean.valueOf(ConfigReader.getValue("config", "headless"));
 
 		String headlessKey = "headless";
 		if (System.getProperty(headlessKey) != null)
 			headless = Boolean.valueOf(System.getProperty(headlessKey).strip().toLowerCase());
+		else
+			headless = Boolean.valueOf(ConfigReader.getValue("config", "headless"));
 		isSet = true;
 	}
 
@@ -77,11 +81,16 @@ public class DriverFactory {
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
 	}
 
-	// use auto driver or local driver
+	/**
+	 * Switch between local driver and auto driver
+	 */
 	private static WebDriver getRealDriver() {
 		return auto ? autoLocalDriver() : initLocalDriver();
 	}
 
+	/**
+	 * Local driver is updated manually
+	 */
 	private static WebDriver initLocalDriver() {
 		WebDriver driver;
 		switch (browser) {
@@ -141,8 +150,10 @@ public class DriverFactory {
 		return new ChromeDriver(service, options);
 	}
 
+	/**
+	 * Auto driver is updated automatically using Selenium Manager
+	 */
 	private static WebDriver autoLocalDriver() {
-		// when in use, Selenium Manager automatically downloads drivers
 		System.err.println("Danger!!! Auto driver is used. Warning: Illegal downloaded driver could harm your system.");
 		WebDriver driver;
 		switch (browser) {
