@@ -2,6 +2,7 @@ package ui.demo;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Tags;
 import org.junit.jupiter.api.Test;
@@ -21,10 +22,11 @@ import utilities.ConfigReader;
 @TestMethodOrder(OrderAnnotation.class)
 public class LoginTest extends DriverFactoryWebBase {
 
-	/*
+	/**
 	 * Without using Page Object Model
 	 */
 	@Test
+	@DisplayName("First Login Test")
 	@Order(1)
 	@Tags({ @Tag("ui"), @Tag("web") })
 	public void the1stLoginTest() {
@@ -35,10 +37,11 @@ public class LoginTest extends DriverFactoryWebBase {
 		assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
 	}
 
-	/*
+	/**
 	 * Without using PageManager
 	 */
 	@Test
+	@DisplayName("Second Login Test")
 	@Order(2)
 	@Tags({ @Tag("ui"), @Tag("web") })
 	public void the2ndLoginTest() {
@@ -50,10 +53,11 @@ public class LoginTest extends DriverFactoryWebBase {
 		assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
 	}
 
-	/*
+	/**
 	 * Without using steps package
 	 */
 	@Test
+	@DisplayName("Third Login Test")
 	@Order(3)
 	@Tags({ @Tag("ui"), @Tag("web") })
 	public void the3rdLoginTest() {
@@ -64,10 +68,11 @@ public class LoginTest extends DriverFactoryWebBase {
 		assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
 	}
 
-	/*
+	/**
 	 * The most advanced practice
 	 */
 	@Test
+	@DisplayName("Fourth Login Test")
 	@Order(4)
 	@Tags({ @Tag("ui"), @Tag("web") })
 	public void the4thLoginTest() {
