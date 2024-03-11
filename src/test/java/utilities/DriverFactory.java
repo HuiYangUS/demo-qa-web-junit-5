@@ -50,6 +50,8 @@ public class DriverFactory {
 		String headlessKey = "headless";
 		if (System.getProperty(headlessKey) != null)
 			headless = Boolean.valueOf(System.getProperty(headlessKey).strip().toLowerCase());
+		else
+			headless = Boolean.valueOf(ConfigReader.getValue("config", "headless"));
 		isSet = true;
 	}
 
