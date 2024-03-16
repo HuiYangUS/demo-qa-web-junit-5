@@ -143,13 +143,18 @@ public class DriverFactory {
 	    driver = new FirefoxDriver(firefoxService, firefoxOptions);
 	    break;
 	case "opera":
-	    assertTrue(AppTestUtils.isOperaOnWindowsAvailable(), "Opera browser is not available.");
+	    String operaDirPath = null;
+	    try {
+		operaDirPath = ConfigReader.getValue("config", "operaDirPath");
+	    } catch (Exception e) {
+		assertTrue(false, "Opera browser is not found in the system.");
+	    }
 	    ChromeDriverService operaService = new ChromeDriverService.Builder()
 		    .usingDriverExecutable(new File("src/test/resources/drivers/win/operadriver/operadriver.exe"))
 		    .build();
 	    ChromeOptions operaOptions = new ChromeOptions();
 	    operaOptions.setExperimentalOption("w3c", true);
-	    operaOptions.setBinary(AppTestUtils.getOperaOnWindowsPath());
+	    operaOptions.setBinary(operaDirPath);
 	    findChromeHeadless(operaOptions);
 	    driver = new ChromeDriver(operaService, operaOptions);
 	    break;
@@ -215,13 +220,16 @@ public class DriverFactory {
     }
 
     private static void findChromeHeadless(ChromeOptions options) {
-	if (headless)
+	if (headless && browser.equals("opera"))
 	    options.addArguments("--headless");
+	else if (headless && browser.equals("chrome"))
+	    options.addArguments("--headless=new");
+
     }
 
     private static void findEdgeHeadless(EdgeOptions options) {
 	if (headless)
-	    options.addArguments("--headless");
+	    options.addArguments("--headless=new");
     }
 
     private static void findFirefoxHeadless(FirefoxOptions options) {
