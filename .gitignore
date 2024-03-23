@@ -1,9 +1,8 @@
 /target/
-configs/
+**/resources/configs/
 
-### Extent Reports ###
-extent.properties
-pdf-config.yaml
+### any properties ###
+*.properties
 
 ### Eclipse ###
 .classpath
@@ -16,3 +15,7 @@ pdf-config.yaml
 
 ### Mac OS ###
 .DS_Store
+
+### Misc ###
+/.apt_generated/
+/.apt_generated_tests/
