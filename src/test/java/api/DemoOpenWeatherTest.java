@@ -11,7 +11,7 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 
 import unit.BaseTest;
-import utils.AppConfigReader;
+import utils.TestConfigReader;
 
 public class DemoOpenWeatherTest extends BaseTest {
 
@@ -19,7 +19,7 @@ public class DemoOpenWeatherTest extends BaseTest {
     static String stateCode = "VA";
     static String countryCode = "US";
     static String limit = "";
-    static String apiKey = AppConfigReader.getValue("config", "openweather_api_key");
+    static String apiKey = TestConfigReader.getValue("config", "openweather_api_key");
 
     @Test
     @DisplayName("Demo Weather Test")

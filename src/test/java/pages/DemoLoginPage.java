@@ -5,8 +5,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
-import utils.AppConfigReader;
 import utils.DriverManager;
+import utils.TestConfigReader;
 
 public class DemoLoginPage {
 
@@ -29,15 +29,15 @@ public class DemoLoginPage {
     }
 
     public void loadPage() {
-	driver.navigate().to(AppConfigReader.getValue(fileName, "url"));
+	driver.navigate().to(TestConfigReader.getValue(fileName, "url"));
     }
 
     public void enterUsername(String username) {
-	usernameInput.sendKeys(AppConfigReader.getValue(fileName, username));
+	usernameInput.sendKeys(TestConfigReader.getValue(fileName, username));
     }
 
     public void enterPassword(String password) {
-	passwordInput.sendKeys(AppConfigReader.getValue(fileName, password));
+	passwordInput.sendKeys(TestConfigReader.getValue(fileName, password));
     }
 
     public String getPasswordValue() {

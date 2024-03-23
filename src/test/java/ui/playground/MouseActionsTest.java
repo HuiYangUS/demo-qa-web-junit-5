@@ -1,17 +1,19 @@
 package ui.playground;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import org.openqa.selenium.By;
 
 import ui.base.web.DriverFactoryWebBase;
-import utils.AppConfigReader;
+import utils.TestConfigReader;
 
 public class MouseActionsTest extends DriverFactoryWebBase {
 
-    private static String playgroundURL = AppConfigReader.getValue("playground", "url");
+    private static String playgroundURL = TestConfigReader.getValue("playground", "url");
 
     @Test
+    @DisplayName("Mouse Actions Test")
     void actionTest() {
 	driver.navigate().to(playgroundURL);
 	By registerLinkByLocator = By

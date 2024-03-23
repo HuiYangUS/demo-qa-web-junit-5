@@ -15,90 +15,90 @@ import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import utils.AppTestUtils;
-import utils.AppConfigReader;
 import utils.DataManager;
+import utils.TestConfigReader;
 
 public class SimpleReportExtension
-		implements BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback {
+	implements BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback {
 
-	static ExtentSparkReporter reporter;
-	static ExtentReports report;
-	static ExtentTest test;
+    static ExtentSparkReporter reporter;
+    static ExtentReports report;
+    static ExtentTest test;
 
-	static DataManager dataManager = DataManager.getInstance();
+    static DataManager dataManager = DataManager.getInstance();
 
-	@Override
-	public void beforeAll(ExtensionContext context) throws Exception {
-		// get browser data from the system or the config file
-		Optional<String> browserDataFromSystem = context.getConfigurationParameter("browser");
-		String browserDataFromConfig = AppConfigReader.getValue("config", "browser");
-		String browserName = "Chrome";
-		if (browserDataFromSystem.isPresent()) {
-			switch (browserDataFromSystem.get().toLowerCase().strip()) {
-			case "firefox":
-				browserName = "Firefox";
-				break;
-			case "edge":
-				browserName = "Edge";
-				break;
-			case "safari":
-				browserName = "Safari";
-				break;
-			default:
-				break;
-			}
-		} else {
-			switch (browserDataFromConfig.toLowerCase()) {
-			case "firefox":
-				browserName = "Firefox";
-				break;
-			case "edge":
-				browserName = "Edge";
-				break;
-			case "safari":
-				browserName = "Safari";
-				break;
-			default:
-				break;
-			}
-		}
-
-		report = new ExtentReports();
-		reporter = new ExtentSparkReporter(AppTestUtils.getCurrentDir() + String.format(
-				"/target/extent-reports/report-%s-%s.html", AppTestUtils.getDateString(), AppTestUtils.getTimeStamp()));
-		report.attachReporter(reporter);
-
-		reporter.config().setOfflineMode(true);
-		reporter.config().setDocumentTitle("Test in " + browserName);
-		reporter.config().setReportName("Simple Test Report");
-		reporter.config().setTheme(Theme.STANDARD);
-		reporter.config().setEncoding("UTF-8");
+    @Override
+    public void beforeAll(ExtensionContext context) throws Exception {
+	// get browser data from the system or the config file
+	Optional<String> browserDataFromSystem = context.getConfigurationParameter("browser");
+	String browserDataFromConfig = TestConfigReader.getValue("config", "browser");
+	String browserName = "Chrome";
+	if (browserDataFromSystem.isPresent()) {
+	    switch (browserDataFromSystem.get().toLowerCase().strip()) {
+	    case "firefox":
+		browserName = "Firefox";
+		break;
+	    case "edge":
+		browserName = "Edge";
+		break;
+	    case "safari":
+		browserName = "Safari";
+		break;
+	    default:
+		break;
+	    }
+	} else {
+	    switch (browserDataFromConfig.toLowerCase()) {
+	    case "firefox":
+		browserName = "Firefox";
+		break;
+	    case "edge":
+		browserName = "Edge";
+		break;
+	    case "safari":
+		browserName = "Safari";
+		break;
+	    default:
+		break;
+	    }
 	}
 
-	@Override
-	public void beforeEach(ExtensionContext context) throws Exception {
-		String testName = context.getDisplayName().replaceAll("[(].*[)]", "");
-		test = report.createTest(testName);
-		test.assignAuthor(AppConfigReader.getValue("config", "author"));
-		test.assignDevice(System.getProperty("os.name"));
-	}
+	report = new ExtentReports();
+	reporter = new ExtentSparkReporter(AppTestUtils.getCurrentDir() + String.format(
+		"/target/extent-reports/report-%s-%s.html", AppTestUtils.getDateString(), AppTestUtils.getTimeStamp()));
+	report.attachReporter(reporter);
 
-	@Override
-	public void afterEach(ExtensionContext context) throws Exception {
-		Optional<Throwable> data = context.getExecutionException();
-		if (data.isEmpty())
-			test.log(Status.PASS, "Test Passed");
-		else {
-			test.fail(data.get());
-			test.log(Status.FAIL, "Test Failed");
-			if (Boolean.valueOf(AppConfigReader.getValue("config", "screenshot")))
-				dataManager.webUtils().savesScreenshot();
-		}
-	}
+	reporter.config().setOfflineMode(true);
+	reporter.config().setDocumentTitle("Test in " + browserName);
+	reporter.config().setReportName("Simple Test Report");
+	reporter.config().setTheme(Theme.STANDARD);
+	reporter.config().setEncoding("UTF-8");
+    }
 
-	@Override
-	public void afterAll(ExtensionContext context) throws Exception {
-		report.flush();
+    @Override
+    public void beforeEach(ExtensionContext context) throws Exception {
+	String testName = context.getDisplayName().replaceAll("[(].*[)]", "");
+	test = report.createTest(testName);
+	test.assignAuthor(TestConfigReader.getValue("config", "author"));
+	test.assignDevice(System.getProperty("os.name"));
+    }
+
+    @Override
+    public void afterEach(ExtensionContext context) throws Exception {
+	Optional<Throwable> data = context.getExecutionException();
+	if (data.isEmpty())
+	    test.log(Status.PASS, "Test Passed");
+	else {
+	    test.fail(data.get());
+	    test.log(Status.FAIL, "Test Failed");
+	    if (Boolean.valueOf(TestConfigReader.getValue("config", "screenshot")))
+		dataManager.webUtils().savesScreenshot();
 	}
+    }
+
+    @Override
+    public void afterAll(ExtensionContext context) throws Exception {
+	report.flush();
+    }
 
 }

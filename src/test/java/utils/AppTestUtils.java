@@ -67,10 +67,6 @@ public class AppTestUtils {
 	System.clearProperty("deviceName");
     }
 
-    public static boolean getDefaultTestCheck() {
-	return Boolean.valueOf(AppConfigReader.getValue("config", "check").strip().toLowerCase());
-    }
-
     public static String getOS() {
 	return System.getProperty("os.name").toLowerCase();
     }
@@ -92,7 +88,7 @@ public class AppTestUtils {
     }
 
     /**
-     * return first row of cucumber data table as map
+     * Return the first row of a cucumber data table as map
      */
     public static Map<String, String> getDataRow(DataTable dataTable) {
 	if (dataTable.asMaps().size() >= 1)

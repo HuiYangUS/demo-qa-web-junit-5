@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import java.io.FileInputStream;
 import java.util.Properties;
 
-public class ConfigReader {
+public class TestConfigReader {
 
     private static final String DIR_PATH = "src/test/resources/configs/";
 
@@ -20,7 +20,7 @@ public class ConfigReader {
 	try {
 	    p.load(new FileInputStream(filePath));
 	} catch (Exception e) {
-	    assertTrue(false, "No config file is discovered.");
+	    fail("No config file is discovered.");
 	}
 	return p;
     }

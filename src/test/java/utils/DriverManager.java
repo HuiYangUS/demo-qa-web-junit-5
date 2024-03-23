@@ -10,7 +10,7 @@ public class DriverManager {
     }
 
     public static WebDriver getDriver() {
-	String driverFactoryType = AppConfigReader.getValue("config", "driverFactoryType");
+	String driverFactoryType = TestConfigReader.getValue("config", "driverFactoryType");
 	if (driverFactoryType.equalsIgnoreCase("p") || driverFactoryType.equalsIgnoreCase("pie")) {
 	    return DriverFactoryPie.getDriver();
 	}

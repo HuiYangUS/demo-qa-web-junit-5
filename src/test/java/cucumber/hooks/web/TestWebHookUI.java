@@ -4,10 +4,10 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import utils.AppTestUtils;
-import utils.AppConfigReader;
 import utils.DataManager;
 import utils.DriverManager;
 import utils.PageManager;
+import utils.TestConfigReader;
 
 public class TestWebHookUI {
 
@@ -55,7 +55,7 @@ public class TestWebHookUI {
     @After(order = 2, value = "@ui or @web or @e2e or @phone or @tablet")
     public void tearDown(Scenario scenario) {
 	DataManager dataManager = DataManager.getInstance();
-	if (Boolean.valueOf(AppConfigReader.getValue("config", "screenshot")) && scenario.isFailed())
+	if (Boolean.valueOf(TestConfigReader.getValue("config", "screenshot")) && scenario.isFailed())
 	    dataManager.webUtils().savesScreenshot();
 	DriverManager.reset();
 	PageManager.reset();

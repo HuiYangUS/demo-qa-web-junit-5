@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import utils.AppTestUtils;
 
-public class UtilTest {
+public class UtilityTest {
 
     @Test
     void isIntTest() {

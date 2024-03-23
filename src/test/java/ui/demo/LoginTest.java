@@ -14,7 +14,7 @@ import org.openqa.selenium.By;
 import pages.DemoLoginPage;
 import steps.DemoLoginSteps;
 import ui.base.web.DriverFactoryWebBase;
-import utils.AppConfigReader;
+import utils.TestConfigReader;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class LoginTest extends DriverFactoryWebBase {
@@ -27,9 +27,9 @@ public class LoginTest extends DriverFactoryWebBase {
     @Order(1)
     @Tags({ @Tag("ui"), @Tag("web") })
     public void the1stLoginTest() {
-	driver.navigate().to(AppConfigReader.getValue("config", "url"));
-	driver.findElement(By.id("user-name")).sendKeys(AppConfigReader.getValue("config", "username"));
-	driver.findElement(By.id("password")).sendKeys(AppConfigReader.getValue("config", "password"));
+	driver.navigate().to(TestConfigReader.getValue("demo", "url"));
+	driver.findElement(By.id("user-name")).sendKeys(TestConfigReader.getValue("demo", "username"));
+	driver.findElement(By.id("password")).sendKeys(TestConfigReader.getValue("demo", "password"));
 	driver.findElement(By.id("login-button")).submit();
 	assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
     }

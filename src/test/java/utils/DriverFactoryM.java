@@ -24,9 +24,9 @@ public class DriverFactoryM {
 
     private static ThreadLocal<WebDriver> localDriver;
 
-    private static String browser = AppConfigReader.getValue("config", "browser").toLowerCase();
-    private static boolean headless = Boolean.valueOf(AppConfigReader.getValue("config", "headless").toLowerCase());
-    private static String deviceName = AppConfigReader.getValue("config", "deviceName");
+    private static String browser = TestConfigReader.getValue("config", "browser").toLowerCase();
+    private static boolean headless = Boolean.valueOf(TestConfigReader.getValue("config", "headless").toLowerCase());
+    private static String deviceName = TestConfigReader.getValue("config", "deviceName");
     private static boolean isSet;
     private static int waitTime = 5;
 
@@ -59,6 +59,7 @@ public class DriverFactoryM {
 
     public static void reset() {
 	if (localDriver != null && localDriver.get() != null) {
+	    localDriver.get().close();
 	    localDriver.get().quit();
 	    localDriver.remove();
 	}
@@ -112,13 +113,13 @@ public class DriverFactoryM {
      */
     private static void setChromeOptions(ChromeOptions options) {
 	options.addArguments("--no-sandbox");
-	if (Boolean.valueOf(AppConfigReader.getValue("config", "incognito").toLowerCase()))
+	if (Boolean.valueOf(TestConfigReader.getValue("config", "incognito").toLowerCase()))
 	    options.addArguments("--incognito");
 	String chromeUserDataPath = AppConfigReader.getValue("config", "chromeUserDataPath");
 	if (chromeUserDataPath != null) {
 	    options.addArguments(String.format("--user-data-dir=%s", chromeUserDataPath));
 	    options.addArguments(
-		    String.format("--profile-directory=%s", AppConfigReader.getValue("config", "chromeProfile")));
+		    String.format("--profile-directory=%s", TestConfigReader.getValue("config", "chromeProfile")));
 	}
     }
 
@@ -163,15 +164,15 @@ public class DriverFactoryM {
 	// turn off geographical locator
 	firefoxOptions.addPreference("geo.enabled", false);
 	useFirefoxProfile(firefoxOptions);
-	String firefoxBinPath = AppConfigReader.getValue("config", "firefoxProfilePath");
+	String firefoxBinPath = TestConfigReader.getValue("config", "firefoxProfilePath");
 	if (firefoxBinPath != null)
 	    firefoxOptions.setBinary(firefoxBinPath);
     }
 
     private static void useFirefoxProfile(FirefoxOptions firefoxOptions) {
-	String firefoxProfilePath = AppConfigReader.getValue("config", "firefoxProfilePath");
+	String firefoxProfilePath = TestConfigReader.getValue("config", "firefoxProfilePath");
 	if (firefoxProfilePath != null)
-	    firefoxOptions.addArguments("-profile", AppConfigReader.getValue("config", firefoxProfilePath));
+	    firefoxOptions.addArguments("-profile", TestConfigReader.getValue("config", firefoxProfilePath));
     }
 
     private static void findFirefoxHeadless(FirefoxOptions options) {

@@ -28,7 +28,7 @@ public class WebUtils {
     public WebUtils(WebDriver driver) {
 	this.driver = driver;
 	wait = new WebDriverWait(driver,
-		Duration.ofSeconds(Long.valueOf(AppConfigReader.getValue("config", "waitTime"))));
+		Duration.ofSeconds(Long.valueOf(TestConfigReader.getValue("config", "waitTime"))));
 	actions = new Actions(driver);
 	js = (JavascriptExecutor) driver;
     }
@@ -75,16 +75,16 @@ public class WebUtils {
 	    driver.findElement(By.linkText("Sign out")).click();
 	    driver.findElement(By.id("submitButton")).click();
 	} catch (Exception e) {
-	    // TODO: handle exception
+	    System.out.println("User is already logged in.");
 	}
     }
 
     public void testEnvLogin() {
 	// remove the line below when the problem is fixed
 	fail("Legacy: no longer required but remain as study material.");
-	wait.until(ExpectedConditions.urlContains(AppConfigReader.getValue("test-env", "url")));
+	wait.until(ExpectedConditions.urlContains(TestConfigReader.getValue("test-env", "url")));
 	String originWindow = driver.getWindowHandle();
-	wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(AppConfigReader.getValue("test-env", "id"))))
+	wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(TestConfigReader.getValue("test-env", "id"))))
 		.click();
 	wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 	Set<String> windows = driver.getWindowHandles();
@@ -96,12 +96,12 @@ public class WebUtils {
 	    }
 	}
 	driver.switchTo().window(targetWindow);
-	driver.findElement(By.name("login")).sendKeys(AppConfigReader.getValue("test-env", "username"));
-	driver.findElement(By.name("password")).sendKeys(AppConfigReader.getValue("test-env", "password"));
+	driver.findElement(By.name("login")).sendKeys(TestConfigReader.getValue("test-env", "username"));
+	driver.findElement(By.name("password")).sendKeys(TestConfigReader.getValue("test-env", "password"));
 	driver.findElement(By.name("commit")).submit();
 	wait.until(ExpectedConditions.numberOfWindowsToBe(1));
 	driver.switchTo().window(originWindow);
-	wait.until(ExpectedConditions.urlContains(AppConfigReader.getValue("config", "url")));
+	wait.until(ExpectedConditions.urlContains(TestConfigReader.getValue("config", "url")));
     }
 
     /**
@@ -118,7 +118,7 @@ public class WebUtils {
 	try {
 	    FileUtils.copyFile(imgData, new File(String.format("target/webpage-screenshots/screenshot%s.png", tail)));
 	} catch (IOException e) {
-	    assertTrue(false, "Failed to capture the screenshot.");
+	    fail("Failed to capture the screenshot.");
 	}
     }
 
