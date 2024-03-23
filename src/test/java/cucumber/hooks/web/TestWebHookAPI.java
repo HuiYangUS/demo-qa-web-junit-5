@@ -8,15 +8,15 @@ import utils.DataManager;
 
 public class TestWebHookAPI {
 
-	@Before(order = 2, value = "@api")
-	public void setUp() {
-		DataManager.getInstance();
-	}
+    @Before(order = 2, value = "@api")
+    public void setUp() {
+	DataManager.getInstance();
+    }
 
-	@After(order = 2, value = "@api")
-	public void tearDown(Scenario scenario) {
-		DataManager.reset();
-		AppTestUtils.testConfigReset();
-	}
+    @After(order = 2, value = "@api")
+    public void tearDown(Scenario scenario) {
+	DataManager.reset();
+	AppTestUtils.testConfigReset();
+    }
 
 }
