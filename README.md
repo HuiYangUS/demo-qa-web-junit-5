@@ -1,5 +1,5 @@
-## Demo QA Web App Tests
-
+### Demo QA Web App Tests
+---
 - Author: Hui Yang
 
 1. There are 150+ tests in this project. 90% of them are tested in the Windows system.
@@ -7,6 +7,5 @@
 3. While this testing framework is setup to work all major systems (Windows, Mac, Linux) and browsers (Chrome, Edge, Firefox, Safari, Opera), it's mainly tested in Chrome on Windows.
 4. It is API testing framework with Rest-Assured.
 5. It uses MySQL connector. 
-6. Selenium Grid is disabled, Safari tests are disabled.
 
-- 2-23-2024
+- 3-24-2024
