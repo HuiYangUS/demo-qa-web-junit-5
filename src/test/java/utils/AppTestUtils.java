@@ -10,15 +10,33 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+
 import io.cucumber.datatable.DataTable;
 
 public class AppTestUtils {
 
-    public static void pause(long time) {
+    public static void pause(int time) {
 	try {
 	    Thread.sleep(time * 1000);
 	} catch (InterruptedException e) {
 	    e.printStackTrace();
+	}
+    }
+
+    public static void closeAllWindows(WebDriver driver) {
+	int num = driver.getWindowHandles().size();
+	for (int i = 0; i < num; i++)
+	    driver.close();
+    }
+
+    public static void reallyQuitThisDriver(WebDriver driver) {
+	if (driver instanceof FirefoxDriver)
+	    driver.quit();
+	else {
+	    closeAllWindows(driver);
+	    driver.quit();
 	}
     }
 
@@ -65,6 +83,18 @@ public class AppTestUtils {
 	System.clearProperty("browser");
 	System.clearProperty("headless");
 	System.clearProperty("deviceName");
+    }
+
+    public static int getTestConfigWaitTime() {
+	return TestConfigReader.getIntNumValue("config", "waitTime");
+    }
+
+    public static String getTestConfigBrowserName() {
+	return TestConfigReader.getTextValue("config", "browser").toLowerCase();
+    }
+
+    public static boolean isDemoTest() {
+	return TestConfigReader.getBooleanValue("config", "demo");
     }
 
     public static String getOS() {

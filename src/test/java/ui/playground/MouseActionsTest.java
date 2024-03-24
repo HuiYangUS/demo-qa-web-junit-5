@@ -10,7 +10,7 @@ import utils.TestConfigReader;
 
 public class MouseActionsTest extends DriverFactoryWebBase {
 
-    private static String playgroundURL = TestConfigReader.getValue("playground", "url");
+    private static String playgroundURL = TestConfigReader.getTextValue("playground", "url");
 
     @Test
     @DisplayName("Mouse Actions Test")

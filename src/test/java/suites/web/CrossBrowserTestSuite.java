@@ -8,5 +8,5 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @SuiteDisplayName("Cross Browser Test")
 @SelectPackages("suites.crossbrowser")
 public class CrossBrowserTestSuite {
-
+    // WARN: Nothing should be written here.
 }

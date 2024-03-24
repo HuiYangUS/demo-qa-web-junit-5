@@ -13,5 +13,5 @@ import org.junit.platform.suite.api.ConfigurationParameter;
 @ConfigurationParameter(key = "browser", value = "chrome")
 @ConfigurationParameter(key = "headless", value = "true")
 public class HeadlessChromeTest {
-
+    // WARN: Nothing should be written here.
 }

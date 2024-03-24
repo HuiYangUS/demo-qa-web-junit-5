@@ -33,8 +33,8 @@ public class NullPointerTest {
 
     @Test
     void configReaderTest() {
-	System.out.println(TestConfigReader.getValue("config", "author"));
-	System.out.println(TestConfigReader.getValue("config", "age"));
+	System.out.println(TestConfigReader.getTextValue("config", "author"));
+	System.out.println(TestConfigReader.getTextValue("config", "age"));
     }
 
     @Test
