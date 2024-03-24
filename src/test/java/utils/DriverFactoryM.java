@@ -111,7 +111,8 @@ public class DriverFactoryM {
      * Set specific conditions of <Chrome> for this application
      */
     private static void setChromeOptions(ChromeOptions options) {
-	options.addArguments("--guest");
+	if (TestConfigReader.getBooleanValue("config", "guest"))
+	    options.addArguments("--guest");
 	String chromeUserDataPath = AppConfigReader.getValue("config", "chromeUserDataPath");
 	if (chromeUserDataPath != null) {
 	    options.addArguments(String.format("--user-data-dir=%s", chromeUserDataPath));
