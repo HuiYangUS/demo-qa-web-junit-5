@@ -14,10 +14,14 @@ import org.openqa.selenium.By;
 import pages.DemoLoginPage;
 import steps.DemoLoginSteps;
 import ui.base.web.DriverFactoryWebBase;
+import utils.AppTestUtils;
 import utils.TestConfigReader;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class LoginTest extends DriverFactoryWebBase {
+
+    private static boolean demo = AppTestUtils.isDemoTest()
+	    && !Boolean.valueOf(TestConfigReader.getBooleanValue("config", "headless"));
 
     /**
      * Without using Page Object Model
@@ -32,6 +36,8 @@ public class LoginTest extends DriverFactoryWebBase {
 	driver.findElement(By.id("password")).sendKeys(TestConfigReader.getTextValue("demo", "password"));
 	driver.findElement(By.id("login-button")).submit();
 	assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
+	if (demo)
+	    AppTestUtils.pause(1);
     }
 
     /**
@@ -48,6 +54,8 @@ public class LoginTest extends DriverFactoryWebBase {
 	loginPage.enterPassword("password");
 	loginPage.submitLogin();
 	assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
+	if (demo)
+	    AppTestUtils.pause(1);
     }
 
     /**
@@ -63,6 +71,8 @@ public class LoginTest extends DriverFactoryWebBase {
 	pages.demoLoginPage().enterPassword("password");
 	pages.demoLoginPage().submitLogin();
 	assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
+	if (demo)
+	    AppTestUtils.pause(1);
     }
 
     /**
@@ -78,6 +88,8 @@ public class LoginTest extends DriverFactoryWebBase {
 	DemoLoginSteps.enterPassword();
 	DemoLoginSteps.clickSubmitButton();
 	DemoLoginSteps.loginCheck();
+	if (demo)
+	    AppTestUtils.pause(1);
     }
 
 }
