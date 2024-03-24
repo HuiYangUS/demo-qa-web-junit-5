@@ -14,5 +14,5 @@ import static io.cucumber.junit.platform.engine.Constants.*;
 @ConfigurationParameter(key = PLUGIN_PROPERTY_NAME, value = "pretty, html:target/cucumber-reports/cucumber.html, com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:")
 @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@data and @test")
 public class RunDemoTestSuite {
-
+    // WARN: Nothing should be written here.
 }

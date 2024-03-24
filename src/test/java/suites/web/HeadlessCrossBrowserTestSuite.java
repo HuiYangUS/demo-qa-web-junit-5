@@ -12,5 +12,5 @@ import suites.headless.HeadlessFirefoxTest;
 @SuiteDisplayName("Headless Cross Browser Test")
 @SelectClasses(value = { HeadlessChromeTest.class, HeadlessEdgeTest.class, HeadlessFirefoxTest.class })
 public class HeadlessCrossBrowserTestSuite {
-
+    // WARN: Nothing should be written here.
 }

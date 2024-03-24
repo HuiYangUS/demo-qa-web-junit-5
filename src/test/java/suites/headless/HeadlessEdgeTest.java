@@ -13,5 +13,5 @@ import org.junit.platform.suite.api.ConfigurationParameter;
 @ConfigurationParameter(key = "browser", value = "edge")
 @ConfigurationParameter(key = "headless", value = "true")
 public class HeadlessEdgeTest {
-
+    // WARN: Nothing should be written here.
 }

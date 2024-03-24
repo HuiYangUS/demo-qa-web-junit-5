@@ -13,5 +13,5 @@ import org.junit.platform.suite.api.ConfigurationParameter;
 @ConfigurationParameter(key = "browser", value = "firefox")
 @ConfigurationParameter(key = "headless", value = "true")
 public class HeadlessFirefoxTest {
-
+    // WARN: Nothing should be written here.
 }

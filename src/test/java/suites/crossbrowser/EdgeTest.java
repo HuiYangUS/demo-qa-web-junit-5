@@ -12,5 +12,5 @@ import org.junit.platform.suite.api.SuiteDisplayName;
 @IncludeTags(value = { "ui" })
 @ConfigurationParameter(key = "browser", value = "edge")
 public class EdgeTest {
-
+    // WARN: Nothing should be written here.
 }

@@ -18,5 +18,5 @@ import static io.cucumber.junit.platform.engine.Constants.*;
 // use "and", "or"
 @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@test")
 public class DryRunDemoTestSuite {
-
+    // WARN: Nothing should be written here.
 }

@@ -29,15 +29,15 @@ public class DemoLoginPage {
     }
 
     public void loadPage() {
-	driver.navigate().to(TestConfigReader.getValue(fileName, "url"));
+	driver.navigate().to(TestConfigReader.getTextValue(fileName, "url"));
     }
 
     public void enterUsername(String username) {
-	usernameInput.sendKeys(TestConfigReader.getValue(fileName, username));
+	usernameInput.sendKeys(TestConfigReader.getTextValue(fileName, username));
     }
 
     public void enterPassword(String password) {
-	passwordInput.sendKeys(TestConfigReader.getValue(fileName, password));
+	passwordInput.sendKeys(TestConfigReader.getTextValue(fileName, password));
     }
 
     public String getPasswordValue() {

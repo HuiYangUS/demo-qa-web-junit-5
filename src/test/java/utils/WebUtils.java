@@ -27,8 +27,7 @@ public class WebUtils {
 
     public WebUtils(WebDriver driver) {
 	this.driver = driver;
-	wait = new WebDriverWait(driver,
-		Duration.ofSeconds(Long.valueOf(TestConfigReader.getValue("config", "waitTime"))));
+	wait = new WebDriverWait(driver, Duration.ofSeconds(AppTestUtils.getTestConfigWaitTime()));
 	actions = new Actions(driver);
 	js = (JavascriptExecutor) driver;
     }
@@ -82,10 +81,10 @@ public class WebUtils {
     public void testEnvLogin() {
 	// remove the line below when the problem is fixed
 	fail("Legacy: no longer required but remain as study material.");
-	wait.until(ExpectedConditions.urlContains(TestConfigReader.getValue("test-env", "url")));
+	wait.until(ExpectedConditions.urlContains(TestConfigReader.getTextValue("test-env", "url")));
 	String originWindow = driver.getWindowHandle();
-	wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector(TestConfigReader.getValue("test-env", "id"))))
-		.click();
+	wait.until(ExpectedConditions
+		.elementToBeClickable(By.cssSelector(TestConfigReader.getTextValue("test-env", "id")))).click();
 	wait.until(ExpectedConditions.numberOfWindowsToBe(2));
 	Set<String> windows = driver.getWindowHandles();
 	String targetWindow = null;
@@ -96,12 +95,12 @@ public class WebUtils {
 	    }
 	}
 	driver.switchTo().window(targetWindow);
-	driver.findElement(By.name("login")).sendKeys(TestConfigReader.getValue("test-env", "username"));
-	driver.findElement(By.name("password")).sendKeys(TestConfigReader.getValue("test-env", "password"));
+	driver.findElement(By.name("login")).sendKeys(TestConfigReader.getTextValue("test-env", "username"));
+	driver.findElement(By.name("password")).sendKeys(TestConfigReader.getTextValue("test-env", "password"));
 	driver.findElement(By.name("commit")).submit();
 	wait.until(ExpectedConditions.numberOfWindowsToBe(1));
 	driver.switchTo().window(originWindow);
-	wait.until(ExpectedConditions.urlContains(TestConfigReader.getValue("config", "url")));
+	wait.until(ExpectedConditions.urlContains(TestConfigReader.getTextValue("config", "url")));
     }
 
     /**

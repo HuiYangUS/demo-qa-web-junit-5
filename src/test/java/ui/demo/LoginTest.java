@@ -27,9 +27,9 @@ public class LoginTest extends DriverFactoryWebBase {
     @Order(1)
     @Tags({ @Tag("ui"), @Tag("web") })
     public void the1stLoginTest() {
-	driver.navigate().to(TestConfigReader.getValue("demo", "url"));
-	driver.findElement(By.id("user-name")).sendKeys(TestConfigReader.getValue("demo", "username"));
-	driver.findElement(By.id("password")).sendKeys(TestConfigReader.getValue("demo", "password"));
+	driver.navigate().to(TestConfigReader.getTextValue("demo", "url"));
+	driver.findElement(By.id("user-name")).sendKeys(TestConfigReader.getTextValue("demo", "username"));
+	driver.findElement(By.id("password")).sendKeys(TestConfigReader.getTextValue("demo", "password"));
 	driver.findElement(By.id("login-button")).submit();
 	assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
     }
