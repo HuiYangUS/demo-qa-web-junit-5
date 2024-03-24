@@ -123,7 +123,8 @@ public class DriverFactoryPie {
      * Set specific conditions of <Chrome> for this application
      */
     private static void setChromeOptions(ChromeOptions options) {
-	options.addArguments("--guest");
+	if (TestConfigReader.getBooleanValue("config", "guest"))
+	    options.addArguments("--guest");
 	useChromeForTest(options);
     }
 
