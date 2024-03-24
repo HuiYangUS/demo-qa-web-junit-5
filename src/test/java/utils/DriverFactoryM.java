@@ -59,7 +59,7 @@ public class DriverFactoryM {
 
     public static void reset() {
 	if (localDriver != null && localDriver.get() != null) {
-	    AppTestUtils.reallyQuitThisDriver(localDriver.get());
+	    localDriver.get().quit();
 	    localDriver.remove();
 	}
 	isSet = false;
@@ -111,9 +111,7 @@ public class DriverFactoryM {
      * Set specific conditions of <Chrome> for this application
      */
     private static void setChromeOptions(ChromeOptions options) {
-	options.addArguments("--no-sandbox");
-	if (TestConfigReader.getBooleanValue("config", "incognito"))
-	    options.addArguments("--incognito");
+	options.addArguments("--guest");
 	String chromeUserDataPath = AppConfigReader.getValue("config", "chromeUserDataPath");
 	if (chromeUserDataPath != null) {
 	    options.addArguments(String.format("--user-data-dir=%s", chromeUserDataPath));
