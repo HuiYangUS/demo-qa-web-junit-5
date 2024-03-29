@@ -22,7 +22,8 @@ public class ExcelReader extends TestDataReader {
 	XSSFWorkbook dataWorkbook = load(filePath);
 	XSSFSheet dataSheet = dataWorkbook.getSheet(sheetName);
 	// make sure excel sheet contains more than 1 row of data
-	assertTrue(dataSheet.getLastRowNum() >= 1, "No data is available.");
+	if (dataSheet.getLastRowNum() < 1)
+	    throw new RuntimeException("No data is available.");
 	// create data table
 	List<Map<String, String>> dataTable = new ArrayList<>();
 	// loop through all the rows in the excel sheet
