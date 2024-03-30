@@ -18,7 +18,7 @@ public class MouseActionsTest extends DriverFactoryWebBase {
 	driver.navigate().to(playgroundURL);
 	By registerLinkByLocator = By
 		.xpath("//a[@href='https://accounts.lambdatest.com/login/google']/following-sibling::div/a");
-	// always need to "perform" at the end
+	// Always has to "perform" at the end
 	webUtils.useMouseOrKey().scrollToElement(driver.findElement(registerLinkByLocator)).perform();
 	webUtils.savesScreenshot("center-element", false);
     }

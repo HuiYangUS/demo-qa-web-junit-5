@@ -1,11 +1,9 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 public class DataManager {
 
     private static ThreadLocal<DataManager> localDataManager;
-    private static String password;
+    private String password;
     private WebUtils webUtils;
 
     private DataManager() {
@@ -21,17 +19,19 @@ public class DataManager {
     }
 
     public static void reset() {
+	// LocalDataManager cannot be null
 	if (localDataManager != null && localDataManager.get() != null)
-	    localDataManager.set(null);
+	    localDataManager.remove();
     }
 
     public String getPasswordValue() {
-	assertNotNull(password, "Data Manager does not have the password value.");
+	if (password == null)
+	    throw new RuntimeException("Data Manager does not have the password value.");
 	return password;
     }
 
     public void setPasswordValue(String password) {
-	DataManager.password = password;
+	this.password = password;
     }
 
     public WebUtils webUtils() {

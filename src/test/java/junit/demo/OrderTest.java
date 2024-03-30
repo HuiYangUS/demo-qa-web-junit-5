@@ -1,6 +1,9 @@
-package unit;
+package junit.demo;
 
 import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
+
+import junit.base.BaseTest;
+
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;

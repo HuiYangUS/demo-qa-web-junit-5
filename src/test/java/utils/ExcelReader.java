@@ -1,8 +1,7 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,28 +20,31 @@ public class ExcelReader extends TestDataReader {
 	String filePath = DIR_PATH + fileName + ".xlsx";
 	XSSFWorkbook dataWorkbook = load(filePath);
 	XSSFSheet dataSheet = dataWorkbook.getSheet(sheetName);
-	// make sure excel sheet contains more than 1 row of data
 	if (dataSheet.getLastRowNum() < 1)
-	    throw new RuntimeException("No data is available.");
-	// create data table
+	    throw new RuntimeException("No header data is available.");
+	// Create data table
 	List<Map<String, String>> dataTable = new ArrayList<>();
-	// loop through all the rows in the excel sheet
+	// Loop through all the rows in the excel sheet
 	for (int i = 1; i <= dataSheet.getLastRowNum(); i++) {
-	    // get the current row
+	    // Get the current row
 	    XSSFRow row = dataSheet.getRow(i);
-	    // prepare data row for data table
+	    // Prepare data row for data table
 	    Map<String, String> targetDataRow = new HashMap<>();
-	    // store excel row as Map
+	    // Convert each excel row as <Map>
 	    for (int j = 0; j < row.getLastCellNum(); j++) {
 		String key = getStringValueFromCell(dataSheet.getRow(0).getCell(j));
 		String value = getStringValueFromCell(dataSheet.getRow(i).getCell(j));
 		targetDataRow.put(key, value);
 	    }
-	    // add target row to the data table
+	    // Add target row to the data table
 	    dataTable.add(targetDataRow);
 	}
 	resultTable = dataTable.toArray();
-	close(dataWorkbook);
+	try {
+	    dataWorkbook.close();
+	} catch (IOException e) {
+	    throw new RuntimeException("This workbook failed to close.", e);
+	}
 	return resultTable;
     }
 
@@ -56,17 +58,7 @@ public class ExcelReader extends TestDataReader {
 	try {
 	    return new XSSFWorkbook(new FileInputStream(filePath));
 	} catch (Exception e) {
-	    fail("No excel file is found.");
-	    return null;
-	}
-    }
-
-    private static void close(XSSFWorkbook workbook) {
-	try {
-	    if (workbook != null)
-		workbook.close();
-	} catch (Exception e) {
-	    fail("Workbook for excel failed to close.");
+	    throw new RuntimeException(e);
 	}
     }
 

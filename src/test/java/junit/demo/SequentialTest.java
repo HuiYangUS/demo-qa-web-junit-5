@@ -1,23 +1,24 @@
-package unit;
+package junit.demo;
 
 import org.junit.jupiter.api.Test;
 
+import junit.base.BaseTest;
 import utils.SimplePrinter;
 
 public class SequentialTest extends BaseTest {
 
     @Test
-    void runATest() {
+    void runTestA() {
 	SimplePrinter.printLine("This the 1st demo test.");
     }
 
     @Test
-    void runBTest() {
+    void runTestB() {
 	SimplePrinter.printLine("This the 2nd demo test.");
     }
 
     @Test
-    void runCTest() {
+    void runTestC() {
 	SimplePrinter.printLine("This the 3rd demo test.");
     }
 

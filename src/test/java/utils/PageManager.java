@@ -20,6 +20,7 @@ public class PageManager {
     }
 
     public static void reset() {
+	// LocalPageManager cannot be null
 	if (localPageManager != null && localPageManager.get() != null)
 	    localPageManager.remove();
     }

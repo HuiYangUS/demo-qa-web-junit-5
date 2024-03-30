@@ -9,8 +9,7 @@ import org.junit.jupiter.api.Test;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
-
-import unit.BaseTest;
+import junit.base.BaseTest;
 import utils.TestConfigReader;
 
 public class DemoOpenWeatherTest extends BaseTest {

@@ -1,4 +1,4 @@
-package unit;
+package junit.demo;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -9,6 +9,8 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import org.junit.jupiter.api.Test;
+
+import junit.base.BaseTest;
 
 public class SortTest extends BaseTest {
 

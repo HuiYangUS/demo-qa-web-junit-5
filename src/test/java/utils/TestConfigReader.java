@@ -49,7 +49,7 @@ public class TestConfigReader {
 	try {
 	    result = Integer.valueOf(target.toLowerCase());
 	} catch (Exception e) {
-	    throw new RuntimeException("This key does not have a integer value.", e);
+	    throw new RuntimeException("This key does not have an integer value.", e);
 	}
 	return result;
     }

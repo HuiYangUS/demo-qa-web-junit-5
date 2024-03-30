@@ -1,4 +1,4 @@
-package unit;
+package junit.demo;
 
 import java.util.Set;
 

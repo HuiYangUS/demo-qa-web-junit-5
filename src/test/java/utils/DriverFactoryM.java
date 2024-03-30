@@ -1,7 +1,5 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.Map;
@@ -94,12 +92,12 @@ public class DriverFactoryM {
 	    driver = new FirefoxDriver(firefoxOptions);
 	    break;
 	case "safari":
-	    assertTrue(AppTestUtils.isMac(), "Safari Driver is only allowed in Mac machines.");
+	    if (!AppTestUtils.isMac())
+		throw new RuntimeException("Safari Driver is only allowed in Mac machines.");
 	    SafariOptions safariOptions = new SafariOptions();
 	    driver = new SafariDriver(safariOptions);
 	default:
-	    fail("No such browser in the system.");
-	    break;
+	    throw new RuntimeException("No such browser in the system.");
 	}
 	if (driver != null)
 	    System.out.println(driver.toString().replaceAll("[(].*[)]", ""));
