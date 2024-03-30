@@ -1,7 +1,5 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 import java.time.Duration;
 import java.util.HashMap;
@@ -89,7 +87,8 @@ public class DriverFactoryPie {
 	    driver = new ChromeDriver(service, options);
 	    break;
 	case "edge":
-	    assertTrue(AppTestUtils.isLinux(), "Edge Driver is only allowed in Linux systems.");
+	    if (!AppTestUtils.isLinux())
+		throw new RuntimeException("Edge Driver is only allowed in Linux systems.");
 	    String edgeDriverPath = getDriverDir() + "/edgedriver/msedgedriver"
 		    + (AppTestUtils.isWindows() ? ".exe" : "");
 	    EdgeDriverService edgeService = new EdgeDriverService.Builder()
@@ -110,8 +109,7 @@ public class DriverFactoryPie {
 	    driver = new FirefoxDriver(firefoxService, firefoxOptions);
 	    break;
 	default:
-	    fail("No such browser in the system.");
-	    break;
+	    throw new RuntimeException("No such browser in the system.");
 	}
 	if (driver != null)
 	    System.out.println(driver.toString().replaceAll("[(].*[)]", ""));
@@ -208,7 +206,8 @@ public class DriverFactoryPie {
 	    dirPathName = "win";
 	else if (AppTestUtils.isLinux())
 	    dirPathName = "linux";
-	assertNotNull(dirPathName, "Failed to locate a valid directory for the driver.");
+	if (dirPathName == null)
+	    throw new RuntimeException("Failed to locate a valid directory for the driver.");
 	return AppTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
     }
 

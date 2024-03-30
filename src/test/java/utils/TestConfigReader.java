@@ -23,7 +23,7 @@ public class TestConfigReader {
 	try {
 	    p.load(new FileInputStream(filePath));
 	} catch (Exception e) {
-	    fail("No config file is discovered.");
+	    throw new RuntimeException("No config file is discovered.", e);
 	}
 	return p;
     }
@@ -37,7 +37,7 @@ public class TestConfigReader {
 	try {
 	    result = Boolean.valueOf(target.toLowerCase());
 	} catch (Exception e) {
-	    fail("This key does not have a boolean value.");
+	    throw new RuntimeException("This key does not have a boolean value.", e);
 	}
 	return result;
     }
@@ -49,7 +49,7 @@ public class TestConfigReader {
 	try {
 	    result = Integer.valueOf(target.toLowerCase());
 	} catch (Exception e) {
-	    fail("This key does not have a integer value.");
+	    throw new RuntimeException("This key does not have an integer value.", e);
 	}
 	return result;
     }

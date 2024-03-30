@@ -1,6 +1,5 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.*;
 import org.openqa.selenium.WebDriver;
 
 public class DriverManager {
@@ -11,13 +10,11 @@ public class DriverManager {
 
     public static WebDriver getDriver() {
 	String driverFactoryType = TestConfigReader.getTextValue("config", "driverFactoryType");
-	if (driverFactoryType.equalsIgnoreCase("p") || driverFactoryType.equalsIgnoreCase("pie")) {
+	if (driverFactoryType.equalsIgnoreCase("p") || driverFactoryType.equalsIgnoreCase("pie"))
 	    return DriverFactoryPie.getDriver();
-	}
 	if (driverFactoryType.equalsIgnoreCase("m"))
 	    return DriverFactoryM.getDriver();
-	fail("No valid Driver Factory type in the system.");
-	return null;
+	throw new RuntimeException("No valid Driver Factory type in the system.");
     }
 
     public static void reset() {

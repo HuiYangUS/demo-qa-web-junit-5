@@ -1,11 +1,8 @@
 package utils;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import java.io.File;
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Set;
 
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
@@ -15,12 +12,12 @@ import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class WebUtils {
 
     private WebDriver driver;
+    @SuppressWarnings("unused")
     private WebDriverWait wait;
     private Actions actions;
     private JavascriptExecutor js;
@@ -41,13 +38,13 @@ public class WebUtils {
     }
 
     /**
-     * Change border of an element to be thick and red
+     * Change the border of an element to be thick and red
      */
     public void elementOnFocus(WebElement element) {
-	// set element border to red and thick
+	// Set this element's border to be red and thick
 	js.executeScript("arguments[0].style.borderColor = 'red'; arguments[0].style.borderWidth = 'thick';", element);
 	AppTestUtils.pause(2);
-	// reset element border
+	// Reset this element's border
 	js.executeScript("arguments[0].style.borderColor = ''; arguments[0].style.borderWidth = '';", element);
 	AppTestUtils.pause(1);
     }
@@ -65,45 +62,6 @@ public class WebUtils {
     }
 
     /**
-     * If the user is logged in, log out.
-     */
-    public void appLogOut() {
-	// remove the line below when the problem is fixed
-	fail("Legacy: no longer required but remain as study material.");
-	try {
-	    driver.findElement(By.linkText("Sign out")).click();
-	    driver.findElement(By.id("submitButton")).click();
-	} catch (Exception e) {
-	    System.out.println("User is already logged in.");
-	}
-    }
-
-    public void testEnvLogin() {
-	// remove the line below when the problem is fixed
-	fail("Legacy: no longer required but remain as study material.");
-	wait.until(ExpectedConditions.urlContains(TestConfigReader.getTextValue("test-env", "url")));
-	String originWindow = driver.getWindowHandle();
-	wait.until(ExpectedConditions
-		.elementToBeClickable(By.cssSelector(TestConfigReader.getTextValue("test-env", "id")))).click();
-	wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-	Set<String> windows = driver.getWindowHandles();
-	String targetWindow = null;
-	for (String window : windows) {
-	    if (!window.equals(originWindow)) {
-		targetWindow = window;
-		break;
-	    }
-	}
-	driver.switchTo().window(targetWindow);
-	driver.findElement(By.name("login")).sendKeys(TestConfigReader.getTextValue("test-env", "username"));
-	driver.findElement(By.name("password")).sendKeys(TestConfigReader.getTextValue("test-env", "password"));
-	driver.findElement(By.name("commit")).submit();
-	wait.until(ExpectedConditions.numberOfWindowsToBe(1));
-	driver.switchTo().window(originWindow);
-	wait.until(ExpectedConditions.urlContains(TestConfigReader.getTextValue("config", "url")));
-    }
-
-    /**
      * Takes a screenshot and stores in the "target" folder
      */
     public void savesScreenshot(String postfix, boolean useTimeStamp) {
@@ -117,7 +75,7 @@ public class WebUtils {
 	try {
 	    FileUtils.copyFile(imgData, new File(String.format("target/webpage-screenshots/screenshot%s.png", tail)));
 	} catch (IOException e) {
-	    fail("Failed to capture the screenshot.");
+	    throw new RuntimeException("Failed to capture the screenshot.", e);
 	}
     }
 

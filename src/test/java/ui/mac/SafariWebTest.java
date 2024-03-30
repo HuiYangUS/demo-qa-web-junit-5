@@ -30,7 +30,7 @@ public class SafariWebTest {
     @Test
     @EnabledOnOs(OS.MAC)
     void localDriverTest() {
-	// default safari driver location
+	// Default safari driver location
 	String driverFilePath = "/usr/bin/safaridriver";
 	SafariDriverService service = new SafariDriverService.Builder().usingDriverExecutable(new File(driverFilePath))
 		.build();

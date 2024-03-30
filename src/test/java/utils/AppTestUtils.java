@@ -6,11 +6,11 @@ import java.sql.Timestamp;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
 import org.openqa.selenium.WebDriver;
+
 import io.cucumber.datatable.DataTable;
 
 public class AppTestUtils {
@@ -19,7 +19,7 @@ public class AppTestUtils {
 	try {
 	    Thread.sleep(time * 1000);
 	} catch (InterruptedException e) {
-	    e.printStackTrace();
+	    // Do nothing
 	}
     }
 
@@ -107,12 +107,12 @@ public class AppTestUtils {
     }
 
     /**
-     * Return the first row of a cucumber data table as map
+     * Return the first row of a cucumber data table as <Map>
      */
     public static Map<String, String> getDataRow(DataTable dataTable) {
 	if (dataTable.asMaps().size() >= 1)
 	    return dataTable.asMaps().get(0);
-	return new HashMap<String, String>();
+	throw new RuntimeException("This cucumber data table does not have enough data.");
     }
 
 }
