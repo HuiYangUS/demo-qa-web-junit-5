@@ -17,14 +17,14 @@ public class DemoTest extends DriverFactoryWebBase {
     @DisplayName("Tooltip Test")
     void tooltipTest() {
 	driver.navigate().to(url);
-	webUtils.jsClick(By.linkText("Tooltip"));
+	utils.jsClick(By.linkText("Tooltip"));
 	wait.until(ExpectedConditions.urlContains("tooltip/"));
 	driver.switchTo().frame(driver.findElement(By.className("demo-frame")));
 	By ageInputByLocator = By.id("age");
 	By tooltipContentByLocator = By.className("ui-tooltip-content");
-	webUtils.elementOnFocus(driver.findElement(ageInputByLocator));
-	webUtils.useMouseOrKey().moveToElement(driver.findElement(ageInputByLocator)).pause(Duration.ofSeconds(1))
-		.build().perform();
+	utils.elementOnFocus(driver.findElement(ageInputByLocator));
+	utils.useMouseOrKey().moveToElement(driver.findElement(ageInputByLocator)).pause(Duration.ofSeconds(1)).build()
+		.perform();
 	wait.until(ExpectedConditions.visibilityOfElementLocated(tooltipContentByLocator));
 	System.out.println(driver.findElement(tooltipContentByLocator).getText());
     }

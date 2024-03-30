@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.base.configs.SimpleReportExtension;
 import ui.base.configs.WebTestConfig;
 import utils.AppTestUtils;
+import utils.DataManager;
 import utils.DriverManager;
 import utils.PageManager;
 import utils.WebUtils;
@@ -21,20 +22,23 @@ public class DriverFactoryWebBase {
     protected static WebDriver driver;
     protected static WebDriverWait wait;
     protected static PageManager pages;
-    protected static WebUtils webUtils;
+    protected static DataManager dataManager;
+    protected static WebUtils utils;
 
     @BeforeEach
     protected void setUp() {
 	driver = DriverManager.getDriver();
 	wait = new WebDriverWait(driver, Duration.ofSeconds(AppTestUtils.getTestConfigWaitTime()));
+	utils = new WebUtils(driver);
 	pages = PageManager.getInstance();
-	webUtils = new WebUtils(driver);
+	dataManager = DataManager.getInstance();
     }
 
     @AfterEach
     protected void tearDown() {
 	DriverManager.reset();
 	PageManager.reset();
+	DataManager.reset();
     }
 
 }

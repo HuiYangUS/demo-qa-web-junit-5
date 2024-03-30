@@ -5,6 +5,7 @@ import org.junit.jupiter.api.MethodOrderer.OrderAnnotation;
 import junit.base.BaseTest;
 
 import org.junit.jupiter.api.Order;
+import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
@@ -27,6 +28,7 @@ public class OrderTest extends BaseTest {
 
     @Test
     @Order(value = 2)
+    @Tag("demo")
     void runCTest() {
 	SimplePrinter.printLine("This the 3rd demo test.");
     }

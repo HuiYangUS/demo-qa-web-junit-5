@@ -1,4 +1,4 @@
-package ui.playground;
+package ui.demo;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -19,8 +19,8 @@ public class MouseActionsTest extends DriverFactoryWebBase {
 	By registerLinkByLocator = By
 		.xpath("//a[@href='https://accounts.lambdatest.com/login/google']/following-sibling::div/a");
 	// Always has to "perform" at the end
-	webUtils.useMouseOrKey().scrollToElement(driver.findElement(registerLinkByLocator)).perform();
-	webUtils.savesScreenshot("center-element", false);
+	utils.useMouseOrKey().scrollToElement(driver.findElement(registerLinkByLocator)).perform();
+	utils.savesScreenshot("center-element", false);
     }
 
 }
