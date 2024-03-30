@@ -8,14 +8,14 @@ import io.cucumber.java.en.When;
 
 public class IceCreamSteps {
 
-    private static String name;
+    private String name;
 
     @Given("I have ice cream {string}")
     public void i_have_ice_cream(String name) {
 	String errorText = "You don't even give me any ice cream.";
 	assertNotNull(name, errorText);
 	assertFalse(name.isEmpty(), errorText);
-	IceCreamSteps.name = name;
+	this.name = name;
     }
 
     @When("I check for the rating {string} of this ice cream")
