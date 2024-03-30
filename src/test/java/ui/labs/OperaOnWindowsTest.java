@@ -1,4 +1,4 @@
-package ui.testlab;
+package ui.labs;
 
 import java.io.File;
 import java.time.Duration;

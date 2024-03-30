@@ -69,9 +69,10 @@ public class AppTestUtils {
     }
 
     public static void testConfigReset() {
-	System.clearProperty("browser");
-	System.clearProperty("headless");
-	System.clearProperty("deviceName");
+	System.clearProperty(TestKeys.DRIVER_FACTORY_TYPE_KEY);
+	System.clearProperty(TestKeys.BROWSER_KEY);
+	System.clearProperty(TestKeys.HEADLESS_KEY);
+	System.clearProperty(TestKeys.DEVICE_NAME_KEY);
     }
 
     public static int getTestConfigWaitTime() {

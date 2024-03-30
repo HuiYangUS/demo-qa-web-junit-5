@@ -33,15 +33,12 @@ public class DriverFactoryM {
     }
 
     private static void setUpDriver() {
-	String browserKey = "browser";
-	if (System.getProperty(browserKey) != null)
-	    browser = System.getProperty(browserKey).toLowerCase();
-	String headlessKey = "headless";
-	if (System.getProperty(headlessKey) != null)
-	    headless = Boolean.valueOf(System.getProperty(headlessKey).toLowerCase());
-	String deviceNameKey = "deviceName";
-	if (System.getProperty(deviceNameKey) != null)
-	    deviceName = System.getProperty(deviceNameKey);
+	if (System.getProperty(TestKeys.BROWSER_KEY) != null)
+	    browser = System.getProperty(TestKeys.BROWSER_KEY).toLowerCase();
+	if (System.getProperty(TestKeys.HEADLESS_KEY) != null)
+	    headless = Boolean.valueOf(System.getProperty(TestKeys.HEADLESS_KEY).toLowerCase());
+	if (System.getProperty(TestKeys.DEVICE_NAME_KEY) != null)
+	    deviceName = System.getProperty(TestKeys.DEVICE_NAME_KEY);
 	isSet = true;
     }
 
