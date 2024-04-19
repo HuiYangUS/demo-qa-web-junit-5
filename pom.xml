@@ -91,14 +91,14 @@
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-java</artifactId>
-			<version>7.16.0</version>
+			<version>7.16.1</version>
 		</dependency>
 
 		<!-- JUnit-5 for Cucumber -->
 		<dependency>
 			<groupId>io.cucumber</groupId>
 			<artifactId>cucumber-junit-platform-engine</artifactId>
-			<version>7.16.0</version>
+			<version>7.16.1</version>
 			<scope>test</scope>
 		</dependency>
 
@@ -114,6 +114,13 @@
 			<groupId>org.apache.poi</groupId>
 			<artifactId>poi-ooxml</artifactId>
 			<version>5.2.5</version>
+		</dependency>
+
+		<!-- POI - XML support -->
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-compress</artifactId>
+			<version>1.26.1</version>
 		</dependency>
 
 		<!-- POI - schemas -->
