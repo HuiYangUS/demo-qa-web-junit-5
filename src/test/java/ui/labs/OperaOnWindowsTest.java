@@ -17,16 +17,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.AppTestUtils;
-import utils.TestConfigReader;
+import utils.TestConfigsReader;
 
 public class OperaOnWindowsTest {
 
     private static WebDriver driver;
     private static WebDriverWait wait;
 
-    private static String url = TestConfigReader.getTextValue("playground", "url");
+    private static String url = TestConfigsReader.getTextValue("playground", "url");
 
-    private static boolean demo = TestConfigReader.getBooleanValue("config", "demo");
+    private static boolean demo = TestConfigsReader.getBooleanValue("config", "demo");
 
     @Test
     @DisplayName("Opera On Windows Test")
@@ -43,12 +43,12 @@ public class OperaOnWindowsTest {
 	ChromeDriverService service = new ChromeDriverService.Builder()
 		.usingDriverExecutable(new File("src/test/resources/drivers/win/operadriver/operadriver.exe")).build();
 	ChromeOptions options = new ChromeOptions();
-	options.setBinary(TestConfigReader.getTextValue("config", "operaBinPath"));
+	options.setBinary(TestConfigsReader.getTextValue("config", "operaBinPath"));
 	options.setExperimentalOption("w3c", true);
 	driver = new ChromeDriver(service, options);
 	driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
 	driver.manage().window().maximize();
-	wait = new WebDriverWait(driver, Duration.ofSeconds(TestConfigReader.getIntNumValue("config", "waitTime")));
+	wait = new WebDriverWait(driver, Duration.ofSeconds(TestConfigsReader.getIntNumValue("config", "waitTime")));
     }
 
     @AfterEach

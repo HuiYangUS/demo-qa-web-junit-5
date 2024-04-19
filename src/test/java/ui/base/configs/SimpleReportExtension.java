@@ -16,7 +16,7 @@ import com.aventstack.extentreports.reporter.configuration.Theme;
 
 import utils.AppTestUtils;
 import utils.DataManager;
-import utils.TestConfigReader;
+import utils.TestConfigsReader;
 
 public class SimpleReportExtension
 	implements BeforeAllCallback, AfterAllCallback, BeforeEachCallback, AfterEachCallback {
@@ -79,7 +79,7 @@ public class SimpleReportExtension
     public void beforeEach(ExtensionContext context) throws Exception {
 	String testName = context.getDisplayName().replaceAll("[(].*[)]", "");
 	test = report.createTest(testName);
-	test.assignAuthor(TestConfigReader.getTextValue("config", "author"));
+	test.assignAuthor(TestConfigsReader.getTextValue("config", "author"));
 	test.assignDevice(System.getProperty("os.name"));
     }
 
@@ -91,7 +91,7 @@ public class SimpleReportExtension
 	else {
 	    test.fail(data.get());
 	    test.log(Status.FAIL, "Test Failed");
-	    if (TestConfigReader.getBooleanValue("config", "screenshot"))
+	    if (TestConfigsReader.getBooleanValue("config", "screenshot"))
 		dataManager.webUtils().savesScreenshot();
 	}
     }

@@ -6,11 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 
 import ui.base.web.DriverFactoryWebBase;
-import utils.TestConfigReader;
+import utils.TestConfigsReader;
 
 public class MouseActionsTest extends DriverFactoryWebBase {
 
-    private static String playgroundURL = TestConfigReader.getTextValue("playground", "url");
+    private static String playgroundURL = TestConfigsReader.getTextValue("playground", "url");
 
     @Test
     @DisplayName("Mouse Actions Test")

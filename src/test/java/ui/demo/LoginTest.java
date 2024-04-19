@@ -14,13 +14,13 @@ import org.openqa.selenium.By;
 import pages.DemoLoginPage;
 import ui.base.web.DriverFactoryWebBase;
 import utils.AppTestUtils;
-import utils.TestConfigReader;
+import utils.TestConfigsReader;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class LoginTest extends DriverFactoryWebBase {
 
     private static boolean demo = AppTestUtils.isDemoTest()
-	    && !Boolean.valueOf(TestConfigReader.getBooleanValue("config", "headless"));
+	    && !Boolean.valueOf(TestConfigsReader.getBooleanValue("config", "headless"));
 
     /**
      * Without using Page Object Model
@@ -30,9 +30,9 @@ public class LoginTest extends DriverFactoryWebBase {
     @Order(1)
     @Tags({ @Tag("ui"), @Tag("web") })
     public void the1stLoginTest() {
-	driver.navigate().to(TestConfigReader.getTextValue("demo", "url"));
-	driver.findElement(By.id("user-name")).sendKeys(TestConfigReader.getTextValue("demo", "username"));
-	driver.findElement(By.id("password")).sendKeys(TestConfigReader.getTextValue("demo", "password"));
+	driver.navigate().to(TestConfigsReader.getTextValue("demo", "url"));
+	driver.findElement(By.id("user-name")).sendKeys(TestConfigsReader.getTextValue("demo", "username"));
+	driver.findElement(By.id("password")).sendKeys(TestConfigsReader.getTextValue("demo", "password"));
 	driver.findElement(By.id("login-button")).submit();
 	assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
 	if (demo)

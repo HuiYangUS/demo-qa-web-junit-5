@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import junit.base.BaseTest;
-import utils.TestConfigReader;
+import utils.TestConfigsReader;
 
 public class DemoOpenWeatherTest extends BaseTest {
 
@@ -18,7 +18,7 @@ public class DemoOpenWeatherTest extends BaseTest {
     static String stateCode = "VA";
     static String countryCode = "US";
     static String limit = "";
-    static String apiKey = TestConfigReader.getTextValue("config", "openweather_api_key");
+    static String apiKey = TestConfigsReader.getTextValue("config", "openweather_api_key");
 
     @Test
     @DisplayName("Demo Weather Test")
