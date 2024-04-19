@@ -64,7 +64,7 @@ public class DemoOpenWeatherTest extends BaseTest {
 		Response responseData = RestAssured.get(getGeoEndpoint());
 		assertEquals(200, responseData.getStatusCode(),
 				"API call failed, status code: " + responseData.getStatusCode());
-		System.out.println("Test passed.");
+		System.out.println("Geo Test passed.");
 	}
 
 }
