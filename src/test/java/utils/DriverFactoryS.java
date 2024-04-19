@@ -9,33 +9,39 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeDriverService;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.edge.EdgeDriver;
-import org.openqa.selenium.edge.EdgeDriverService;
-import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxDriverService;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.firefox.GeckoDriverService;
 
 /**
- * This <DriverFactory> class uses Selenium-4. Drivers are updated manually in
+ * This <DriverFactoryS> class uses Selenium-4. Drivers are updated manually in
  * "drivers" folder under "resources" package.
  */
-public class DriverFactoryPie {
+public class DriverFactoryS {
 
-	private static ThreadLocal<WebDriver> localDriver;
+	private static ThreadLocal<DriverFactoryS> localDriverFactory;
 
-	private static String browser = AppTestUtils.getTestConfigBrowserName();
-	private static boolean headless = TestConfigsReader.getBooleanValue("config", "headless");
-	private static String deviceName = TestConfigsReader.getTextValue("config", "deviceName");
-	private static boolean isSet;
-	private static int waitTime = 5;
+	private WebDriver driver;
+	private String browser = AppTestUtils.getTestConfigBrowserName();
+	private boolean headless = TestConfigsReader.getBooleanValue("config", "headless");
+	private String deviceName = TestConfigsReader.getTextValue("config", "deviceName");
+	private boolean isSet;
+	private int waitTime = 5;
 
-	private DriverFactoryPie() {
+	private DriverFactoryS() {
 		// WARN: Nothing should be written here.
 	}
 
-	private static void setUpDriver() {
+	public static DriverFactoryS getInstance() {
+		if (localDriverFactory == null)
+			localDriverFactory = new ThreadLocal<DriverFactoryS>();
+		if (localDriverFactory.get() == null)
+			localDriverFactory.set(new DriverFactoryS());
+		return localDriverFactory.get();
+	}
+
+	private void setupDriver() {
 		if (System.getProperty(TestKeys.BROWSER_KEY) != null)
 			browser = System.getProperty(TestKeys.BROWSER_KEY).toLowerCase();
 		if (System.getProperty(TestKeys.HEADLESS_KEY) != null)
@@ -45,32 +51,40 @@ public class DriverFactoryPie {
 		isSet = true;
 	}
 
-	public static synchronized WebDriver getDriver() {
+	public void setupDriver(String browser) {
+		this.browser = browser;
+	}
+
+	public void setupDriver(boolean headless) {
+		this.headless = headless;
+	}
+
+	public void setupDriver(String browser, boolean headless) {
+		this.browser = browser;
+		this.headless = headless;
+	}
+
+	public WebDriver getDriver() {
 		if (!isSet)
-			setUpDriver();
-		if (localDriver == null)
-			localDriver = new ThreadLocal<WebDriver>();
-		if (localDriver.get() == null)
-			localDriver.set(initDriver());
-		return localDriver.get();
+			setupDriver();
+		if (driver == null)
+			initDriver();
+		return driver;
 	}
 
 	public static void reset() {
-		if (localDriver != null && localDriver.get() != null) {
-			localDriver.get().quit();
-			localDriver.remove();
-		}
-		isSet = false;
-		AppTestUtils.testConfigReset();
+		if (localDriverFactory.get().driver != null)
+			localDriverFactory.get().driver.quit();
+		if (localDriverFactory != null && localDriverFactory.get() != null)
+			localDriverFactory.remove();
 	}
 
-	private static void configDriver(WebDriver driver) {
+	private void configDriver(WebDriver driver) {
 		driver.manage().window().maximize();
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(waitTime));
 	}
 
-	private static WebDriver initDriver() {
-		WebDriver driver = null;
+	private void initDriver() {
 		switch (browser) {
 		case "chrome":
 			String chromeDriverPath = getDriverDir() + "/chromedriver/chromedriver"
@@ -79,21 +93,7 @@ public class DriverFactoryPie {
 					.usingDriverExecutable(new File(chromeDriverPath)).build();
 			ChromeOptions options = new ChromeOptions();
 			setChromeOptions(options);
-			findChromeHeadless(options);
-			emulateChromeIfMobile(options);
 			driver = new ChromeDriver(service, options);
-			break;
-		case "edge":
-			if (!AppTestUtils.isLinux())
-				throw new RuntimeException("Edge Driver is only allowed in Linux systems.");
-			String edgeDriverPath = getDriverDir() + "/edgedriver/msedgedriver"
-					+ (AppTestUtils.isWindows() ? ".exe" : "");
-			EdgeDriverService edgeService = new EdgeDriverService.Builder()
-					.usingDriverExecutable(new File(edgeDriverPath)).build();
-			EdgeOptions edgeOptions = new EdgeOptions();
-			setEdgeOptions(edgeOptions);
-			findEdgeHeadless(edgeOptions);
-			driver = new EdgeDriver(edgeService, edgeOptions);
 			break;
 		case "firefox":
 			String firefoxDriverPath = getDriverDir() + "/firefoxdriver/geckodriver"
@@ -102,7 +102,6 @@ public class DriverFactoryPie {
 					.usingDriverExecutable(new File(firefoxDriverPath)).build();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
 			setFirefoxOptions(firefoxOptions);
-			findFirefoxHeadless(firefoxOptions);
 			driver = new FirefoxDriver(firefoxService, firefoxOptions);
 			break;
 		default:
@@ -111,19 +110,23 @@ public class DriverFactoryPie {
 		if (driver != null)
 			System.out.println(driver.toString().replaceAll("[(].*[)]", ""));
 		configDriver(driver);
-		return driver;
 	}
 
 	/**
 	 * Set specific conditions of <Chrome> for this application
 	 */
-	private static void setChromeOptions(ChromeOptions options) {
+	private void setChromeOptions(ChromeOptions chromeOptions) {
+		useChromeForTest(chromeOptions);
 		if (TestConfigsReader.getBooleanValue("config", "guest"))
-			options.addArguments("--guest");
-		useChromeForTest(options);
+			chromeOptions.addArguments("--guest");
+		emulateChromeIfMobile(chromeOptions);
+		if (headless) {
+			chromeOptions.addArguments("--headless=new");
+			chromeOptions.addArguments("--user-agent=" + AppConfigReader.getValue("config", "chromeUserAgent"));
+		}
 	}
 
-	private static void useChromeForTest(ChromeOptions options) {
+	private void useChromeForTest(ChromeOptions options) {
 		String testChromeUserDataPath = TestConfigsReader.getTextValue("config", "testChromeUserDataPath");
 		if (testChromeUserDataPath != null) {
 			options.addArguments(String.format("--user-data-dir=%s", testChromeUserDataPath));
@@ -133,17 +136,10 @@ public class DriverFactoryPie {
 		options.setBinary(TestConfigsReader.getTextValue("config", "testChromeBinPath"));
 	}
 
-	private static void findChromeHeadless(ChromeOptions options) {
-		if (headless) {
-			options.addArguments("--headless=new");
-			options.addArguments("--user-agent=" + AppConfigReader.getValue("config", "chromeUserAgent"));
-		}
-	}
-
 	/**
 	 * Change web view from desktop to either tablet or phone
 	 */
-	private static void emulateChromeIfMobile(ChromeOptions chromeOptions) {
+	private void emulateChromeIfMobile(ChromeOptions chromeOptions) {
 		if (deviceName != null) {
 			Map<String, String> mobileEmulation = new HashMap<>();
 			mobileEmulation.put("deviceName", deviceName);
@@ -152,42 +148,22 @@ public class DriverFactoryPie {
 	}
 
 	/**
-	 * Set specific conditions of <Edge> for this application
-	 */
-	private static void setEdgeOptions(EdgeOptions edgeOptions) {
-		// create data type for value of capability "prefs"
-		Map<String, Object> prefs = new HashMap<>();
-		// turn off personal prompt
-		prefs.put("user_experience_metrics.personalization_data_consent_enabled", true);
-		edgeOptions.setExperimentalOption("prefs", prefs);
-	}
-
-	private static void findEdgeHeadless(EdgeOptions options) {
-		if (headless)
-			options.addArguments("--headless=new");
-	}
-
-	/**
 	 * Set specific conditions of <Firefox> for this application
 	 */
-	private static void setFirefoxOptions(FirefoxOptions firefoxOptions) {
-		// turn off geographical locator
-		firefoxOptions.addPreference("geo.enabled", false);
+	private void setFirefoxOptions(FirefoxOptions firefoxOptions) {
+		firefoxOptions.addPreference("geo.enabled", false); // Turn off geographical locator
 		useFirefoxProfile(firefoxOptions);
 		String firefoxBinPath = TestConfigsReader.getTextValue("config", "firefoxProfilePath");
 		if (firefoxBinPath != null)
 			firefoxOptions.setBinary(firefoxBinPath);
+		if (headless)
+			firefoxOptions.addArguments("-headless");
 	}
 
-	private static void useFirefoxProfile(FirefoxOptions firefoxOptions) {
+	private void useFirefoxProfile(FirefoxOptions firefoxOptions) {
 		String firefoxProfilePath = TestConfigsReader.getTextValue("config", "firefoxProfilePath");
 		if (firefoxProfilePath != null)
 			firefoxOptions.addArguments("-profile", TestConfigsReader.getTextValue("config", firefoxProfilePath));
-	}
-
-	private static void findFirefoxHeadless(FirefoxOptions options) {
-		if (headless)
-			options.addArguments("-headless");
 	}
 
 	/**

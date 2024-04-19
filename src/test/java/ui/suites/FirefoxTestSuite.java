@@ -15,5 +15,5 @@ import ui.demo.LoginTest;
 @ConfigurationParameter(key = "browser", value = "firefox")
 @IncludeTags(value = { "web" })
 public class FirefoxTestSuite {
-
+	// WARN: Nothing should be written here.
 }

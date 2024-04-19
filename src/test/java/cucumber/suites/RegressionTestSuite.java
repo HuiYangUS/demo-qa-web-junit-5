@@ -18,5 +18,5 @@ import org.junit.platform.suite.api.Suite;
 @ConfigurationParameter(key = PARALLEL_CONFIG_FIXED_MAX_POOL_SIZE_PROPERTY_NAME, value = "3")
 @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@regression")
 public class RegressionTestSuite {
-    // WARN: Nothing should be written here.
+	// WARN: Nothing should be written here.
 }

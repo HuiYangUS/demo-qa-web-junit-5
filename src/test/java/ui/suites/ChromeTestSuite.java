@@ -15,5 +15,5 @@ import ui.demo.LoginTest;
 @ConfigurationParameter(key = "browser", value = "chrome")
 @IncludeTags(value = { "web" })
 public class ChromeTestSuite {
-
+	// WARN: Nothing should be written here.
 }

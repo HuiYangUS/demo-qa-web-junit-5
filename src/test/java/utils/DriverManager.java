@@ -12,15 +12,15 @@ public class DriverManager {
 		String driverFactoryType = TestConfigsReader.getTextValue("config", "driverFactoryType");
 		if (System.getProperty(TestKeys.DRIVER_FACTORY_TYPE_KEY) != null)
 			driverFactoryType = System.getProperty(TestKeys.DRIVER_FACTORY_TYPE_KEY);
-		if (driverFactoryType.equalsIgnoreCase("p") || driverFactoryType.equalsIgnoreCase("pie"))
-			return DriverFactoryPie.getDriver();
+		if (driverFactoryType.equalsIgnoreCase("s"))
+			return DriverFactoryS.getInstance().getDriver();
 		if (driverFactoryType.equalsIgnoreCase("m"))
 			return DriverFactoryM.getDriver();
-		throw new RuntimeException("No valid Driver Factory type in the system.");
+		throw new RuntimeException("No valid <DriverFactory> type in the system.");
 	}
 
 	public static void reset() {
-		DriverFactoryPie.reset();
+		DriverFactoryS.reset();
 		DriverFactoryM.reset();
 	}
 

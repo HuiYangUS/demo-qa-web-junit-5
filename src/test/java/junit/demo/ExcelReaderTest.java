@@ -10,15 +10,15 @@ import utils.ExcelReader;
 
 public class ExcelReaderTest {
 
-    @ParameterizedTest
-    @MethodSource("dataProvider")
-    void runDemoTest(Map<?, ?> dataRow) {
-	System.out.println(String.format("Employee: %s %s, %s, %s.", dataRow.get("firstName"), dataRow.get("lastName"),
-		dataRow.get("empID"), dataRow.get("department")));
-    }
+	@ParameterizedTest
+	@MethodSource("dataProvider")
+	void runDemoTest(Map<?, ?> dataRow) {
+		System.out.println(String.format("Employee: %s %s, %s, %s.", dataRow.get("firstName"), dataRow.get("lastName"),
+				dataRow.get("empID"), dataRow.get("department")));
+	}
 
-    static Stream<Object> dataProvider() {
-	return Stream.of(ExcelReader.getData("pseudo_candy_company", "employees"));
-    }
+	static Stream<Object> dataProvider() {
+		return Stream.of(ExcelReader.getData("pseudo_candy_company", "employees"));
+	}
 
 }
