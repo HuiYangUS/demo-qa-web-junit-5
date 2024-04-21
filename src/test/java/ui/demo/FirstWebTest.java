@@ -16,9 +16,9 @@ import utils.AppTestUtils;
 
 public class FirstWebTest extends WebBaseTest {
 
-	private String url = "https://www.google.com/";
-	private String searchTerm = "Batman";
-	private int num = 7;
+	private static String url = "https://www.google.com/";
+	private static String searchTerm = "Batman";
+	private static int num = 7;
 
 	@Test
 	@DisplayName(value = "First Web Test")

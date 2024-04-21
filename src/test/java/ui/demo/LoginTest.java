@@ -26,9 +26,9 @@ public class LoginTest extends WebBaseTest {
 	 * Without using Page Object Model
 	 */
 	@Test
-	@DisplayName("First Login Test")
+	@DisplayName("First Login Demo Test")
 	@Order(1)
-	@Tags({ @Tag("ui"), @Tag("web") })
+	@Tags({ @Tag("ui"), @Tag("web"), @Tag("demo"), @Tag("login") })
 	public void the1stLoginTest() {
 		driver.navigate().to(TestConfigsReader.getTextValue("demo", "url"));
 		driver.findElement(By.id("user-name")).sendKeys(TestConfigsReader.getTextValue("demo", "username"));
@@ -43,9 +43,9 @@ public class LoginTest extends WebBaseTest {
 	 * Without using PageManager
 	 */
 	@Test
-	@DisplayName("Second Login Test")
+	@DisplayName("Second Login Demo Test")
 	@Order(2)
-	@Tags({ @Tag("ui"), @Tag("web") })
+	@Tags({ @Tag("ui"), @Tag("web"), @Tag("demo"), @Tag("login") })
 	public void the2ndLoginTest() {
 		DemoLoginPage loginPage = new DemoLoginPage();
 		loginPage.loadPage();
@@ -61,9 +61,9 @@ public class LoginTest extends WebBaseTest {
 	 * Without using steps package
 	 */
 	@Test
-	@DisplayName("Third Login Test")
+	@DisplayName("Third Login Demo Test")
 	@Order(3)
-	@Tags({ @Tag("ui"), @Tag("web") })
+	@Tags({ @Tag("ui"), @Tag("web"), @Tag("demo"), @Tag("login") })
 	public void the3rdLoginTest() {
 		pages.demoLoginPage().loadPage();
 		pages.demoLoginPage().enterUsername("username");
