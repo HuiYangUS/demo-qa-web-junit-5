@@ -7,19 +7,19 @@ import utils.SimplePrinter;
 
 public class SequentialTest extends BaseTest {
 
-    @Test
-    void runTestA() {
-	SimplePrinter.printLine("This the 1st demo test.");
-    }
+	@Test
+	void runTestA() {
+		SimplePrinter.printLine("This is the 1st demo test.");
+	}
 
-    @Test
-    void runTestB() {
-	SimplePrinter.printLine("This the 2nd demo test.");
-    }
+	@Test
+	void runTestB() {
+		SimplePrinter.printLine("This is the 2nd demo test.");
+	}
 
-    @Test
-    void runTestC() {
-	SimplePrinter.printLine("This the 3rd demo test.");
-    }
+	@Test
+	void runTestC() {
+		SimplePrinter.printLine("This is the 3rd demo test.");
+	}
 
 }

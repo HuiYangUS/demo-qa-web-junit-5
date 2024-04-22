@@ -18,5 +18,5 @@ import org.junit.platform.suite.api.Suite;
 // Use "and", "or"
 @ConfigurationParameter(key = FILTER_TAGS_PROPERTY_NAME, value = "@test")
 public class DryRunTestSuite {
-    // WARN: Nothing should be written here.
+	// WARN: Nothing should be written here.
 }
