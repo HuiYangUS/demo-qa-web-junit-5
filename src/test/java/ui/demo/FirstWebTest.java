@@ -37,7 +37,7 @@ public class FirstWebTest extends WebBaseTest {
 		System.out.println("Number of links: " + dataList.size());
 		if (num <= dataList.size())
 			System.out.println("Target webpage == " + dataList.get(num - 1).getAttribute("href"));
-		AppTestUtils.pause(5);
+		AppTestUtils.pause(2);
 	}
 
 }

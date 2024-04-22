@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import utils.DriverManager;
+import utils.TestConfigsReader;
 
 public class DemoInventoryPage {
 
@@ -17,7 +18,7 @@ public class DemoInventoryPage {
 
 	public DemoInventoryPage() {
 		driver = DriverManager.getDriver();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(TestConfigsReader.getIntNumValue("config", "waitTime")));
 	}
 
 	public boolean isLoaded() {

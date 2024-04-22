@@ -19,11 +19,11 @@ import utils.WebUtils;
 @ExtendWith({ WebTestConfig.class, SimpleReportExtension.class })
 public class WebBaseTest {
 
-	protected static WebDriver driver;
-	protected static WebDriverWait wait;
-	protected static PageManager pages;
-	protected static DataManager dataManager;
-	protected static WebUtils utils;
+	protected WebDriver driver;
+	protected WebDriverWait wait;
+	protected PageManager pages;
+	protected DataManager dataManager;
+	protected WebUtils utils;
 
 	@BeforeEach
 	protected void setUp() {
