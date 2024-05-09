@@ -22,7 +22,7 @@ public class DriverFactoryM {
 
 	private static ThreadLocal<WebDriver> localDriver;
 
-	private static String browser = AppTestUtils.getTestConfigBrowserName();
+	private static String browser = TestUtils.getTestConfigBrowserName();
 	private static boolean headless = TestConfigsReader.getBooleanValue("config", "headless");
 	private static String deviceName = TestConfigsReader.getTextValue("config", "deviceName");
 	private static boolean isSet;
@@ -58,7 +58,7 @@ public class DriverFactoryM {
 			localDriver.remove();
 		}
 		isSet = false;
-		AppTestUtils.testConfigReset();
+		TestUtils.testConfigReset();
 	}
 
 	private static void configDriver(WebDriver driver) {
@@ -89,7 +89,7 @@ public class DriverFactoryM {
 			driver = new FirefoxDriver(firefoxOptions);
 			break;
 		case "safari":
-			if (!AppTestUtils.isMac())
+			if (!TestUtils.isMac())
 				throw new RuntimeException("Safari Driver is only allowed in Mac machines.");
 			SafariOptions safariOptions = new SafariOptions();
 			driver = new SafariDriver(safariOptions);
@@ -108,7 +108,7 @@ public class DriverFactoryM {
 	private static void setChromeOptions(ChromeOptions options) {
 		if (TestConfigsReader.getBooleanValue("config", "guest"))
 			options.addArguments("--guest");
-		String chromeUserDataPath = AppConfigReader.getValue("config", "chromeUserDataPath");
+		String chromeUserDataPath = AppConfigsReader.getValue("config", "chromeUserDataPath");
 		if (chromeUserDataPath != null) {
 			options.addArguments(String.format("--user-data-dir=%s", chromeUserDataPath));
 			options.addArguments(
@@ -119,7 +119,7 @@ public class DriverFactoryM {
 	private static void findChromeHeadless(ChromeOptions options) {
 		if (headless) {
 			options.addArguments("--headless=new");
-			options.addArguments("--user-agent=" + AppConfigReader.getValue("config", "chromeUserAgent"));
+			options.addArguments("--user-agent=" + AppConfigsReader.getValue("config", "chromeUserAgent"));
 		}
 	}
 

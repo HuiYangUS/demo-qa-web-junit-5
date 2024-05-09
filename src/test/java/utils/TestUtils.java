@@ -13,7 +13,7 @@ import org.openqa.selenium.WebDriver;
 
 import io.cucumber.datatable.DataTable;
 
-public class AppTestUtils {
+public class TestUtils {
 
 	public static void pause(int time) {
 		try {

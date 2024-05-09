@@ -11,7 +11,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import utils.AppTestUtils;
+import utils.TestUtils;
 
 public class ExcelWriterTest {
 
@@ -43,7 +43,7 @@ public class ExcelWriterTest {
 			new File(targetDirPath).mkdir();
 
 		// create a new excel file from scratch
-		String targetFilePath = String.format("target/demo/demo-%d.xlsx", AppTestUtils.getTimeStamp());
+		String targetFilePath = String.format("target/demo/demo-%d.xlsx", TestUtils.getTimeStamp());
 		try {
 			XSSFWorkbook demoWorkbook = new XSSFWorkbook();
 			XSSFSheet schoolSheet = demoWorkbook.createSheet("school");
