@@ -23,7 +23,7 @@ public class DriverFactoryS {
 	private static ThreadLocal<DriverFactoryS> localDriverFactory;
 
 	private WebDriver driver;
-	private String browser = AppTestUtils.getTestConfigBrowserName();
+	private String browser = TestUtils.getTestConfigBrowserName();
 	private boolean headless = TestConfigsReader.getBooleanValue("config", "headless");
 	private String deviceName = TestConfigsReader.getTextValue("config", "deviceName");
 	private boolean isSet;
@@ -88,7 +88,7 @@ public class DriverFactoryS {
 		switch (browser) {
 		case "chrome":
 			String chromeDriverPath = getDriverDir() + "/chromedriver/chromedriver"
-					+ (AppTestUtils.isWindows() ? ".exe" : "");
+					+ (TestUtils.isWindows() ? ".exe" : "");
 			ChromeDriverService service = new ChromeDriverService.Builder()
 					.usingDriverExecutable(new File(chromeDriverPath)).build();
 			ChromeOptions options = new ChromeOptions();
@@ -97,7 +97,7 @@ public class DriverFactoryS {
 			break;
 		case "firefox":
 			String firefoxDriverPath = getDriverDir() + "/firefoxdriver/geckodriver"
-					+ (AppTestUtils.isWindows() ? ".exe" : "");
+					+ (TestUtils.isWindows() ? ".exe" : "");
 			FirefoxDriverService firefoxService = new GeckoDriverService.Builder()
 					.usingDriverExecutable(new File(firefoxDriverPath)).build();
 			FirefoxOptions firefoxOptions = new FirefoxOptions();
@@ -122,7 +122,7 @@ public class DriverFactoryS {
 		emulateChromeIfMobile(chromeOptions);
 		if (headless) {
 			chromeOptions.addArguments("--headless=new");
-			chromeOptions.addArguments("--user-agent=" + AppConfigReader.getValue("config", "chromeUserAgent"));
+			chromeOptions.addArguments("--user-agent=" + AppConfigsReader.getValue("config", "chromeUserAgent"));
 		}
 	}
 
@@ -171,17 +171,17 @@ public class DriverFactoryS {
 	 */
 	private static String getDriverDir() {
 		String dirPathName = null;
-		if (AppTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("x86_64"))
+		if (TestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("x86_64"))
 			dirPathName = "mac/intel";
-		else if (AppTestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("aarch64"))
+		else if (TestUtils.isMac() && System.getProperty("os.arch").equalsIgnoreCase("aarch64"))
 			dirPathName = "mac/m-chip";
-		else if (AppTestUtils.isWindows())
+		else if (TestUtils.isWindows())
 			dirPathName = "win";
-		else if (AppTestUtils.isLinux())
+		else if (TestUtils.isLinux())
 			dirPathName = "linux";
 		if (dirPathName == null)
 			throw new RuntimeException("Failed to locate a valid directory for the driver.");
-		return AppTestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
+		return TestUtils.getCurrentDir() + "/src/test/resources/drivers/" + dirPathName;
 	}
 
 }

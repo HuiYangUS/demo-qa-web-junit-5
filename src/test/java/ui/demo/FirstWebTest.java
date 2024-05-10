@@ -12,7 +12,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import ui.base.web.WebBaseTest;
-import utils.AppTestUtils;
+import utils.TestUtils;
 
 public class FirstWebTest extends WebBaseTest {
 
@@ -37,7 +37,7 @@ public class FirstWebTest extends WebBaseTest {
 		System.out.println("Number of links: " + dataList.size());
 		if (num <= dataList.size())
 			System.out.println("Target webpage == " + dataList.get(num - 1).getAttribute("href"));
-		AppTestUtils.pause(2);
+		TestUtils.pause(2);
 	}
 
 }

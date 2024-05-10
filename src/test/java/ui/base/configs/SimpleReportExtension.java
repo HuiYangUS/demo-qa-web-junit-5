@@ -14,7 +14,7 @@ import com.aventstack.extentreports.Status;
 import com.aventstack.extentreports.reporter.ExtentSparkReporter;
 import com.aventstack.extentreports.reporter.configuration.Theme;
 
-import utils.AppTestUtils;
+import utils.TestUtils;
 import utils.DataManager;
 import utils.TestConfigsReader;
 
@@ -31,7 +31,7 @@ public class SimpleReportExtension
 	public void beforeAll(ExtensionContext context) throws Exception {
 		// get browser data from the system or the config file
 		Optional<String> browserDataFromSystem = context.getConfigurationParameter("browser");
-		String browserDataFromConfig = AppTestUtils.getTestConfigBrowserName();
+		String browserDataFromConfig = TestUtils.getTestConfigBrowserName();
 		String browserName = "Chrome";
 		if (browserDataFromSystem.isPresent()) {
 			switch (browserDataFromSystem.get().toLowerCase().strip()) {
@@ -64,8 +64,8 @@ public class SimpleReportExtension
 		}
 
 		report = new ExtentReports();
-		reporter = new ExtentSparkReporter(AppTestUtils.getCurrentDir() + String.format(
-				"/target/extent-reports/report-%s-%s.html", AppTestUtils.getDateString(), AppTestUtils.getTimeStamp()));
+		reporter = new ExtentSparkReporter(TestUtils.getCurrentDir() + String.format(
+				"/target/extent-reports/report-%s-%s.html", TestUtils.getDateString(), TestUtils.getTimeStamp()));
 		report.attachReporter(reporter);
 
 		reporter.config().setOfflineMode(true);

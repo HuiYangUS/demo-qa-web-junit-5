@@ -24,7 +24,7 @@ public class WebUtils {
 
 	public WebUtils(WebDriver driver) {
 		this.driver = driver;
-		wait = new WebDriverWait(driver, Duration.ofSeconds(AppTestUtils.getTestConfigWaitTime()));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtils.getTestConfigWaitTime()));
 		actions = new Actions(driver);
 		js = (JavascriptExecutor) driver;
 	}
@@ -43,10 +43,10 @@ public class WebUtils {
 	public void elementOnFocus(WebElement element) {
 		// Set this element's border to be red and thick
 		js.executeScript("arguments[0].style.borderColor = 'red'; arguments[0].style.borderWidth = 'thick';", element);
-		AppTestUtils.pause(2);
+		TestUtils.pause(2);
 		// Reset this element's border
 		js.executeScript("arguments[0].style.borderColor = ''; arguments[0].style.borderWidth = '';", element);
-		AppTestUtils.pause(1);
+		TestUtils.pause(1);
 	}
 
 	public void elementOnFocus(By locator) {
@@ -69,7 +69,7 @@ public class WebUtils {
 		if (postfix == null)
 			tail = "";
 		if (useTimeStamp)
-			tail += "-" + AppTestUtils.getDateString() + "-" + AppTestUtils.getTimeStamp();
+			tail += "-" + TestUtils.getDateString() + "-" + TestUtils.getTimeStamp();
 		TakesScreenshot cam = (TakesScreenshot) driver;
 		File imgData = cam.getScreenshotAs(OutputType.FILE);
 		try {

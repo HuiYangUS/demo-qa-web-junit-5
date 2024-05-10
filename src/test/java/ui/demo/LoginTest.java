@@ -13,13 +13,13 @@ import org.openqa.selenium.By;
 
 import pages.DemoLoginPage;
 import ui.base.web.WebBaseTest;
-import utils.AppTestUtils;
+import utils.TestUtils;
 import utils.TestConfigsReader;
 
 @TestMethodOrder(OrderAnnotation.class)
 public class LoginTest extends WebBaseTest {
 
-	private static boolean demo = AppTestUtils.isDemoTest()
+	private static boolean demo = TestUtils.isDemoTest()
 			&& !Boolean.valueOf(TestConfigsReader.getBooleanValue("config", "headless"));
 
 	/**
@@ -36,7 +36,7 @@ public class LoginTest extends WebBaseTest {
 		driver.findElement(By.id("login-button")).submit();
 		assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
 		if (demo)
-			AppTestUtils.pause(1);
+			TestUtils.pause(1);
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class LoginTest extends WebBaseTest {
 		loginPage.submitLogin();
 		assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
 		if (demo)
-			AppTestUtils.pause(1);
+			TestUtils.pause(1);
 	}
 
 	/**
@@ -71,7 +71,7 @@ public class LoginTest extends WebBaseTest {
 		pages.demoLoginPage().submitLogin();
 		assertTrue(driver.getCurrentUrl().contains("inventory"), "User should be on the inventory page.");
 		if (demo)
-			AppTestUtils.pause(1);
+			TestUtils.pause(1);
 	}
 
 }

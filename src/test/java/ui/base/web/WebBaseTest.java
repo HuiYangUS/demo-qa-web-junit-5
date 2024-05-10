@@ -10,7 +10,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 import ui.base.configs.SimpleReportExtension;
 import ui.base.configs.WebTestConfig;
-import utils.AppTestUtils;
+import utils.TestUtils;
 import utils.DataManager;
 import utils.DriverManager;
 import utils.PageManager;
@@ -28,7 +28,7 @@ public class WebBaseTest {
 	@BeforeEach
 	protected void setUp() {
 		driver = DriverManager.getDriver();
-		wait = new WebDriverWait(driver, Duration.ofSeconds(AppTestUtils.getTestConfigWaitTime()));
+		wait = new WebDriverWait(driver, Duration.ofSeconds(TestUtils.getTestConfigWaitTime()));
 		utils = new WebUtils(driver);
 		pages = PageManager.getInstance();
 		dataManager = DataManager.getInstance();
